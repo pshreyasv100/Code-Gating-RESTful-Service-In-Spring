@@ -1,0 +1,5 @@
+com\gating\staticanalysis\service\PMDParameters.class
+com\gating\Application.class
+com\gating\controller\GatingController.class
+com\gating\staticanalysis\service\PMDService.class
+com\gating\service\GatingService.class
