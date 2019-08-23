@@ -1,49 +1,72 @@
 package com.gating.thresholdconfig.service;
 
 import java.io.File;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Properties;
 import org.springframework.stereotype.Service;
 
-@SuppressWarnings("restriction")
 @Service
 public class ThresholdConfigurationService {
 
   public ThresholdConfiguration getThresholds() {
 
-    final File xmlFile = new File("thresholdconf.xml");
-    JAXBContext jaxbContext;
-    try
-    {
-      jaxbContext = JAXBContext.newInstance(ThresholdConfiguration.class);
-      final Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-      return (ThresholdConfiguration) jaxbUnmarshaller.unmarshal(xmlFile);
-    }
-    catch (final JAXBException e)
-    {
-      e.printStackTrace();
+    FileInputStream fileInput = null;
+    try{
+
+      fileInput = new FileInputStream(new File("src/main/resources/thresholdconfig.properties"));
+      final Properties prop = new Properties();
+      prop.load(fileInput);
+      final ThresholdConfiguration thresholdConfig = new ThresholdConfiguration();
+
+      thresholdConfig.setCyclomaticComplexity(Integer.valueOf(prop.getProperty("cyclomaticComplexity")));
+      thresholdConfig.setCodeCoverage(Float.valueOf(prop.getProperty("codeCoverage")));
+      thresholdConfig.setTimeToRunTests(Integer.valueOf(prop.getProperty("timeToRunTests")));
+      thresholdConfig.setNoOfWarnings(Integer.valueOf(prop.getProperty("noOfWarnings")));
+      thresholdConfig.setDuplicateLinesThreshold(Integer.valueOf(prop.getProperty("duplicateLinesThreshold")));
+      thresholdConfig.setSecurityIssuesCount(Integer.valueOf(prop.getProperty("securityIssuesCount")));
+
+      return thresholdConfig;
+
+    } catch (final IOException ex) {
+      ex.printStackTrace();
     }
 
+    finally {
+      try {
+        fileInput.close();
+      } catch (final IOException e) {
+        e.printStackTrace();
+      }
+    }
     return null;
   }
 
+
+
   public void setThresholds(ThresholdConfiguration newThresholds) {
 
-    try
-    {
-      final JAXBContext jaxbContext = JAXBContext.newInstance(ThresholdConfiguration.class);
-      final Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
-      jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-      final File file = new File("thresholdconf.xml");
-      jaxbMarshaller.marshal(newThresholds, file);
-    }
-    catch (final JAXBException e)
-    {
+    try {
+      final Properties properties = new Properties();
+      properties.setProperty("cyclomaticComplexity",String.valueOf(newThresholds.getCyclomaticComplexity()));
+      properties.setProperty("codeCoverage", String.valueOf(newThresholds.getCodeCoverage()));
+      properties.setProperty("timeToRunTests", String.valueOf(newThresholds.getTimeToRunTests()));
+      properties.setProperty("duplicateLinesThreshold",String.valueOf(newThresholds.getDuplicateLinesThreshold()));
+      properties.setProperty("noOfWarnings", String.valueOf(newThresholds.getNoOfWarnings()));
+      properties.setProperty("securityIssuesCount", String.valueOf(newThresholds.getSecurityIssuesCount()));
+
+      final FileOutputStream fileOut =
+          new FileOutputStream(new File("src/main/resources/thresholdconfig.properties"));
+      properties.store(fileOut, null);
+      fileOut.close();
+
+    } catch (final FileNotFoundException e) {
+      e.printStackTrace();
+    } catch (final IOException e) {
       e.printStackTrace();
     }
   }
-
 
 }

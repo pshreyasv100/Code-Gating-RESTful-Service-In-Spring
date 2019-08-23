@@ -19,11 +19,14 @@ public class SimianService {
 
     final StringJoiner simianCommand = new StringJoiner(" ");
     simianCommand.add("java -jar");
-    simianCommand.add(SimianParameters.simianJarPath);
+    simianCommand.add(SimianParameters.SIMIAN_JAR_PATH);
     simianCommand.add(simianParameters.getSourceCodePath());
-    simianCommand.add("-threshold=" + thresholdConfigurationService.getThresholds().getduplicateLinesThreshold());
+    simianCommand.add("-threshold=" + thresholdConfigurationService.getThresholds().getDuplicateLinesThreshold());
+    simianCommand.add("-formatter=plain");
     simianCommand.add("-includes=**/*.java");
     simianCommand.add("-excludes=**/*Test.java");
+    simianCommand.add(">");
+    simianCommand.add("reports/simian_report.txt");
 
     final List<String> command = new ArrayList<String>();
     command.add("cmd");

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.StringJoiner;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -28,15 +29,22 @@ public class PMDService {
     envMap.put("Path", path);
   }
 
-  public List<String> getCommand(PMDParameters params) {
+  private List<String> getCommand(PMDParameters params) {
 
-    final String pmdCommand = "pmd -d " + params.getSourceCodePath() + " -f "
-        + PMDParameters.outputFormat + " -R " + params.getRuleSet() + " >" + PMDParameters.pmdReportPath;
+    final StringJoiner pmdCommand = new StringJoiner(" ");
+    pmdCommand.add("pmd -d");
+    pmdCommand.add(params.getSourceCodePath());
+    pmdCommand.add("-f");
+    pmdCommand.add(PMDParameters.outputFormat);
+    pmdCommand.add("-R");
+    pmdCommand.add(params.getRuleSet());
+    pmdCommand.add(">");
+    pmdCommand.add(PMDParameters.pmdReportPath);
 
     final List<String> command = new ArrayList<String>();
     command.add("cmd");
     command.add("/c");
-    command.add(pmdCommand);
+    command.add(pmdCommand.toString());
     return command;
   }
 

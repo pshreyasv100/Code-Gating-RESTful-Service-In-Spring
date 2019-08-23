@@ -2,5 +2,31 @@
 <pmd xmlns="http://pmd.sourceforge.net/report/2.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 http://pmd.sourceforge.net/report_2_0_0.xsd"
-    version="6.16.0" timestamp="2019-08-22T14:29:38.216">
+    version="6.16.0" timestamp="2019-08-23T15:31:30.863">
+<file name="C:\bootcamp\java\code\stack\src\com\philps\training\generics\Stack.java">
+<violation beginline="5" endline="5" begincolumn="16" endcolumn="62" rule="UnnecessaryModifier" ruleset="Code Style" package="com.philps.training.generics" class="Stack" method="push" externalInfoUrl="https://pmd.github.io/pmd-6.16.0/pmd_rules_java_codestyle.html#unnecessarymodifier" priority="3">
+Unnecessary modifier 'public' on method 'push': the method is declared in an interface type
+</violation>
+<violation beginline="6" endline="6" begincolumn="16" endcolumn="50" rule="UnnecessaryModifier" ruleset="Code Style" package="com.philps.training.generics" class="Stack" method="pop" externalInfoUrl="https://pmd.github.io/pmd-6.16.0/pmd_rules_java_codestyle.html#unnecessarymodifier" priority="3">
+Unnecessary modifier 'public' on method 'pop': the method is declared in an interface type
+</violation>
+</file>
+<file name="C:\bootcamp\java\code\stack\src\com\philps\training\generics\StackApp.java">
+<violation beginline="3" endline="26" begincolumn="23" endcolumn="1" rule="UseUtilityClass" ruleset="Design" package="com.philps.training.generics" class="StackApp" externalInfoUrl="https://pmd.github.io/pmd-6.16.0/pmd_rules_java_design.html#useutilityclass" priority="3">
+All methods are static.  Consider using a utility class instead. Alternatively, you could add a private constructor or make the class abstract to silence this warning.
+</violation>
+</file>
+<file name="C:\bootcamp\java\code\stack\src\stack\Stack.java">
+<violation beginline="5" endline="5" begincolumn="16" endcolumn="67" rule="UnnecessaryModifier" ruleset="Code Style" package="stack" class="Stack" method="push" externalInfoUrl="https://pmd.github.io/pmd-6.16.0/pmd_rules_java_codestyle.html#unnecessarymodifier" priority="3">
+Unnecessary modifier 'public' on method 'push': the method is declared in an interface type
+</violation>
+<violation beginline="6" endline="6" begincolumn="16" endcolumn="55" rule="UnnecessaryModifier" ruleset="Code Style" package="stack" class="Stack" method="pop" externalInfoUrl="https://pmd.github.io/pmd-6.16.0/pmd_rules_java_codestyle.html#unnecessarymodifier" priority="3">
+Unnecessary modifier 'public' on method 'pop': the method is declared in an interface type
+</violation>
+</file>
+<file name="C:\bootcamp\java\code\stack\src\stack\StackApp.java">
+<violation beginline="3" endline="13" begincolumn="23" endcolumn="1" rule="UseUtilityClass" ruleset="Design" package="stack" class="StackApp" externalInfoUrl="https://pmd.github.io/pmd-6.16.0/pmd_rules_java_design.html#useutilityclass" priority="3">
+All methods are static.  Consider using a utility class instead. Alternatively, you could add a private constructor or make the class abstract to silence this warning.
+</violation>
+</file>
 </pmd>

@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<thresholdConfiguration>
-    <codeCoverage>0</codeCoverage>
-    <cyclomaticComplexity>0</cyclomaticComplexity>
-    <noOfWarnings>1</noOfWarnings>
-    <timeToRunTests>120</timeToRunTests>
-    <duplicateLinesThreshold>6</duplicateLinesThreshold>
-</thresholdConfiguration>

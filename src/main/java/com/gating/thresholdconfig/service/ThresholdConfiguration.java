@@ -4,16 +4,34 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @SuppressWarnings("restriction")
 @XmlRootElement
-public class ThresholdConfiguration{
+public class ThresholdConfiguration {
 
   private int cyclomaticComplexity;
-  private int codeCoverage;
+  private float codeCoverage;
   private int timeToRunTests;
   private int duplicateLinesThreshold;
   private int noOfWarnings;
+  private int securityIssuesCount;
 
-  public ThresholdConfiguration() {
+
+  public ThresholdConfiguration() {}
+
+  public int getDuplicateLinesThreshold() {
+    return duplicateLinesThreshold;
   }
+
+  public void setDuplicateLinesThreshold(int duplicateLinesThreshold) {
+    this.duplicateLinesThreshold = duplicateLinesThreshold;
+  }
+
+  public int getSecurityIssuesCount() {
+    return securityIssuesCount;
+  }
+
+  public void setSecurityIssuesCount(int securityIssuesCount) {
+    this.securityIssuesCount = securityIssuesCount;
+  }
+
 
   public int getCyclomaticComplexity() {
     return cyclomaticComplexity;
@@ -23,11 +41,11 @@ public class ThresholdConfiguration{
     this.cyclomaticComplexity = cyclomaticComplexity;
   }
 
-  public int getCodeCoverage() {
+  public float getCodeCoverage() {
     return codeCoverage;
   }
 
-  public void setCodeCoverage(int codeCoverage) {
+  public void setCodeCoverage(float codeCoverage) {
     this.codeCoverage = codeCoverage;
   }
 
@@ -37,14 +55,6 @@ public class ThresholdConfiguration{
 
   public void setTimeToRunTests(int timeToRunTests) {
     this.timeToRunTests = timeToRunTests;
-  }
-
-  public int getduplicateLinesThreshold() {
-    return duplicateLinesThreshold;
-  }
-
-  public void setduplicateLinesThreshold(int duplicateLinesThreshold) {
-    this.duplicateLinesThreshold = duplicateLinesThreshold;
   }
 
   public int getNoOfWarnings() {

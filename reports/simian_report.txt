@@ -1,0 +1,16 @@
+Similarity Analyser 2.5.10 - http://www.harukizaemon.com/simian
+Copyright (c) 2003-2018 Simon Harris.  All rights reserved.
+Simian is not free unless used solely for non-commercial or evaluation purposes.
+{failOnDuplication=true, ignoreCharacterCase=true, ignoreCurlyBraces=true, ignoreIdentifierCase=true, ignoreModifiers=true, ignoreStringCase=true, threshold=6}
+Found 8 duplicate lines with fingerprint 863397e21294e13b922a016870819664 in the following files:
+ Between lines 53 and 61 in C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\staticanalysis\service\VCGService.java
+ Between lines 42 and 49 in C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\staticanalysis\service\SimianService.java
+Found 8 duplicate lines with fingerprint e11c75fdcf80d635e154b648bec95473 in the following files:
+ Between lines 52 and 65 in C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\thresholdconfig\service\ThresholdConfiguration.java
+ Between lines 30 and 43 in C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\service\GatingResponse.java
+Found 8 duplicate lines with fingerprint 7da783e29ef36de719a4688433cff76f in the following files:
+ Between lines 70 and 80 in C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\staticanalysis\service\VCGService.java
+ Between lines 54 and 64 in C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\staticanalysis\service\PMDService.java
+Found 48 duplicate lines in 6 blocks in 5 files
+Processed a total of 349 significant (682 raw) lines in 13 files
+Processing time: 1.082sec
