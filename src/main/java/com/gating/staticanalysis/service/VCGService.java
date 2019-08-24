@@ -8,6 +8,8 @@ import java.util.StringJoiner;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -17,6 +19,9 @@ import org.xml.sax.SAXException;
 
 @Service
 public class VCGService {
+
+  @Autowired
+  Logger logger;
 
   private ProcessBuilder processBuilder;
 
@@ -56,9 +61,10 @@ public class VCGService {
       process = processBuilder.start();
       process.waitFor();
     } catch (final IOException e) {
-      e.printStackTrace();
+      logger.error("IOException occured", e);
     } catch (final InterruptedException e) {
-      e.printStackTrace();
+      logger.error("InterruptedException occured", e);
+      Thread.currentThread().interrupt();
     }
 
     return getCountOfSecurityIssues();
@@ -74,18 +80,21 @@ public class VCGService {
     try {
       builder = factory.newDocumentBuilder();
     } catch (final ParserConfigurationException e) {
-      e.printStackTrace();
+      logger.error("Report file could not be parsed", e);
     }
 
     try {
-      doc = builder.parse(VCGParameters.VCG_REPORT_PATH);
+      if(builder != null) {
+        doc = builder.parse(VCGParameters.VCG_REPORT_PATH);
+      }
     } catch (final SAXException e) {
-      e.printStackTrace();
+      logger.error("SAXException occurred", e);
     } catch (final IOException e) {
-      e.printStackTrace();
+      logger.error("IOException occurred", e);
     }
 
-    if (doc.getElementsByTagName("CodeIssueCollection") != null) {
+
+    if (doc != null && doc.getElementsByTagName("CodeIssueCollection") != null) {
       final NodeList issueCollection = doc.getElementsByTagName("CodeIssueCollection");
       for (int i = 0; i < issueCollection.getLength(); i++) {
         final Node p = issueCollection.item(i);

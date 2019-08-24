@@ -1,0 +1,30 @@
+2019-08-24 12:27:12.277  INFO 31432 --- [main] com.gating.Application                   : Starting Application on YY165907 with PID 31432 (C:\eclipse-workspace\staticanalysis.service\target\classes started by 320052310 in C:\eclipse-workspace\staticanalysis.service)
+2019-08-24 12:27:12.277  INFO 31432 --- [main] com.gating.Application                   : No active profile set, falling back to default profiles: default
+2019-08-24 12:27:13.719  INFO 31432 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-08-24 12:27:13.753  INFO 31432 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-08-24 12:27:13.753  INFO 31432 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.21]
+2019-08-24 12:27:13.881  INFO 31432 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-08-24 12:27:13.881  INFO 31432 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1535 ms
+2019-08-24 12:27:14.151  INFO 31432 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-08-24 12:27:14.421  INFO 31432 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-08-24 12:27:14.425  INFO 31432 --- [main] com.gating.Application                   : Started Application in 2.833 seconds (JVM running for 3.535)
+2019-08-24 12:27:20.224  INFO 31432 --- [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-08-24 12:27:20.225  INFO 31432 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-08-24 12:27:20.232  INFO 31432 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 6 ms
+2019-08-24 12:27:23.850 ERROR 31432 --- [http-nio-8080-exec-2] com.gating.Application                   : inside pmd
+2019-08-24 12:27:23.894 ERROR 31432 --- [http-nio-8080-exec-2] com.gating.Application                   : inside simian
+2019-08-24 12:30:32.411  INFO 30400 --- [main] com.gating.Application                   : Starting Application on YY165907 with PID 30400 (C:\eclipse-workspace\staticanalysis.service\target\classes started by 320052310 in C:\eclipse-workspace\staticanalysis.service)
+2019-08-24 12:30:32.414  INFO 30400 --- [main] com.gating.Application                   : No active profile set, falling back to default profiles: default
+2019-08-24 12:30:33.742  INFO 30400 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-08-24 12:30:33.764  INFO 30400 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-08-24 12:30:33.764  INFO 30400 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.21]
+2019-08-24 12:30:33.883  INFO 30400 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-08-24 12:30:33.883  INFO 30400 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1416 ms
+2019-08-24 12:30:34.112  INFO 30400 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-08-24 12:30:34.297  INFO 30400 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-08-24 12:30:34.297  INFO 30400 --- [main] com.gating.Application                   : Started Application in 2.333 seconds (JVM running for 2.734)
+2019-08-24 12:30:39.659  INFO 30400 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-08-24 12:30:39.659  INFO 30400 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-08-24 12:30:39.665  INFO 30400 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 5 ms
+2019-08-24 12:30:42.499 ERROR 30400 --- [http-nio-8080-exec-1] com.gating.Application                   : inside pmd
+2019-08-24 12:30:42.518 ERROR 30400 --- [http-nio-8080-exec-1] com.gating.Application                   : inside simian

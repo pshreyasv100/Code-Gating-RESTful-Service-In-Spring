@@ -8,6 +8,8 @@ import java.util.StringJoiner;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -18,6 +20,9 @@ import org.xml.sax.SAXException;
 @Service
 public class PMDService {
 
+
+  @Autowired
+  Logger logger;
 
   private ProcessBuilder processBuilder;
 
@@ -50,7 +55,9 @@ public class PMDService {
 
   private int getNumberOfViolations() {
 
+    logger.error("inside pmd");
     int violations = 0;
+
     final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
     DocumentBuilder builder = null;
     Document doc = null;
@@ -58,18 +65,20 @@ public class PMDService {
     try {
       builder = factory.newDocumentBuilder();
     } catch (final ParserConfigurationException e) {
-      e.printStackTrace();
+      logger.error("ParserConfigurationException occured", e);
     }
 
     try {
-      doc = builder.parse(PMDParameters.pmdReportPath);
+      if (builder != null) {
+        doc = builder.parse(PMDParameters.pmdReportPath);
+      }
     } catch (final SAXException e) {
-      e.printStackTrace();
+      logger.error("SAXException occured", e);
     } catch (final IOException e) {
-      e.printStackTrace();
+      logger.error("File not found exception occured", e);
     }
 
-    if (doc.getElementsByTagName("file") != null) {
+    if (doc != null && doc.getElementsByTagName("file") != null) {
       final NodeList fileList = doc.getElementsByTagName("file");
       for (int i = 0; i < fileList.getLength(); i++) {
         final Node p = fileList.item(i);

@@ -1,9 +1,5 @@
 package com.gating.thresholdconfig.service;
 
-import javax.xml.bind.annotation.XmlRootElement;
-
-@SuppressWarnings("restriction")
-@XmlRootElement
 public class ThresholdConfiguration {
 
   private int cyclomaticComplexity;

@@ -2,7 +2,7 @@
 <pmd xmlns="http://pmd.sourceforge.net/report/2.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 http://pmd.sourceforge.net/report_2_0_0.xsd"
-    version="6.16.0" timestamp="2019-08-23T15:31:30.863">
+    version="6.16.0" timestamp="2019-08-24T12:30:41.383">
 <file name="C:\bootcamp\java\code\stack\src\com\philps\training\generics\Stack.java">
 <violation beginline="5" endline="5" begincolumn="16" endcolumn="62" rule="UnnecessaryModifier" ruleset="Code Style" package="com.philps.training.generics" class="Stack" method="push" externalInfoUrl="https://pmd.github.io/pmd-6.16.0/pmd_rules_java_codestyle.html#unnecessarymodifier" priority="3">
 Unnecessary modifier 'public' on method 'push': the method is declared in an interface type

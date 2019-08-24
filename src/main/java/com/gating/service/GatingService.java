@@ -4,6 +4,7 @@ import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.gating.controller.GatingInput;
+import com.gating.staticanalysis.service.CyvisService;
 import com.gating.staticanalysis.service.PMDService;
 import com.gating.staticanalysis.service.SimianService;
 import com.gating.staticanalysis.service.VCGService;
@@ -22,6 +23,9 @@ public class GatingService {
   VCGService vcgService;
 
   @Autowired
+  CyvisService cyvisService;
+
+  @Autowired
   ThresholdConfigurationService thresholdService;
 
 
@@ -34,6 +38,7 @@ public class GatingService {
     response.setNoOfWarnings(pmdService.run(gatingContext.getPmdParameters()));
     response.setCodeDuplication(simianService.run(gatingContext.getSimianParameters()) == 0);
     response.setSecurityIssuesCount(vcgService.run(gatingContext.getVcgParameters()));
+    cyvisService.run(gatingContext.getCyvisParameters());
 
 
     if (response.getNoOfWarnings() <= thresholdService.getThresholds().getNoOfWarnings()

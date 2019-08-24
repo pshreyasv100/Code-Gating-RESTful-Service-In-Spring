@@ -1,6 +1,7 @@
 package com.gating.controller;
 
 import com.gating.codecoverage.service.JacocoParameters;
+import com.gating.staticanalysis.service.CyvisParameters;
 import com.gating.staticanalysis.service.PMDParameters;
 import com.gating.staticanalysis.service.SimianParameters;
 import com.gating.staticanalysis.service.VCGParameters;
@@ -13,6 +14,17 @@ public class GatingInput {
   private PMDParameters pmdParameters;
   private VCGParameters vcgParameters;
   private JacocoParameters jacocoParameters;
+  private CyvisParameters cyvisParameters;
+
+
+  public CyvisParameters getCyvisParameters() {
+    return cyvisParameters;
+  }
+
+  public void setCyvisParameters(CyvisParameters cyvisParameters) {
+    this.cyvisParameters = cyvisParameters;
+  }
+
 
   public JacocoParameters getJacocoParameters() {
     return jacocoParameters;

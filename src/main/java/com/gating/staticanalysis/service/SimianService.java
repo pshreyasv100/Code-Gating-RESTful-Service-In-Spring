@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.gating.thresholdconfig.service.ThresholdConfigurationService;
@@ -11,6 +12,8 @@ import com.gating.thresholdconfig.service.ThresholdConfigurationService;
 @Service
 public class SimianService {
 
+  @Autowired
+  Logger logger;
 
   @Autowired
   ThresholdConfigurationService thresholdConfigurationService;
@@ -21,7 +24,8 @@ public class SimianService {
     simianCommand.add("java -jar");
     simianCommand.add(SimianParameters.SIMIAN_JAR_PATH);
     simianCommand.add(simianParameters.getSourceCodePath());
-    simianCommand.add("-threshold=" + thresholdConfigurationService.getThresholds().getDuplicateLinesThreshold());
+    simianCommand.add(
+        "-threshold=" + thresholdConfigurationService.getThresholds().getDuplicateLinesThreshold());
     simianCommand.add("-formatter=plain");
     simianCommand.add("-includes=**/*.java");
     simianCommand.add("-excludes=**/*Test.java");
@@ -37,20 +41,25 @@ public class SimianService {
 
 
   public int run(SimianParameters simianParameters) {
+
+    logger.error("inside simian");
+
     final ProcessBuilder processBuilder = new ProcessBuilder();
     processBuilder.command(getCommand(simianParameters));
     Process process = null;
+
     try {
       process = processBuilder.start();
       process.waitFor();
+      return process.exitValue();
+
     } catch (final IOException e) {
-      e.printStackTrace();
+      logger.error("IOException occured", e);
     } catch (final InterruptedException e) {
-      e.printStackTrace();
+      logger.error("InterruptedException occured", e);
+      Thread.currentThread().interrupt();
     }
 
-    System.out.println(process.exitValue());
-    return process.exitValue();
-
+    return Integer.valueOf(null);
   }
 }
