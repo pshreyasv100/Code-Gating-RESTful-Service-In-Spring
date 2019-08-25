@@ -2,31 +2,52 @@
 <pmd xmlns="http://pmd.sourceforge.net/report/2.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 http://pmd.sourceforge.net/report_2_0_0.xsd"
-    version="6.16.0" timestamp="2019-08-24T12:30:41.383">
-<file name="C:\bootcamp\java\code\stack\src\com\philps\training\generics\Stack.java">
-<violation beginline="5" endline="5" begincolumn="16" endcolumn="62" rule="UnnecessaryModifier" ruleset="Code Style" package="com.philps.training.generics" class="Stack" method="push" externalInfoUrl="https://pmd.github.io/pmd-6.16.0/pmd_rules_java_codestyle.html#unnecessarymodifier" priority="3">
-Unnecessary modifier 'public' on method 'push': the method is declared in an interface type
-</violation>
-<violation beginline="6" endline="6" begincolumn="16" endcolumn="50" rule="UnnecessaryModifier" ruleset="Code Style" package="com.philps.training.generics" class="Stack" method="pop" externalInfoUrl="https://pmd.github.io/pmd-6.16.0/pmd_rules_java_codestyle.html#unnecessarymodifier" priority="3">
-Unnecessary modifier 'public' on method 'pop': the method is declared in an interface type
-</violation>
-</file>
-<file name="C:\bootcamp\java\code\stack\src\com\philps\training\generics\StackApp.java">
-<violation beginline="3" endline="26" begincolumn="23" endcolumn="1" rule="UseUtilityClass" ruleset="Design" package="com.philps.training.generics" class="StackApp" externalInfoUrl="https://pmd.github.io/pmd-6.16.0/pmd_rules_java_design.html#useutilityclass" priority="3">
+    version="6.16.0" timestamp="2019-08-25T10:55:27.461">
+<file name="C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\Application.java">
+<violation beginline="7" endline="12" begincolumn="26" endcolumn="1" rule="UseUtilityClass" ruleset="Design" package="com.gating" class="Application" externalInfoUrl="https://pmd.github.io/pmd-6.16.0/pmd_rules_java_design.html#useutilityclass" priority="3">
 All methods are static.  Consider using a utility class instead. Alternatively, you could add a private constructor or make the class abstract to silence this warning.
 </violation>
 </file>
-<file name="C:\bootcamp\java\code\stack\src\stack\Stack.java">
-<violation beginline="5" endline="5" begincolumn="16" endcolumn="67" rule="UnnecessaryModifier" ruleset="Code Style" package="stack" class="Stack" method="push" externalInfoUrl="https://pmd.github.io/pmd-6.16.0/pmd_rules_java_codestyle.html#unnecessarymodifier" priority="3">
-Unnecessary modifier 'public' on method 'push': the method is declared in an interface type
+<file name="C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\service\GatingService.java">
+<violation beginline="64" endline="64" begincolumn="28" endcolumn="43" rule="CloseResource" ruleset="Error Prone" package="com.gating.service" class="GatingService" method="saveResults" variable="resultsCsvWriter" externalInfoUrl="https://pmd.github.io/pmd-6.16.0/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this BufferedWriter object are closed after use
 </violation>
-<violation beginline="6" endline="6" begincolumn="16" endcolumn="55" rule="UnnecessaryModifier" ruleset="Code Style" package="stack" class="Stack" method="pop" externalInfoUrl="https://pmd.github.io/pmd-6.16.0/pmd_rules_java_codestyle.html#unnecessarymodifier" priority="3">
-Unnecessary modifier 'public' on method 'pop': the method is declared in an interface type
+<violation beginline="67" endline="67" begincolumn="20" endcolumn="32" rule="LocalVariableNamingConventions" ruleset="Code Style" package="com.gating.service" class="GatingService" method="saveResults" variable="CSV_SEPARATOR" externalInfoUrl="https://pmd.github.io/pmd-6.16.0/pmd_rules_java_codestyle.html#localvariablenamingconventions" priority="1">
+The final local variable name 'CSV_SEPARATOR' doesn't match '[a-z][a-zA-Z0-9]*'
+</violation>
+<violation beginline="87" endline="88" begincolumn="7" endcolumn="5" rule="EmptyCatchBlock" ruleset="Error Prone" package="com.gating.service" class="GatingService" method="saveResults" externalInfoUrl="https://pmd.github.io/pmd-6.16.0/pmd_rules_java_errorprone.html#emptycatchblock" priority="3">
+Avoid empty catch blocks
+</violation>
+<violation beginline="88" endline="89" begincolumn="7" endcolumn="5" rule="IdenticalCatchBranches" ruleset="Code Style" package="com.gating.service" class="GatingService" method="saveResults" externalInfoUrl="https://pmd.github.io/pmd-6.16.0/pmd_rules_java_codestyle.html#identicalcatchbranches" priority="3">
+'catch' branch identical to 'UnsupportedEncodingException' branch
+</violation>
+<violation beginline="88" endline="89" begincolumn="7" endcolumn="5" rule="EmptyCatchBlock" ruleset="Error Prone" package="com.gating.service" class="GatingService" method="saveResults" externalInfoUrl="https://pmd.github.io/pmd-6.16.0/pmd_rules_java_errorprone.html#emptycatchblock" priority="3">
+Avoid empty catch blocks
+</violation>
+<violation beginline="89" endline="90" begincolumn="7" endcolumn="5" rule="IdenticalCatchBranches" ruleset="Code Style" package="com.gating.service" class="GatingService" method="saveResults" externalInfoUrl="https://pmd.github.io/pmd-6.16.0/pmd_rules_java_codestyle.html#identicalcatchbranches" priority="3">
+'catch' branch identical to 'UnsupportedEncodingException' branch
+</violation>
+<violation beginline="89" endline="90" begincolumn="7" endcolumn="5" rule="EmptyCatchBlock" ruleset="Error Prone" package="com.gating.service" class="GatingService" method="saveResults" externalInfoUrl="https://pmd.github.io/pmd-6.16.0/pmd_rules_java_errorprone.html#emptycatchblock" priority="3">
+Avoid empty catch blocks
+</violation>
+<violation beginline="100" endline="100" begincolumn="26" endcolumn="31" rule="CloseResource" ruleset="Error Prone" package="com.gating.service" class="GatingService" method="getLastRunResults" variable="reader" externalInfoUrl="https://pmd.github.io/pmd-6.16.0/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this BufferedReader object are closed after use
 </violation>
 </file>
-<file name="C:\bootcamp\java\code\stack\src\stack\StackApp.java">
-<violation beginline="3" endline="13" begincolumn="23" endcolumn="1" rule="UseUtilityClass" ruleset="Design" package="stack" class="StackApp" externalInfoUrl="https://pmd.github.io/pmd-6.16.0/pmd_rules_java_design.html#useutilityclass" priority="3">
-All methods are static.  Consider using a utility class instead. Alternatively, you could add a private constructor or make the class abstract to silence this warning.
+<file name="C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\thresholdconfig\service\ThresholdConfiguration.java">
+<violation beginline="13" endline="13" begincolumn="10" endcolumn="36" rule="UnnecessaryConstructor" ruleset="Code Style" package="com.gating.thresholdconfig.service" class="ThresholdConfiguration" method="ThresholdConfiguration" externalInfoUrl="https://pmd.github.io/pmd-6.16.0/pmd_rules_java_codestyle.html#unnecessaryconstructor" priority="3">
+Avoid unnecessary constructors - the compiler will generate these for you
+</violation>
+<violation beginline="13" endline="13" begincolumn="10" endcolumn="36" rule="UncommentedEmptyConstructor" ruleset="Documentation" package="com.gating.thresholdconfig.service" class="ThresholdConfiguration" method="ThresholdConfiguration" externalInfoUrl="https://pmd.github.io/pmd-6.16.0/pmd_rules_java_documentation.html#uncommentedemptyconstructor" priority="3">
+Document empty constructor
+</violation>
+</file>
+<file name="C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\thresholdconfig\service\ThresholdConfigurationService.java">
+<violation beginline="60" endline="60" begincolumn="30" endcolumn="36" rule="CloseResource" ruleset="Error Prone" package="com.gating.thresholdconfig.service" class="ThresholdConfigurationService" method="setThresholds" variable="fileOut" externalInfoUrl="https://pmd.github.io/pmd-6.16.0/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this FileOutputStream object are closed after use
+</violation>
+<violation beginline="67" endline="69" begincolumn="7" endcolumn="5" rule="IdenticalCatchBranches" ruleset="Code Style" package="com.gating.thresholdconfig.service" class="ThresholdConfigurationService" method="setThresholds" externalInfoUrl="https://pmd.github.io/pmd-6.16.0/pmd_rules_java_codestyle.html#identicalcatchbranches" priority="3">
+'catch' branch identical to 'FileNotFoundException' branch
 </violation>
 </file>
 </pmd>

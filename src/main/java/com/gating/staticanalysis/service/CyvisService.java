@@ -15,7 +15,7 @@ public class CyvisService {
   @Autowired
   Logger logger;
 
-  private List<String> getCommand(CyvisParameters cyvisParameters) {
+  private String getCommand(CyvisParameters cyvisParameters) {
 
     final StringJoiner cyvisCommand = new StringJoiner(" ");
     cyvisCommand.add("/staticanalysis.service/static-code-analyzers/cyvis-0.9");
@@ -36,10 +36,11 @@ public class CyvisService {
     command.add("cmd");
     command.add("/c");
     command.add(cyvisCommand.toString());
-    return command;
+    return command.toString();
   }
 
-  public void run(CyvisParameters cyvisParameters) {
+  public int run(CyvisParameters cyvisParameters) throws IOException {
+
 
     final ProcessBuilder processBuilder = new ProcessBuilder();
     processBuilder.command(getCommand(cyvisParameters));
@@ -54,6 +55,7 @@ public class CyvisService {
       Thread.currentThread().interrupt();
     }
 
+    return 0;
   }
 
 

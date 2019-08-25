@@ -53,6 +53,7 @@ public class PMDService {
     return command;
   }
 
+
   private int getNumberOfViolations() {
 
     logger.error("inside pmd");
@@ -92,6 +93,7 @@ public class PMDService {
 
     return violations;
   }
+
 
   public int run(PMDParameters params) throws IOException, InterruptedException {
     createProcess();

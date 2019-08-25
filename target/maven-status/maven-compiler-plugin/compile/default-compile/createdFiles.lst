@@ -1,0 +1,17 @@
+com\gating\staticanalysis\service\SimianService.class
+com\gating\Configuration.class
+com\gating\thresholdconfig\service\ThresholdConfiguration.class
+com\gating\staticanalysis\service\SimianParameters.class
+com\gating\controller\GatingInput.class
+com\gating\staticanalysis\service\PMDParameters.class
+com\gating\Application.class
+com\gating\codecoverage\service\JacocoService.class
+com\gating\controller\GatingController.class
+com\gating\thresholdconfig\service\ThresholdConfigurationService.class
+com\gating\codecoverage\service\JacocoParameters.class
+com\gating\staticanalysis\service\VCGService.class
+com\gating\staticanalysis\service\VCGParameters.class
+com\gating\staticanalysis\service\CyvisService.class
+com\gating\staticanalysis\service\PMDService.class
+com\gating\staticanalysis\service\CyvisParameters.class
+com\gating\service\GatingService.class

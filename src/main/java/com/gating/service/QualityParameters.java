@@ -1,14 +1,14 @@
 package com.gating.service;
 
-public class GatingResponse {
+public class QualityParameters{
 
   private int timeToRunTests;
   private int noOfWarnings;
   private float codeCoverage;
   private int cyclomaticComplexity;
-  private String finalDecision;
   private boolean isCodeDuplication;
   private int securityIssuesCount;
+  private String finalDecision;
 
 
   public int getSecurityIssuesCount() {
@@ -66,7 +66,6 @@ public class GatingResponse {
   public void setFinalDecision(String finalDecision) {
     this.finalDecision = finalDecision;
   }
-
 
 
 }

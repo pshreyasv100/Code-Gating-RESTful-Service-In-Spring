@@ -7,12 +7,12 @@ C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\staticanaly
 C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\thresholdconfig\service\ThresholdConfiguration.java
 C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\Configuration.java
 C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\controller\GatingInput.java
-C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\service\GatingResponse.java
 C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\staticanalysis\service\SimianParameters.java
 C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\staticanalysis\service\VCGParameters.java
 C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\thresholdconfig\service\ThresholdConfigurationService.java
 C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\staticanalysis\service\PMDService.java
 C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\codecoverage\service\JacocoParameters.java
 C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\codecoverage\service\JacocoService.java
+C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\service\QualityParameters.java
 C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\staticanalysis\service\CyvisService.java
 C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\staticanalysis\service\VCGService.java

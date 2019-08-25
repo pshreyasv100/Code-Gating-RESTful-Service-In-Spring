@@ -4,16 +4,16 @@ Simian is not free unless used solely for non-commercial or evaluation purposes.
 {failOnDuplication=true, ignoreCharacterCase=true, ignoreCurlyBraces=true, ignoreIdentifierCase=true, ignoreModifiers=true, ignoreStringCase=true, threshold=6}
 Found 6 duplicate lines with fingerprint 9d28a107a023526eea593f84a92b4f0b in the following files:
  Between lines 76 and 82 in C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\staticanalysis\service\VCGService.java
- Between lines 61 and 67 in C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\staticanalysis\service\PMDService.java
+ Between lines 62 and 68 in C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\staticanalysis\service\PMDService.java
 Found 7 duplicate lines with fingerprint 3f2617477ca0e1bead0d265200459d19 in the following files:
  Between lines 24 and 32 in C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\staticanalysis\service\PMDService.java
  Between lines 23 and 31 in C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\staticanalysis\service\VCGService.java
 Found 8 duplicate lines with fingerprint e11c75fdcf80d635e154b648bec95473 in the following files:
  Between lines 48 and 61 in C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\thresholdconfig\service\ThresholdConfiguration.java
- Between lines 30 and 43 in C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\service\GatingResponse.java
-Found 9 duplicate lines with fingerprint 160ffd36f7862090f10433346f3edd83 in the following files:
- Between lines 69 and 78 in C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\codecoverage\service\JacocoService.java
- Between lines 46 and 54 in C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\staticanalysis\service\CyvisService.java
-Found 60 duplicate lines in 8 blocks in 6 files
-Processed a total of 475 significant (921 raw) lines in 18 files
-Processing time: 0.542sec
+ Between lines 30 and 43 in C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\service\QualityParameters.java
+Found 10 duplicate lines with fingerprint 4d129c1311fcb37b3cacfbb04430d695 in the following files:
+ Between lines 47 and 58 in C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\staticanalysis\service\CyvisService.java
+ Between lines 69 and 80 in C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\codecoverage\service\JacocoService.java
+Found 62 duplicate lines in 8 blocks in 6 files
+Processed a total of 529 significant (1009 raw) lines in 18 files
+Processing time: 0.614sec

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import com.gating.service.GatingResponse;
+import com.gating.service.QualityParameters;
 import com.gating.service.GatingService;
 import com.gating.thresholdconfig.service.ThresholdConfiguration;
 import com.gating.thresholdconfig.service.ThresholdConfigurationService;
@@ -23,7 +23,7 @@ public class GatingController {
 
   @PostMapping(path = "/gating/analysis", consumes = {"application/json"})
   @ResponseBody
-  public GatingResponse handler(@RequestBody GatingInput gatingContext)
+  public QualityParameters handler(@RequestBody GatingInput gatingContext)
       throws IOException, InterruptedException {
 
     return gatingService.gateCode(gatingContext);

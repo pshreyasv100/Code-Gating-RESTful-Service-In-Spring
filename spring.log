@@ -1,30 +1,751 @@
-2019-08-24 12:27:12.277  INFO 31432 --- [main] com.gating.Application                   : Starting Application on YY165907 with PID 31432 (C:\eclipse-workspace\staticanalysis.service\target\classes started by 320052310 in C:\eclipse-workspace\staticanalysis.service)
-2019-08-24 12:27:12.277  INFO 31432 --- [main] com.gating.Application                   : No active profile set, falling back to default profiles: default
-2019-08-24 12:27:13.719  INFO 31432 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
-2019-08-24 12:27:13.753  INFO 31432 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2019-08-24 12:27:13.753  INFO 31432 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.21]
-2019-08-24 12:27:13.881  INFO 31432 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2019-08-24 12:27:13.881  INFO 31432 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1535 ms
-2019-08-24 12:27:14.151  INFO 31432 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2019-08-24 12:27:14.421  INFO 31432 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
-2019-08-24 12:27:14.425  INFO 31432 --- [main] com.gating.Application                   : Started Application in 2.833 seconds (JVM running for 3.535)
-2019-08-24 12:27:20.224  INFO 31432 --- [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2019-08-24 12:27:20.225  INFO 31432 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2019-08-24 12:27:20.232  INFO 31432 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 6 ms
-2019-08-24 12:27:23.850 ERROR 31432 --- [http-nio-8080-exec-2] com.gating.Application                   : inside pmd
-2019-08-24 12:27:23.894 ERROR 31432 --- [http-nio-8080-exec-2] com.gating.Application                   : inside simian
-2019-08-24 12:30:32.411  INFO 30400 --- [main] com.gating.Application                   : Starting Application on YY165907 with PID 30400 (C:\eclipse-workspace\staticanalysis.service\target\classes started by 320052310 in C:\eclipse-workspace\staticanalysis.service)
-2019-08-24 12:30:32.414  INFO 30400 --- [main] com.gating.Application                   : No active profile set, falling back to default profiles: default
-2019-08-24 12:30:33.742  INFO 30400 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
-2019-08-24 12:30:33.764  INFO 30400 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2019-08-24 12:30:33.764  INFO 30400 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.21]
-2019-08-24 12:30:33.883  INFO 30400 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2019-08-24 12:30:33.883  INFO 30400 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1416 ms
-2019-08-24 12:30:34.112  INFO 30400 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2019-08-24 12:30:34.297  INFO 30400 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
-2019-08-24 12:30:34.297  INFO 30400 --- [main] com.gating.Application                   : Started Application in 2.333 seconds (JVM running for 2.734)
-2019-08-24 12:30:39.659  INFO 30400 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2019-08-24 12:30:39.659  INFO 30400 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2019-08-24 12:30:39.665  INFO 30400 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 5 ms
-2019-08-24 12:30:42.499 ERROR 30400 --- [http-nio-8080-exec-1] com.gating.Application                   : inside pmd
-2019-08-24 12:30:42.518 ERROR 30400 --- [http-nio-8080-exec-1] com.gating.Application                   : inside simian
+2019-08-25 07:42:23.633  INFO 28088 --- [main] com.gating.Application                   : Starting Application on YY165907 with PID 28088 (C:\eclipse-workspace\staticanalysis.service\target\classes started by 320052310 in C:\eclipse-workspace\staticanalysis.service)
+2019-08-25 07:42:23.654  INFO 28088 --- [main] com.gating.Application                   : No active profile set, falling back to default profiles: default
+2019-08-25 07:42:25.127  INFO 28088 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-08-25 07:42:25.157  INFO 28088 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-08-25 07:42:25.158  INFO 28088 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.21]
+2019-08-25 07:42:25.305  INFO 28088 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-08-25 07:42:25.306  INFO 28088 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1586 ms
+2019-08-25 07:42:25.564  INFO 28088 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-08-25 07:42:25.793  INFO 28088 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-08-25 07:42:25.797  INFO 28088 --- [main] com.gating.Application                   : Started Application in 2.895 seconds (JVM running for 3.427)
+2019-08-25 07:46:22.726  INFO 16872 --- [main] com.gating.Application                   : Starting Application on YY165907 with PID 16872 (C:\eclipse-workspace\staticanalysis.service\target\classes started by 320052310 in C:\eclipse-workspace\staticanalysis.service)
+2019-08-25 07:46:22.730  INFO 16872 --- [main] com.gating.Application                   : No active profile set, falling back to default profiles: default
+2019-08-25 07:46:24.032  INFO 16872 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-08-25 07:46:24.057  INFO 16872 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-08-25 07:46:24.057  INFO 16872 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.21]
+2019-08-25 07:46:24.185  INFO 16872 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-08-25 07:46:24.185  INFO 16872 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1400 ms
+2019-08-25 07:46:24.424  INFO 16872 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-08-25 07:46:24.656  INFO 16872 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-08-25 07:46:24.660  INFO 16872 --- [main] com.gating.Application                   : Started Application in 2.357 seconds (JVM running for 2.877)
+2019-08-25 07:47:30.888  INFO 28740 --- [main] com.gating.Application                   : Starting Application on YY165907 with PID 28740 (C:\eclipse-workspace\staticanalysis.service\target\classes started by 320052310 in C:\eclipse-workspace\staticanalysis.service)
+2019-08-25 07:47:30.892  INFO 28740 --- [main] com.gating.Application                   : No active profile set, falling back to default profiles: default
+2019-08-25 07:47:32.152  INFO 28740 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-08-25 07:47:32.183  INFO 28740 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-08-25 07:47:32.183  INFO 28740 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.21]
+2019-08-25 07:47:32.307  INFO 28740 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-08-25 07:47:32.307  INFO 28740 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1364 ms
+2019-08-25 07:47:32.582  INFO 28740 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-08-25 07:47:32.798  INFO 28740 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-08-25 07:47:32.802  INFO 28740 --- [main] com.gating.Application                   : Started Application in 2.332 seconds (JVM running for 2.748)
+2019-08-25 07:48:42.048  INFO 26256 --- [main] com.gating.Application                   : Starting Application on YY165907 with PID 26256 (C:\eclipse-workspace\staticanalysis.service\target\classes started by 320052310 in C:\eclipse-workspace\staticanalysis.service)
+2019-08-25 07:48:42.051  INFO 26256 --- [main] com.gating.Application                   : No active profile set, falling back to default profiles: default
+2019-08-25 07:48:43.440  INFO 26256 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-08-25 07:48:43.463  INFO 26256 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-08-25 07:48:43.463  INFO 26256 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.21]
+2019-08-25 07:48:43.595  INFO 26256 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-08-25 07:48:43.595  INFO 26256 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1480 ms
+2019-08-25 07:48:43.873  INFO 26256 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-08-25 07:48:44.100  INFO 26256 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-08-25 07:48:44.102  INFO 26256 --- [main] com.gating.Application                   : Started Application in 2.459 seconds (JVM running for 2.91)
+2019-08-25 07:52:34.388  INFO 26232 --- [main] com.gating.Application                   : Starting Application on YY165907 with PID 26232 (C:\eclipse-workspace\staticanalysis.service\target\classes started by 320052310 in C:\eclipse-workspace\staticanalysis.service)
+2019-08-25 07:52:34.394  INFO 26232 --- [main] com.gating.Application                   : No active profile set, falling back to default profiles: default
+2019-08-25 07:52:35.606  INFO 26232 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-08-25 07:52:35.630  INFO 26232 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-08-25 07:52:35.630  INFO 26232 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.21]
+2019-08-25 07:52:35.765  INFO 26232 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-08-25 07:52:35.766  INFO 26232 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1317 ms
+2019-08-25 07:52:36.018  INFO 26232 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-08-25 07:52:36.227  INFO 26232 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-08-25 07:52:36.230  INFO 26232 --- [main] com.gating.Application                   : Started Application in 2.229 seconds (JVM running for 2.643)
+2019-08-25 07:53:43.051  INFO 7624 --- [main] com.gating.Application                   : Starting Application on YY165907 with PID 7624 (C:\eclipse-workspace\staticanalysis.service\target\classes started by 320052310 in C:\eclipse-workspace\staticanalysis.service)
+2019-08-25 07:53:43.054  INFO 7624 --- [main] com.gating.Application                   : No active profile set, falling back to default profiles: default
+2019-08-25 07:53:44.522  INFO 7624 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-08-25 07:53:44.549  INFO 7624 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-08-25 07:53:44.549  INFO 7624 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.21]
+2019-08-25 07:53:44.684  INFO 7624 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-08-25 07:53:44.684  INFO 7624 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1564 ms
+2019-08-25 07:53:44.924  INFO 7624 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-08-25 07:53:45.147  INFO 7624 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-08-25 07:53:45.151  INFO 7624 --- [main] com.gating.Application                   : Started Application in 2.542 seconds (JVM running for 3.03)
+2019-08-25 07:56:40.472  INFO 21216 --- [main] com.gating.Application                   : Starting Application on YY165907 with PID 21216 (C:\eclipse-workspace\staticanalysis.service\target\classes started by 320052310 in C:\eclipse-workspace\staticanalysis.service)
+2019-08-25 07:56:40.475  INFO 21216 --- [main] com.gating.Application                   : No active profile set, falling back to default profiles: default
+2019-08-25 07:56:41.843  INFO 21216 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-08-25 07:56:41.871  INFO 21216 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-08-25 07:56:41.872  INFO 21216 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.21]
+2019-08-25 07:56:42.008  INFO 21216 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-08-25 07:56:42.009  INFO 21216 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1470 ms
+2019-08-25 07:56:42.269  INFO 21216 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-08-25 07:56:42.485  INFO 21216 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-08-25 07:56:42.489  INFO 21216 --- [main] com.gating.Application                   : Started Application in 2.432 seconds (JVM running for 2.839)
+2019-08-25 07:59:48.742  INFO 8932 --- [main] com.gating.Application                   : Starting Application on YY165907 with PID 8932 (C:\eclipse-workspace\staticanalysis.service\target\classes started by 320052310 in C:\eclipse-workspace\staticanalysis.service)
+2019-08-25 07:59:48.745  INFO 8932 --- [main] com.gating.Application                   : No active profile set, falling back to default profiles: default
+2019-08-25 07:59:50.030  INFO 8932 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-08-25 07:59:50.061  INFO 8932 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-08-25 07:59:50.062  INFO 8932 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.21]
+2019-08-25 07:59:50.189  INFO 8932 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-08-25 07:59:50.189  INFO 8932 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1396 ms
+2019-08-25 07:59:50.429  INFO 8932 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-08-25 07:59:50.665  INFO 8932 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-08-25 07:59:50.670  INFO 8932 --- [main] com.gating.Application                   : Started Application in 2.333 seconds (JVM running for 2.775)
+2019-08-25 08:07:14.131  INFO 8932 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-08-25 08:07:14.131  INFO 8932 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-08-25 08:07:14.141  INFO 8932 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 10 ms
+2019-08-25 08:07:19.227 ERROR 8932 --- [http-nio-8080-exec-1] com.gating.Application                   : inside pmd
+2019-08-25 08:07:19.281 ERROR 8932 --- [http-nio-8080-exec-1] com.gating.Application                   : inside simian
+2019-08-25 08:07:41.612 ERROR 8932 --- [http-nio-8080-exec-1] com.gating.Application                   : IOException occurred
+
+java.io.IOException: Cannot run program "[cmd, /c, /staticanalysis.service/static-code-analyzers/cyvis-0.9 && jar cf code.jar C:/bootcamp/java/code/stack && java -jar /staticanalysis.service/static-code-analyzers/cyvis-0.9/cyvis-0.9.jar -p code.jar -t reports/cyvis_reports]": CreateProcess error=2, The system cannot find the file specified
+	at java.lang.ProcessBuilder.start(ProcessBuilder.java:1048) ~[na:1.8.0_211]
+	at com.gating.staticanalysis.service.CyvisService.run(CyvisService.java:49) ~[classes/:na]
+	at com.gating.service.GatingService.gateCode(GatingService.java:61) [classes/:na]
+	at com.gating.controller.GatingController.handler(GatingController.java:29) [classes/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_211]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_211]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_211]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_211]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:190) [spring-web-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138) [spring-web-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:104) [spring-webmvc-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:892) [spring-webmvc-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:797) [spring-webmvc-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) [spring-webmvc-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1039) [spring-webmvc-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:942) [spring-webmvc-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1005) [spring-webmvc-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:908) [spring-webmvc-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:660) [tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:882) [spring-webmvc-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741) [tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231) [tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) [tomcat-embed-websocket-9.0.21.jar:9.0.21]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99) [spring-web-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:109) [spring-web-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:92) [spring-web-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:109) [spring-web-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:93) [spring-web-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:109) [spring-web-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200) [spring-web-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:109) [spring-web-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202) [tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96) [tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490) [tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139) [tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) [tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) [tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343) [tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408) [tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66) [tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:853) [tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1587) [tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) [tomcat-embed-core-9.0.21.jar:9.0.21]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [na:1.8.0_211]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [na:1.8.0_211]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-9.0.21.jar:9.0.21]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_211]
+Caused by: java.io.IOException: CreateProcess error=2, The system cannot find the file specified
+	at java.lang.ProcessImpl.create(Native Method) ~[na:1.8.0_211]
+	at java.lang.ProcessImpl.<init>(ProcessImpl.java:386) ~[na:1.8.0_211]
+	at java.lang.ProcessImpl.start(ProcessImpl.java:137) ~[na:1.8.0_211]
+	at java.lang.ProcessBuilder.start(ProcessBuilder.java:1029) ~[na:1.8.0_211]
+	... 57 common frames omitted
+
+2019-08-25 08:08:37.964  INFO 9032 --- [main] com.gating.Application                   : Starting Application on YY165907 with PID 9032 (C:\eclipse-workspace\staticanalysis.service\target\classes started by 320052310 in C:\eclipse-workspace\staticanalysis.service)
+2019-08-25 08:08:37.967  INFO 9032 --- [main] com.gating.Application                   : No active profile set, falling back to default profiles: default
+2019-08-25 08:08:39.339  INFO 9032 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-08-25 08:08:39.371  INFO 9032 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-08-25 08:08:39.372  INFO 9032 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.21]
+2019-08-25 08:08:39.514  INFO 9032 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-08-25 08:08:39.515  INFO 9032 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1499 ms
+2019-08-25 08:08:39.790  INFO 9032 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-08-25 08:08:40.045  INFO 9032 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-08-25 08:08:40.048  INFO 9032 --- [main] com.gating.Application                   : Started Application in 2.503 seconds (JVM running for 2.91)
+2019-08-25 08:08:44.609  INFO 9032 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-08-25 08:08:44.609  INFO 9032 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-08-25 08:08:44.615  INFO 9032 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 6 ms
+2019-08-25 08:08:47.790 ERROR 9032 --- [http-nio-8080-exec-1] com.gating.Application                   : inside pmd
+2019-08-25 08:08:47.814 ERROR 9032 --- [http-nio-8080-exec-1] com.gating.Application                   : inside simian
+2019-08-25 08:10:20.473  INFO 19332 --- [main] com.gating.Application                   : Starting Application on YY165907 with PID 19332 (C:\eclipse-workspace\staticanalysis.service\target\classes started by 320052310 in C:\eclipse-workspace\staticanalysis.service)
+2019-08-25 08:10:20.476  INFO 19332 --- [main] com.gating.Application                   : No active profile set, falling back to default profiles: default
+2019-08-25 08:10:21.783  INFO 19332 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-08-25 08:10:21.810  INFO 19332 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-08-25 08:10:21.811  INFO 19332 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.21]
+2019-08-25 08:10:21.937  INFO 19332 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-08-25 08:10:21.938  INFO 19332 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1410 ms
+2019-08-25 08:10:22.189  INFO 19332 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-08-25 08:10:22.408  INFO 19332 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-08-25 08:10:22.411  INFO 19332 --- [main] com.gating.Application                   : Started Application in 2.357 seconds (JVM running for 2.776)
+2019-08-25 08:10:25.633  INFO 19332 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-08-25 08:10:25.634  INFO 19332 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-08-25 08:10:25.640  INFO 19332 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 6 ms
+2019-08-25 08:10:29.212 ERROR 19332 --- [http-nio-8080-exec-1] com.gating.Application                   : inside pmd
+2019-08-25 08:10:29.234 ERROR 19332 --- [http-nio-8080-exec-1] com.gating.Application                   : inside simian
+2019-08-25 08:14:09.562  INFO 25340 --- [main] com.gating.Application                   : Starting Application on YY165907 with PID 25340 (C:\eclipse-workspace\staticanalysis.service\target\classes started by 320052310 in C:\eclipse-workspace\staticanalysis.service)
+2019-08-25 08:14:09.566  INFO 25340 --- [main] com.gating.Application                   : No active profile set, falling back to default profiles: default
+2019-08-25 08:14:10.961  INFO 25340 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-08-25 08:14:10.988  INFO 25340 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-08-25 08:14:10.988  INFO 25340 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.21]
+2019-08-25 08:14:11.112  INFO 25340 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-08-25 08:14:11.112  INFO 25340 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1488 ms
+2019-08-25 08:14:11.381  INFO 25340 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-08-25 08:14:11.611  INFO 25340 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-08-25 08:14:11.615  INFO 25340 --- [main] com.gating.Application                   : Started Application in 2.475 seconds (JVM running for 2.912)
+2019-08-25 08:14:16.943  INFO 25340 --- [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-08-25 08:14:16.943  INFO 25340 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-08-25 08:14:16.949  INFO 25340 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 5 ms
+2019-08-25 08:14:19.982 ERROR 25340 --- [http-nio-8080-exec-2] com.gating.Application                   : inside pmd
+2019-08-25 08:14:20.009 ERROR 25340 --- [http-nio-8080-exec-2] com.gating.Application                   : inside simian
+2019-08-25 08:18:27.673  INFO 9504 --- [main] com.gating.Application                   : Starting Application on YY165907 with PID 9504 (C:\eclipse-workspace\staticanalysis.service\target\classes started by 320052310 in C:\eclipse-workspace\staticanalysis.service)
+2019-08-25 08:18:27.676  INFO 9504 --- [main] com.gating.Application                   : No active profile set, falling back to default profiles: default
+2019-08-25 08:18:29.044  INFO 9504 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-08-25 08:18:29.073  INFO 9504 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-08-25 08:18:29.074  INFO 9504 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.21]
+2019-08-25 08:18:29.203  INFO 9504 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-08-25 08:18:29.205  INFO 9504 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1449 ms
+2019-08-25 08:18:29.470  INFO 9504 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-08-25 08:18:29.692  INFO 9504 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-08-25 08:18:29.695  INFO 9504 --- [main] com.gating.Application                   : Started Application in 2.428 seconds (JVM running for 2.85)
+2019-08-25 08:18:34.005  INFO 9504 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-08-25 08:18:34.006  INFO 9504 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-08-25 08:18:34.015  INFO 9504 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 9 ms
+2019-08-25 08:18:36.857 ERROR 9504 --- [http-nio-8080-exec-1] com.gating.Application                   : inside pmd
+2019-08-25 08:18:36.879 ERROR 9504 --- [http-nio-8080-exec-1] com.gating.Application                   : inside simian
+2019-08-25 08:19:14.955 ERROR 9504 --- [http-nio-8080-exec-2] com.gating.Application                   : inside pmd
+2019-08-25 08:19:14.970 ERROR 9504 --- [http-nio-8080-exec-2] com.gating.Application                   : inside simian
+2019-08-25 08:51:02.941  INFO 25432 --- [main] com.gating.Application                   : Starting Application on YY165907 with PID 25432 (C:\eclipse-workspace\staticanalysis.service\target\classes started by 320052310 in C:\eclipse-workspace\staticanalysis.service)
+2019-08-25 08:51:02.946  INFO 25432 --- [main] com.gating.Application                   : No active profile set, falling back to default profiles: default
+2019-08-25 08:51:04.556  INFO 25432 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-08-25 08:51:04.588  INFO 25432 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-08-25 08:51:04.597  INFO 25432 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.21]
+2019-08-25 08:51:04.776  INFO 25432 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-08-25 08:51:04.776  INFO 25432 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1762 ms
+2019-08-25 08:51:05.129  INFO 25432 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-08-25 08:51:05.422  INFO 25432 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-08-25 08:51:05.427  INFO 25432 --- [main] com.gating.Application                   : Started Application in 3.52 seconds (JVM running for 4.372)
+2019-08-25 08:51:09.848  INFO 25432 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-08-25 08:51:09.851  INFO 25432 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-08-25 08:51:09.858  INFO 25432 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 7 ms
+2019-08-25 08:51:15.069 ERROR 25432 --- [http-nio-8080-exec-1] com.gating.Application                   : inside pmd
+2019-08-25 08:51:15.105 ERROR 25432 --- [http-nio-8080-exec-1] com.gating.Application                   : inside simian
+2019-08-25 08:51:54.249  INFO 21552 --- [main] com.gating.Application                   : Starting Application on YY165907 with PID 21552 (C:\eclipse-workspace\staticanalysis.service\target\classes started by 320052310 in C:\eclipse-workspace\staticanalysis.service)
+2019-08-25 08:51:54.257  INFO 21552 --- [main] com.gating.Application                   : No active profile set, falling back to default profiles: default
+2019-08-25 08:51:56.112  INFO 21552 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-08-25 08:51:56.172  INFO 21552 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-08-25 08:51:56.173  INFO 21552 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.21]
+2019-08-25 08:51:56.437  INFO 21552 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-08-25 08:51:56.438  INFO 21552 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2085 ms
+2019-08-25 08:51:56.803  INFO 21552 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-08-25 08:51:57.091  INFO 21552 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-08-25 08:51:57.095  INFO 21552 --- [main] com.gating.Application                   : Started Application in 3.504 seconds (JVM running for 4.273)
+2019-08-25 08:52:10.741  INFO 21552 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-08-25 08:52:10.741  INFO 21552 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-08-25 08:52:10.753  INFO 21552 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 11 ms
+2019-08-25 08:52:16.685 ERROR 21552 --- [http-nio-8080-exec-1] com.gating.Application                   : inside pmd
+2019-08-25 08:52:16.719 ERROR 21552 --- [http-nio-8080-exec-1] com.gating.Application                   : inside simian
+2019-08-25 08:56:21.833  INFO 30152 --- [main] com.gating.Application                   : Starting Application on YY165907 with PID 30152 (C:\eclipse-workspace\staticanalysis.service\target\classes started by 320052310 in C:\eclipse-workspace\staticanalysis.service)
+2019-08-25 08:56:21.838  INFO 30152 --- [main] com.gating.Application                   : No active profile set, falling back to default profiles: default
+2019-08-25 08:56:23.623  INFO 30152 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-08-25 08:56:23.657  INFO 30152 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-08-25 08:56:23.658  INFO 30152 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.21]
+2019-08-25 08:56:23.904  INFO 30152 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-08-25 08:56:23.907  INFO 30152 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2001 ms
+2019-08-25 08:56:24.396  INFO 30152 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-08-25 08:56:24.665  INFO 30152 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-08-25 08:56:24.669  INFO 30152 --- [main] com.gating.Application                   : Started Application in 3.686 seconds (JVM running for 4.458)
+2019-08-25 08:56:28.849  INFO 30152 --- [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-08-25 08:56:28.850  INFO 30152 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-08-25 08:56:28.863  INFO 30152 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 12 ms
+2019-08-25 08:56:34.316 ERROR 30152 --- [http-nio-8080-exec-2] com.gating.Application                   : inside pmd
+2019-08-25 08:56:34.353 ERROR 30152 --- [http-nio-8080-exec-2] com.gating.Application                   : inside simian
+2019-08-25 08:57:32.063  INFO 23876 --- [main] com.gating.Application                   : Starting Application on YY165907 with PID 23876 (C:\eclipse-workspace\staticanalysis.service\target\classes started by 320052310 in C:\eclipse-workspace\staticanalysis.service)
+2019-08-25 08:57:32.067  INFO 23876 --- [main] com.gating.Application                   : No active profile set, falling back to default profiles: default
+2019-08-25 08:57:33.695  INFO 23876 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-08-25 08:57:33.762  INFO 23876 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-08-25 08:57:33.763  INFO 23876 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.21]
+2019-08-25 08:57:34.015  INFO 23876 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-08-25 08:57:34.015  INFO 23876 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1884 ms
+2019-08-25 08:57:34.329  INFO 23876 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-08-25 08:57:34.583  INFO 23876 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-08-25 08:57:34.587  INFO 23876 --- [main] com.gating.Application                   : Started Application in 3.18 seconds (JVM running for 4.128)
+2019-08-25 08:57:52.266  INFO 23876 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-08-25 08:57:52.267  INFO 23876 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-08-25 08:57:52.280  INFO 23876 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 13 ms
+2019-08-25 08:57:56.623 ERROR 23876 --- [http-nio-8080-exec-1] com.gating.Application                   : inside pmd
+2019-08-25 08:57:56.652 ERROR 23876 --- [http-nio-8080-exec-1] com.gating.Application                   : inside simian
+2019-08-25 08:58:41.687  INFO 24712 --- [main] com.gating.Application                   : Starting Application on YY165907 with PID 24712 (C:\eclipse-workspace\staticanalysis.service\target\classes started by 320052310 in C:\eclipse-workspace\staticanalysis.service)
+2019-08-25 08:58:41.690  INFO 24712 --- [main] com.gating.Application                   : No active profile set, falling back to default profiles: default
+2019-08-25 08:58:43.279  INFO 24712 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-08-25 08:58:43.315  INFO 24712 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-08-25 08:58:43.315  INFO 24712 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.21]
+2019-08-25 08:58:43.528  INFO 24712 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-08-25 08:58:43.528  INFO 24712 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1773 ms
+2019-08-25 08:58:43.879  INFO 24712 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-08-25 08:58:44.204  INFO 24712 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-08-25 08:58:44.205  INFO 24712 --- [main] com.gating.Application                   : Started Application in 3.177 seconds (JVM running for 3.781)
+2019-08-25 08:58:51.137  INFO 24712 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-08-25 08:58:51.138  INFO 24712 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-08-25 08:58:51.149  INFO 24712 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 10 ms
+2019-08-25 08:58:56.324 ERROR 24712 --- [http-nio-8080-exec-1] com.gating.Application                   : inside pmd
+2019-08-25 08:58:56.356 ERROR 24712 --- [http-nio-8080-exec-1] com.gating.Application                   : inside simian
+2019-08-25 09:41:20.064  INFO 12400 --- [main] com.gating.Application                   : Starting Application on YY165907 with PID 12400 (C:\eclipse-workspace\staticanalysis.service\target\classes started by 320052310 in C:\eclipse-workspace\staticanalysis.service)
+2019-08-25 09:41:20.072  INFO 12400 --- [main] com.gating.Application                   : No active profile set, falling back to default profiles: default
+2019-08-25 09:41:22.457  INFO 12400 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-08-25 09:41:22.518  INFO 12400 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-08-25 09:41:22.518  INFO 12400 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.21]
+2019-08-25 09:41:22.755  INFO 12400 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-08-25 09:41:22.755  INFO 12400 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2599 ms
+2019-08-25 09:41:23.224  INFO 12400 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-08-25 09:41:23.642  INFO 12400 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-08-25 09:41:23.647  INFO 12400 --- [main] com.gating.Application                   : Started Application in 4.41 seconds (JVM running for 5.638)
+2019-08-25 09:41:31.184  INFO 12400 --- [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-08-25 09:41:31.185  INFO 12400 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-08-25 09:41:31.194  INFO 12400 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 8 ms
+2019-08-25 09:41:58.850 ERROR 12400 --- [http-nio-8080-exec-2] com.gating.Application                   : inside pmd
+2019-08-25 09:42:00.730 ERROR 12400 --- [http-nio-8080-exec-2] com.gating.Application                   : inside simian
+2019-08-25 09:44:32.494  INFO 15836 --- [main] com.gating.Application                   : Starting Application on YY165907 with PID 15836 (C:\eclipse-workspace\staticanalysis.service\target\classes started by 320052310 in C:\eclipse-workspace\staticanalysis.service)
+2019-08-25 09:44:32.497  INFO 15836 --- [main] com.gating.Application                   : No active profile set, falling back to default profiles: default
+2019-08-25 09:44:33.728  INFO 15836 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-08-25 09:44:33.752  INFO 15836 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-08-25 09:44:33.753  INFO 15836 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.21]
+2019-08-25 09:44:33.879  INFO 15836 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-08-25 09:44:33.879  INFO 15836 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1329 ms
+2019-08-25 09:44:34.114  INFO 15836 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-08-25 09:44:34.306  INFO 15836 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-08-25 09:44:34.309  INFO 15836 --- [main] com.gating.Application                   : Started Application in 2.237 seconds (JVM running for 2.625)
+2019-08-25 09:44:41.482  INFO 15836 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-08-25 09:44:41.483  INFO 15836 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-08-25 09:44:41.492  INFO 15836 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 9 ms
+2019-08-25 09:44:44.084 ERROR 15836 --- [http-nio-8080-exec-1] com.gating.Application                   : inside pmd
+2019-08-25 09:44:44.113 ERROR 15836 --- [http-nio-8080-exec-1] com.gating.Application                   : inside simian
+2019-08-25 09:44:48.030 ERROR 15836 --- [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception
+
+java.io.FileNotFoundException: C:\testing.txt (The system cannot find the file specified)
+	at java.io.FileInputStream.open0(Native Method) ~[na:1.8.0_211]
+	at java.io.FileInputStream.open(FileInputStream.java:195) ~[na:1.8.0_211]
+	at java.io.FileInputStream.<init>(FileInputStream.java:138) ~[na:1.8.0_211]
+	at java.io.FileInputStream.<init>(FileInputStream.java:93) ~[na:1.8.0_211]
+	at java.io.FileReader.<init>(FileReader.java:58) ~[na:1.8.0_211]
+	at com.gating.service.GatingService.getLastRunResults(GatingService.java:111) ~[classes/:na]
+	at com.gating.service.GatingService.gateCode(GatingService.java:65) ~[classes/:na]
+	at com.gating.controller.GatingController.handler(GatingController.java:29) ~[classes/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_211]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_211]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_211]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_211]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:190) ~[spring-web-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138) ~[spring-web-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:104) ~[spring-webmvc-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:892) ~[spring-webmvc-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:797) ~[spring-webmvc-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1039) ~[spring-webmvc-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:942) ~[spring-webmvc-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1005) ~[spring-webmvc-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:908) ~[spring-webmvc-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:660) ~[tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:882) ~[spring-webmvc-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741) ~[tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231) ~[tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) ~[tomcat-embed-websocket-9.0.21.jar:9.0.21]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99) ~[spring-web-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:109) ~[spring-web-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:92) ~[spring-web-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:109) ~[spring-web-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:93) ~[spring-web-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:109) ~[spring-web-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200) ~[spring-web-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:109) ~[spring-web-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202) ~[tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96) [tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490) [tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139) [tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) [tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) [tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343) [tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408) [tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66) [tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:853) [tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1587) [tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) [tomcat-embed-core-9.0.21.jar:9.0.21]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [na:1.8.0_211]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [na:1.8.0_211]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-9.0.21.jar:9.0.21]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_211]
+
+2019-08-25 09:45:13.927  INFO 31120 --- [main] com.gating.Application                   : Starting Application on YY165907 with PID 31120 (C:\eclipse-workspace\staticanalysis.service\target\classes started by 320052310 in C:\eclipse-workspace\staticanalysis.service)
+2019-08-25 09:45:13.930  INFO 31120 --- [main] com.gating.Application                   : No active profile set, falling back to default profiles: default
+2019-08-25 09:45:15.203  INFO 31120 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-08-25 09:45:15.229  INFO 31120 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-08-25 09:45:15.230  INFO 31120 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.21]
+2019-08-25 09:45:15.349  INFO 31120 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-08-25 09:45:15.349  INFO 31120 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1369 ms
+2019-08-25 09:45:15.582  INFO 31120 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-08-25 09:45:15.783  INFO 31120 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-08-25 09:45:15.786  INFO 31120 --- [main] com.gating.Application                   : Started Application in 2.228 seconds (JVM running for 2.629)
+2019-08-25 09:45:18.983  INFO 31120 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-08-25 09:45:18.983  INFO 31120 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-08-25 09:45:18.992  INFO 31120 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 9 ms
+2019-08-25 09:45:21.528 ERROR 31120 --- [http-nio-8080-exec-1] com.gating.Application                   : inside pmd
+2019-08-25 09:45:21.550 ERROR 31120 --- [http-nio-8080-exec-1] com.gating.Application                   : inside simian
+2019-08-25 09:48:19.922  INFO 31844 --- [main] com.gating.Application                   : Starting Application on YY165907 with PID 31844 (C:\eclipse-workspace\staticanalysis.service\target\classes started by 320052310 in C:\eclipse-workspace\staticanalysis.service)
+2019-08-25 09:48:19.925  INFO 31844 --- [main] com.gating.Application                   : No active profile set, falling back to default profiles: default
+2019-08-25 09:48:21.446  INFO 31844 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-08-25 09:48:21.470  INFO 31844 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-08-25 09:48:21.471  INFO 31844 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.21]
+2019-08-25 09:48:21.604  INFO 31844 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-08-25 09:48:21.604  INFO 31844 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1627 ms
+2019-08-25 09:48:21.845  INFO 31844 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-08-25 09:48:22.025  INFO 31844 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-08-25 09:48:22.028  INFO 31844 --- [main] com.gating.Application                   : Started Application in 2.47 seconds (JVM running for 2.848)
+2019-08-25 09:48:34.055  INFO 31844 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-08-25 09:48:34.056  INFO 31844 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-08-25 09:48:34.066  INFO 31844 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 10 ms
+2019-08-25 09:48:36.799 ERROR 31844 --- [http-nio-8080-exec-1] com.gating.Application                   : inside pmd
+2019-08-25 09:48:36.817 ERROR 31844 --- [http-nio-8080-exec-1] com.gating.Application                   : inside simian
+2019-08-25 09:48:51.273 ERROR 31844 --- [http-nio-8080-exec-2] com.gating.Application                   : inside pmd
+2019-08-25 09:48:51.282 ERROR 31844 --- [http-nio-8080-exec-2] com.gating.Application                   : inside simian
+2019-08-25 09:50:05.593  INFO 19868 --- [main] com.gating.Application                   : Starting Application on YY165907 with PID 19868 (C:\eclipse-workspace\staticanalysis.service\target\classes started by 320052310 in C:\eclipse-workspace\staticanalysis.service)
+2019-08-25 09:50:05.596  INFO 19868 --- [main] com.gating.Application                   : No active profile set, falling back to default profiles: default
+2019-08-25 09:50:06.850  INFO 19868 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-08-25 09:50:06.878  INFO 19868 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-08-25 09:50:06.879  INFO 19868 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.21]
+2019-08-25 09:50:06.999  INFO 19868 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-08-25 09:50:06.999  INFO 19868 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1348 ms
+2019-08-25 09:50:07.257  INFO 19868 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-08-25 09:50:07.454  INFO 19868 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-08-25 09:50:07.458  INFO 19868 --- [main] com.gating.Application                   : Started Application in 2.234 seconds (JVM running for 2.629)
+2019-08-25 09:50:10.386  INFO 19868 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-08-25 09:50:10.386  INFO 19868 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-08-25 09:50:10.394  INFO 19868 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 8 ms
+2019-08-25 09:50:13.010 ERROR 19868 --- [http-nio-8080-exec-1] com.gating.Application                   : inside pmd
+2019-08-25 09:50:13.028 ERROR 19868 --- [http-nio-8080-exec-1] com.gating.Application                   : inside simian
+2019-08-25 09:51:18.482  INFO 27124 --- [main] com.gating.Application                   : Starting Application on YY165907 with PID 27124 (C:\eclipse-workspace\staticanalysis.service\target\classes started by 320052310 in C:\eclipse-workspace\staticanalysis.service)
+2019-08-25 09:51:18.485  INFO 27124 --- [main] com.gating.Application                   : No active profile set, falling back to default profiles: default
+2019-08-25 09:51:19.852  INFO 27124 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-08-25 09:51:19.881  INFO 27124 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-08-25 09:51:19.882  INFO 27124 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.21]
+2019-08-25 09:51:20.019  INFO 27124 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-08-25 09:51:20.019  INFO 27124 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1478 ms
+2019-08-25 09:51:20.245  INFO 27124 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-08-25 09:51:20.417 ERROR 27124 --- [main] org.apache.catalina.util.LifecycleBase   : Failed to start component [Connector[HTTP/1.1-8080]]
+
+org.apache.catalina.LifecycleException: Protocol handler start failed
+	at org.apache.catalina.connector.Connector.startInternal(Connector.java:1008) ~[tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183) ~[tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.catalina.core.StandardService.addConnector(StandardService.java:227) [tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.addPreviouslyRemovedConnectors(TomcatWebServer.java:263) [spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.start(TomcatWebServer.java:195) [spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.startWebServer(ServletWebServerApplicationContext.java:296) [spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.finishRefresh(ServletWebServerApplicationContext.java:162) [spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:552) [spring-context-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:140) [spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:742) [spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:389) [spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311) [spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1213) [spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1202) [spring-boot-2.1.6.RELEASE.jar:2.1.6.RELEASE]
+	at com.gating.Application.main(Application.java:9) [classes/:na]
+Caused by: java.net.BindException: Address already in use: bind
+	at sun.nio.ch.Net.bind0(Native Method) ~[na:1.8.0_211]
+	at sun.nio.ch.Net.bind(Net.java:433) ~[na:1.8.0_211]
+	at sun.nio.ch.Net.bind(Net.java:425) ~[na:1.8.0_211]
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223) ~[na:1.8.0_211]
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74) ~[na:1.8.0_211]
+	at org.apache.tomcat.util.net.NioEndpoint.initServerSocket(NioEndpoint.java:230) ~[tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.tomcat.util.net.NioEndpoint.bind(NioEndpoint.java:213) ~[tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.tomcat.util.net.AbstractEndpoint.bindWithCleanup(AbstractEndpoint.java:1124) ~[tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.tomcat.util.net.AbstractEndpoint.start(AbstractEndpoint.java:1210) ~[tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.coyote.AbstractProtocol.start(AbstractProtocol.java:585) ~[tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.catalina.connector.Connector.startInternal(Connector.java:1005) ~[tomcat-embed-core-9.0.21.jar:9.0.21]
+	... 14 common frames omitted
+
+2019-08-25 09:51:20.422  INFO 27124 --- [main] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2019-08-25 09:51:20.431  INFO 27124 --- [main] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2019-08-25 09:51:20.433 ERROR 27124 --- [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+The Tomcat connector configured to listen on port 8080 failed to start. The port may already be in use or the connector may be misconfigured.
+
+Action:
+
+Verify the connector's configuration, identify and stop any process that's listening on port 8080, or configure this application to listen on another port.
+
+2019-08-25 09:51:20.435  INFO 27124 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2019-08-25 09:51:50.870  INFO 7708 --- [main] com.gating.Application                   : Starting Application on YY165907 with PID 7708 (C:\eclipse-workspace\staticanalysis.service\target\classes started by 320052310 in C:\eclipse-workspace\staticanalysis.service)
+2019-08-25 09:51:50.873  INFO 7708 --- [main] com.gating.Application                   : No active profile set, falling back to default profiles: default
+2019-08-25 09:51:52.258  INFO 7708 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-08-25 09:51:52.290  INFO 7708 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-08-25 09:51:52.290  INFO 7708 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.21]
+2019-08-25 09:51:52.424  INFO 7708 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-08-25 09:51:52.425  INFO 7708 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1501 ms
+2019-08-25 09:51:52.655  INFO 7708 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-08-25 09:51:52.852  INFO 7708 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-08-25 09:51:52.856  INFO 7708 --- [main] com.gating.Application                   : Started Application in 2.656 seconds (JVM running for 3.493)
+2019-08-25 09:51:56.124  INFO 7708 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-08-25 09:51:56.125  INFO 7708 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-08-25 09:51:56.135  INFO 7708 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 10 ms
+2019-08-25 09:51:58.640 ERROR 7708 --- [http-nio-8080-exec-1] com.gating.Application                   : inside pmd
+2019-08-25 09:51:58.657 ERROR 7708 --- [http-nio-8080-exec-1] com.gating.Application                   : inside simian
+2019-08-25 09:52:23.378 ERROR 7708 --- [http-nio-8080-exec-2] com.gating.Application                   : inside pmd
+2019-08-25 09:52:23.391 ERROR 7708 --- [http-nio-8080-exec-2] com.gating.Application                   : inside simian
+2019-08-25 09:54:58.722  INFO 23124 --- [main] com.gating.Application                   : Starting Application on YY165907 with PID 23124 (C:\eclipse-workspace\staticanalysis.service\target\classes started by 320052310 in C:\eclipse-workspace\staticanalysis.service)
+2019-08-25 09:54:58.725  INFO 23124 --- [main] com.gating.Application                   : No active profile set, falling back to default profiles: default
+2019-08-25 09:54:59.904  INFO 23124 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-08-25 09:54:59.930  INFO 23124 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-08-25 09:54:59.930  INFO 23124 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.21]
+2019-08-25 09:55:00.052  INFO 23124 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-08-25 09:55:00.052  INFO 23124 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1279 ms
+2019-08-25 09:55:00.272  INFO 23124 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-08-25 09:55:00.452  INFO 23124 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-08-25 09:55:00.455  INFO 23124 --- [main] com.gating.Application                   : Started Application in 2.1 seconds (JVM running for 2.467)
+2019-08-25 09:55:05.132  INFO 23124 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-08-25 09:55:05.134  INFO 23124 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-08-25 09:55:05.141  INFO 23124 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 6 ms
+2019-08-25 09:55:07.665 ERROR 23124 --- [http-nio-8080-exec-1] com.gating.Application                   : inside pmd
+2019-08-25 09:55:07.684 ERROR 23124 --- [http-nio-8080-exec-1] com.gating.Application                   : inside simian
+2019-08-25 10:23:01.141  INFO 14056 --- [main] com.gating.Application                   : Starting Application on YY165907 with PID 14056 (C:\eclipse-workspace\staticanalysis.service\target\classes started by 320052310 in C:\eclipse-workspace\staticanalysis.service)
+2019-08-25 10:23:01.143  INFO 14056 --- [main] com.gating.Application                   : No active profile set, falling back to default profiles: default
+2019-08-25 10:23:02.641  INFO 14056 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-08-25 10:23:02.674  INFO 14056 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-08-25 10:23:02.674  INFO 14056 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.21]
+2019-08-25 10:23:02.798  INFO 14056 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-08-25 10:23:02.798  INFO 14056 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1604 ms
+2019-08-25 10:23:03.069  INFO 14056 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-08-25 10:23:03.263  INFO 14056 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-08-25 10:23:03.279  INFO 14056 --- [main] com.gating.Application                   : Started Application in 2.502 seconds (JVM running for 2.886)
+2019-08-25 10:24:10.330  INFO 30372 --- [main] com.gating.Application                   : Starting Application on YY165907 with PID 30372 (C:\eclipse-workspace\staticanalysis.service\target\classes started by 320052310 in C:\eclipse-workspace\staticanalysis.service)
+2019-08-25 10:24:10.330  INFO 30372 --- [main] com.gating.Application                   : No active profile set, falling back to default profiles: default
+2019-08-25 10:24:11.490  INFO 30372 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-08-25 10:24:11.514  INFO 30372 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-08-25 10:24:11.515  INFO 30372 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.21]
+2019-08-25 10:24:11.624  INFO 30372 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-08-25 10:24:11.624  INFO 30372 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1235 ms
+2019-08-25 10:24:11.823  INFO 30372 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-08-25 10:24:12.013  INFO 30372 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-08-25 10:24:12.016  INFO 30372 --- [main] com.gating.Application                   : Started Application in 2.056 seconds (JVM running for 2.424)
+2019-08-25 10:24:20.823  INFO 30372 --- [http-nio-8080-exec-3] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-08-25 10:24:20.824  INFO 30372 --- [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-08-25 10:24:20.829  INFO 30372 --- [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed initialization in 5 ms
+2019-08-25 10:24:20.978 ERROR 30372 --- [http-nio-8080-exec-3] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.NullPointerException] with root cause
+
+java.lang.NullPointerException: null
+	at com.gating.service.GatingService.getLastRunResults(GatingService.java:135) ~[classes/:na]
+	at com.gating.service.GatingService.gateCode(GatingService.java:68) ~[classes/:na]
+	at com.gating.controller.GatingController.handler(GatingController.java:29) ~[classes/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_211]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_211]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_211]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_211]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:190) ~[spring-web-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138) ~[spring-web-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:104) ~[spring-webmvc-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:892) ~[spring-webmvc-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:797) ~[spring-webmvc-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1039) ~[spring-webmvc-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:942) ~[spring-webmvc-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1005) ~[spring-webmvc-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:908) ~[spring-webmvc-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:660) ~[tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:882) ~[spring-webmvc-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741) ~[tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231) ~[tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) ~[tomcat-embed-websocket-9.0.21.jar:9.0.21]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99) ~[spring-web-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:109) ~[spring-web-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:92) ~[spring-web-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:109) ~[spring-web-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:93) ~[spring-web-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:109) ~[spring-web-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200) ~[spring-web-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:109) ~[spring-web-5.1.8.RELEASE.jar:5.1.8.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202) ~[tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96) [tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490) [tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139) [tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) [tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) [tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343) [tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408) [tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66) [tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:853) [tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1587) [tomcat-embed-core-9.0.21.jar:9.0.21]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) [tomcat-embed-core-9.0.21.jar:9.0.21]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [na:1.8.0_211]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [na:1.8.0_211]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-9.0.21.jar:9.0.21]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_211]
+
+2019-08-25 10:25:53.955  INFO 25588 --- [main] com.gating.Application                   : Starting Application on YY165907 with PID 25588 (C:\eclipse-workspace\staticanalysis.service\target\classes started by 320052310 in C:\eclipse-workspace\staticanalysis.service)
+2019-08-25 10:25:53.958  INFO 25588 --- [main] com.gating.Application                   : No active profile set, falling back to default profiles: default
+2019-08-25 10:25:55.120  INFO 25588 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-08-25 10:25:55.145  INFO 25588 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-08-25 10:25:55.145  INFO 25588 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.21]
+2019-08-25 10:25:55.279  INFO 25588 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-08-25 10:25:55.279  INFO 25588 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1276 ms
+2019-08-25 10:25:55.507  INFO 25588 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-08-25 10:25:55.697  INFO 25588 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-08-25 10:25:55.700  INFO 25588 --- [main] com.gating.Application                   : Started Application in 2.132 seconds (JVM running for 2.522)
+2019-08-25 10:26:02.419  INFO 25588 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-08-25 10:26:02.419  INFO 25588 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-08-25 10:26:02.425  INFO 25588 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 6 ms
+2019-08-25 10:26:04.998 ERROR 25588 --- [http-nio-8080-exec-1] com.gating.Application                   : inside pmd
+2019-08-25 10:26:05.015 ERROR 25588 --- [http-nio-8080-exec-1] com.gating.Application                   : inside simian
+2019-08-25 10:27:29.123  INFO 26112 --- [main] com.gating.Application                   : Starting Application on YY165907 with PID 26112 (C:\eclipse-workspace\staticanalysis.service\target\classes started by 320052310 in C:\eclipse-workspace\staticanalysis.service)
+2019-08-25 10:27:29.126  INFO 26112 --- [main] com.gating.Application                   : No active profile set, falling back to default profiles: default
+2019-08-25 10:27:30.278  INFO 26112 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-08-25 10:27:30.304  INFO 26112 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-08-25 10:27:30.304  INFO 26112 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.21]
+2019-08-25 10:27:30.416  INFO 26112 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-08-25 10:27:30.417  INFO 26112 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1241 ms
+2019-08-25 10:27:30.641  INFO 26112 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-08-25 10:27:30.821  INFO 26112 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-08-25 10:27:30.821  INFO 26112 --- [main] com.gating.Application                   : Started Application in 2.069 seconds (JVM running for 2.423)
+2019-08-25 10:27:35.904  INFO 26112 --- [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-08-25 10:27:35.904  INFO 26112 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-08-25 10:27:35.931  INFO 26112 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 16 ms
+2019-08-25 10:27:38.545 ERROR 26112 --- [http-nio-8080-exec-2] com.gating.Application                   : inside pmd
+2019-08-25 10:27:38.564 ERROR 26112 --- [http-nio-8080-exec-2] com.gating.Application                   : inside simian
+2019-08-25 10:30:00.801  INFO 32168 --- [main] com.gating.Application                   : Starting Application on YY165907 with PID 32168 (C:\eclipse-workspace\staticanalysis.service\target\classes started by 320052310 in C:\eclipse-workspace\staticanalysis.service)
+2019-08-25 10:30:00.801  INFO 32168 --- [main] com.gating.Application                   : No active profile set, falling back to default profiles: default
+2019-08-25 10:30:02.006  INFO 32168 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-08-25 10:30:02.035  INFO 32168 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-08-25 10:30:02.036  INFO 32168 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.21]
+2019-08-25 10:30:02.151  INFO 32168 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-08-25 10:30:02.151  INFO 32168 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1304 ms
+2019-08-25 10:30:02.357  INFO 32168 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-08-25 10:30:02.565  INFO 32168 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-08-25 10:30:02.568  INFO 32168 --- [main] com.gating.Application                   : Started Application in 2.136 seconds (JVM running for 2.492)
+2019-08-25 10:30:07.648  INFO 32168 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-08-25 10:30:07.648  INFO 32168 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-08-25 10:30:07.657  INFO 32168 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 8 ms
+2019-08-25 10:30:10.168 ERROR 32168 --- [http-nio-8080-exec-1] com.gating.Application                   : inside pmd
+2019-08-25 10:30:10.187 ERROR 32168 --- [http-nio-8080-exec-1] com.gating.Application                   : inside simian
+2019-08-25 10:31:39.011 ERROR 32168 --- [http-nio-8080-exec-3] com.gating.Application                   : inside pmd
+2019-08-25 10:31:39.028 ERROR 32168 --- [http-nio-8080-exec-3] com.gating.Application                   : inside simian
+2019-08-25 10:45:20.441  INFO 15136 --- [main] com.gating.Application                   : Starting Application on YY165907 with PID 15136 (C:\eclipse-workspace\staticanalysis.service\target\classes started by 320052310 in C:\eclipse-workspace\staticanalysis.service)
+2019-08-25 10:45:20.441  INFO 15136 --- [main] com.gating.Application                   : No active profile set, falling back to default profiles: default
+2019-08-25 10:45:21.647  INFO 15136 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-08-25 10:45:21.674  INFO 15136 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-08-25 10:45:21.674  INFO 15136 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.21]
+2019-08-25 10:45:21.782  INFO 15136 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-08-25 10:45:21.782  INFO 15136 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1281 ms
+2019-08-25 10:45:21.990  INFO 15136 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-08-25 10:45:22.174  INFO 15136 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-08-25 10:45:22.178  INFO 15136 --- [main] com.gating.Application                   : Started Application in 2.105 seconds (JVM running for 2.465)
+2019-08-25 10:45:24.961  INFO 15136 --- [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-08-25 10:45:24.963  INFO 15136 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-08-25 10:45:24.964  INFO 15136 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2019-08-25 10:45:29.315 ERROR 15136 --- [http-nio-8080-exec-2] com.gating.Application                   : inside pmd
+2019-08-25 10:45:29.338 ERROR 15136 --- [http-nio-8080-exec-2] com.gating.Application                   : inside simian
+2019-08-25 10:45:54.489 ERROR 15136 --- [http-nio-8080-exec-1] com.gating.Application                   : inside pmd
+2019-08-25 10:45:54.508 ERROR 15136 --- [http-nio-8080-exec-1] com.gating.Application                   : inside simian
+2019-08-25 10:46:53.233  INFO 13920 --- [main] com.gating.Application                   : Starting Application on YY165907 with PID 13920 (C:\eclipse-workspace\staticanalysis.service\target\classes started by 320052310 in C:\eclipse-workspace\staticanalysis.service)
+2019-08-25 10:46:53.238  INFO 13920 --- [main] com.gating.Application                   : No active profile set, falling back to default profiles: default
+2019-08-25 10:46:54.625  INFO 13920 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-08-25 10:46:54.657  INFO 13920 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-08-25 10:46:54.658  INFO 13920 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.21]
+2019-08-25 10:46:54.786  INFO 13920 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-08-25 10:46:54.787  INFO 13920 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1493 ms
+2019-08-25 10:46:55.087  INFO 13920 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-08-25 10:46:55.346  INFO 13920 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-08-25 10:46:55.348  INFO 13920 --- [main] com.gating.Application                   : Started Application in 2.53 seconds (JVM running for 2.977)
+2019-08-25 10:46:59.449  INFO 13920 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-08-25 10:46:59.449  INFO 13920 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-08-25 10:46:59.458  INFO 13920 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 9 ms
+2019-08-25 10:47:03.717 ERROR 13920 --- [http-nio-8080-exec-1] com.gating.Application                   : inside pmd
+2019-08-25 10:47:03.739 ERROR 13920 --- [http-nio-8080-exec-1] com.gating.Application                   : inside simian
+2019-08-25 10:49:08.421  INFO 24036 --- [main] com.gating.Application                   : Starting Application on YY165907 with PID 24036 (C:\eclipse-workspace\staticanalysis.service\target\classes started by 320052310 in C:\eclipse-workspace\staticanalysis.service)
+2019-08-25 10:49:08.425  INFO 24036 --- [main] com.gating.Application                   : No active profile set, falling back to default profiles: default
+2019-08-25 10:49:09.744  INFO 24036 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-08-25 10:49:09.770  INFO 24036 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-08-25 10:49:09.774  INFO 24036 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.21]
+2019-08-25 10:49:09.911  INFO 24036 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-08-25 10:49:09.911  INFO 24036 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1437 ms
+2019-08-25 10:49:10.179  INFO 24036 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-08-25 10:49:10.413  INFO 24036 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-08-25 10:49:10.418  INFO 24036 --- [main] com.gating.Application                   : Started Application in 2.417 seconds (JVM running for 2.842)
+2019-08-25 10:49:13.543  INFO 24036 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-08-25 10:49:13.545  INFO 24036 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-08-25 10:49:13.551  INFO 24036 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 5 ms
+2019-08-25 10:49:17.027 ERROR 24036 --- [http-nio-8080-exec-1] com.gating.Application                   : inside pmd
+2019-08-25 10:49:17.052 ERROR 24036 --- [http-nio-8080-exec-1] com.gating.Application                   : inside simian
+2019-08-25 10:51:59.194  INFO 30432 --- [main] com.gating.Application                   : Starting Application on YY165907 with PID 30432 (C:\eclipse-workspace\staticanalysis.service\target\classes started by 320052310 in C:\eclipse-workspace\staticanalysis.service)
+2019-08-25 10:51:59.198  INFO 30432 --- [main] com.gating.Application                   : No active profile set, falling back to default profiles: default
+2019-08-25 10:52:00.538  INFO 30432 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-08-25 10:52:00.565  INFO 30432 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-08-25 10:52:00.566  INFO 30432 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.21]
+2019-08-25 10:52:00.704  INFO 30432 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-08-25 10:52:00.706  INFO 30432 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1459 ms
+2019-08-25 10:52:00.938  INFO 30432 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-08-25 10:52:01.160  INFO 30432 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-08-25 10:52:01.164  INFO 30432 --- [main] com.gating.Application                   : Started Application in 2.394 seconds (JVM running for 2.872)
+2019-08-25 10:52:07.188  INFO 30432 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-08-25 10:52:07.189  INFO 30432 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-08-25 10:52:07.194  INFO 30432 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 5 ms
+2019-08-25 10:52:11.800 ERROR 30432 --- [http-nio-8080-exec-1] com.gating.Application                   : inside pmd
+2019-08-25 10:52:11.829 ERROR 30432 --- [http-nio-8080-exec-1] com.gating.Application                   : inside simian
+2019-08-25 10:52:35.062 ERROR 30432 --- [http-nio-8080-exec-2] com.gating.Application                   : inside pmd
+2019-08-25 10:52:35.078 ERROR 30432 --- [http-nio-8080-exec-2] com.gating.Application                   : inside simian
+2019-08-25 10:53:03.092  INFO 19136 --- [main] com.gating.Application                   : Starting Application on YY165907 with PID 19136 (C:\eclipse-workspace\staticanalysis.service\target\classes started by 320052310 in C:\eclipse-workspace\staticanalysis.service)
+2019-08-25 10:53:03.097  INFO 19136 --- [main] com.gating.Application                   : No active profile set, falling back to default profiles: default
+2019-08-25 10:53:04.439  INFO 19136 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-08-25 10:53:04.465  INFO 19136 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-08-25 10:53:04.465  INFO 19136 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.21]
+2019-08-25 10:53:04.618  INFO 19136 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-08-25 10:53:04.618  INFO 19136 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1454 ms
+2019-08-25 10:53:04.883  INFO 19136 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-08-25 10:53:05.094  INFO 19136 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-08-25 10:53:05.097  INFO 19136 --- [main] com.gating.Application                   : Started Application in 2.423 seconds (JVM running for 2.9)
+2019-08-25 10:53:08.565  INFO 19136 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-08-25 10:53:08.565  INFO 19136 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-08-25 10:53:08.572  INFO 19136 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 6 ms
+2019-08-25 10:53:12.851 ERROR 19136 --- [http-nio-8080-exec-1] com.gating.Application                   : inside pmd
+2019-08-25 10:53:12.871 ERROR 19136 --- [http-nio-8080-exec-1] com.gating.Application                   : inside simian
+2019-08-25 10:54:22.963  INFO 30928 --- [main] com.gating.Application                   : Starting Application on YY165907 with PID 30928 (C:\eclipse-workspace\staticanalysis.service\target\classes started by 320052310 in C:\eclipse-workspace\staticanalysis.service)
+2019-08-25 10:54:22.967  INFO 30928 --- [main] com.gating.Application                   : No active profile set, falling back to default profiles: default
+2019-08-25 10:54:24.267  INFO 30928 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-08-25 10:54:24.297  INFO 30928 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-08-25 10:54:24.297  INFO 30928 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.21]
+2019-08-25 10:54:24.427  INFO 30928 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-08-25 10:54:24.427  INFO 30928 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1411 ms
+2019-08-25 10:54:24.685  INFO 30928 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-08-25 10:54:24.901  INFO 30928 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-08-25 10:54:24.905  INFO 30928 --- [main] com.gating.Application                   : Started Application in 2.328 seconds (JVM running for 2.802)
+2019-08-25 10:54:31.186  INFO 30928 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-08-25 10:54:31.187  INFO 30928 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-08-25 10:54:31.194  INFO 30928 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 6 ms
+2019-08-25 10:54:34.487 ERROR 30928 --- [http-nio-8080-exec-1] com.gating.Application                   : inside pmd
+2019-08-25 10:54:34.531 ERROR 30928 --- [http-nio-8080-exec-1] com.gating.Application                   : inside simian
+2019-08-25 10:55:28.978 ERROR 30928 --- [http-nio-8080-exec-2] com.gating.Application                   : inside pmd
+2019-08-25 10:55:28.992 ERROR 30928 --- [http-nio-8080-exec-2] com.gating.Application                   : inside simian
