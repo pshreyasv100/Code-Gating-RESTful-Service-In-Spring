@@ -26,7 +26,7 @@ public class SimianService {
     simianCommand.add(simianParameters.getSourceCodePath());
     simianCommand.add(
         "-threshold=" + thresholdConfigurationService.getThresholds().getDuplicateLinesThreshold());
-    simianCommand.add("-formatter=plain");
+    simianCommand.add("-formatter=text");
     simianCommand.add("-includes=**/*.java");
     simianCommand.add("-excludes=**/*Test.java");
     simianCommand.add(">");

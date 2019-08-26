@@ -5,10 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import com.gating.service.QualityParameters;
 import com.gating.service.GatingService;
+import com.gating.service.QualityParameters;
 import com.gating.thresholdconfig.service.ThresholdConfiguration;
 import com.gating.thresholdconfig.service.ThresholdConfigurationService;
 
@@ -21,8 +20,7 @@ public class GatingController {
   @Autowired
   ThresholdConfigurationService thresholdConfService;
 
-  @PostMapping(path = "/gating/analysis", consumes = {"application/json"})
-  @ResponseBody
+  @GetMapping(path = "/gating/analysis", consumes = {"application/json"})
   public QualityParameters handler(@RequestBody GatingInput gatingContext)
       throws IOException, InterruptedException {
 

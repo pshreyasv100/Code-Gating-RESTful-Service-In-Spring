@@ -1,19 +1,22 @@
 Similarity Analyser 2.5.10 - http://www.harukizaemon.com/simian
 Copyright (c) 2003-2018 Simon Harris.  All rights reserved.
 Simian is not free unless used solely for non-commercial or evaluation purposes.
-{failOnDuplication=true, ignoreCharacterCase=true, ignoreCurlyBraces=true, ignoreIdentifierCase=true, ignoreModifiers=true, ignoreStringCase=true, threshold=6}
-Found 6 duplicate lines with fingerprint 9d28a107a023526eea593f84a92b4f0b in the following files:
- Between lines 76 and 82 in C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\staticanalysis\service\VCGService.java
- Between lines 62 and 68 in C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\staticanalysis\service\PMDService.java
-Found 7 duplicate lines with fingerprint 3f2617477ca0e1bead0d265200459d19 in the following files:
- Between lines 24 and 32 in C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\staticanalysis\service\PMDService.java
- Between lines 23 and 31 in C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\staticanalysis\service\VCGService.java
-Found 8 duplicate lines with fingerprint e11c75fdcf80d635e154b648bec95473 in the following files:
- Between lines 48 and 61 in C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\thresholdconfig\service\ThresholdConfiguration.java
- Between lines 30 and 43 in C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\service\QualityParameters.java
-Found 10 duplicate lines with fingerprint 4d129c1311fcb37b3cacfbb04430d695 in the following files:
- Between lines 47 and 58 in C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\staticanalysis\service\CyvisService.java
- Between lines 69 and 80 in C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\codecoverage\service\JacocoService.java
-Found 62 duplicate lines in 8 blocks in 6 files
-Processed a total of 529 significant (1009 raw) lines in 18 files
-Processing time: 0.614sec
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="simian.xsl" type="text/xsl"?>
+<simian version="2.5.10">
+    <check failOnDuplication="true" ignoreCharacterCase="true" ignoreCurlyBraces="true" ignoreIdentifierCase="true" ignoreModifiers="true" ignoreStringCase="true" threshold="6">
+        <set lineCount="6" fingerprint="9d28a107a023526eea593f84a92b4f0b">
+            <block sourceFile="C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\staticanalysis\service\VCGService.java" startLineNumber="76" endLineNumber="82"/>
+            <block sourceFile="C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\staticanalysis\service\PMDService.java" startLineNumber="62" endLineNumber="68"/>
+        </set>
+        <set lineCount="7" fingerprint="3f2617477ca0e1bead0d265200459d19">
+            <block sourceFile="C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\staticanalysis\service\PMDService.java" startLineNumber="24" endLineNumber="32"/>
+            <block sourceFile="C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\staticanalysis\service\VCGService.java" startLineNumber="23" endLineNumber="31"/>
+        </set>
+        <set lineCount="8" fingerprint="e11c75fdcf80d635e154b648bec95473">
+            <block sourceFile="C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\thresholdconfig\service\ThresholdConfiguration.java" startLineNumber="48" endLineNumber="61"/>
+            <block sourceFile="C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\service\QualityParameters.java" startLineNumber="30" endLineNumber="43"/>
+        </set>
+        <summary duplicateFileCount="4" duplicateLineCount="42" duplicateBlockCount="6" totalFileCount="18" totalRawLineCount="1008" totalSignificantLineCount="514" processingTime="1298"/>
+    </check>
+</simian>
