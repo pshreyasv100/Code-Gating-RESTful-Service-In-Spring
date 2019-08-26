@@ -10,6 +10,7 @@ import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.gating.codecoverage.service.JacocoService;
 import com.gating.controller.GatingInput;
 import com.gating.staticanalysis.service.CyvisService;
 import com.gating.staticanalysis.service.PMDService;
@@ -32,6 +33,9 @@ public class GatingService {
 
   @Autowired
   CyvisService cyvisService;
+
+  @Autowired
+  JacocoService jacocoService;
 
   @Autowired
   ThresholdConfigurationService thresholdService;
@@ -129,7 +133,10 @@ public class GatingService {
     //response.setNoOfWarnings(pmdService.run(gatingContext.getPmdParameters()));
     //response.setCodeDuplication(simianService.run(gatingContext.getSimianParameters()) == 0);
     //response.setSecurityIssuesCount(vcgService.run(gatingContext.getVcgParameters()));
-    response.setCyclomaticComplexity(cyvisService.run(gatingContext.getCyvisParameters()));
+    //response.setCyclomaticComplexity(cyvisService.run(gatingContext.getCyvisParameters()));
+    jacocoService.run(gatingContext.getJacocoParameters());
+
+
 
     saveResults(response);
     determineCodeQuality(response, lastRunResults);

@@ -15,15 +15,16 @@ public class JacocoService {
   Logger logger;
 
   private void searchFilesInDirectory(final String pattern, final File folder, List<String> result) {
-    for (final File f : folder.listFiles()) {
-      if (f.isDirectory()) {
-        searchFilesInDirectory(pattern, f, result);
+    for (final File file : folder.listFiles()) {
+      if (file.isDirectory()) {
+        searchFilesInDirectory(pattern, file, result);
       }
-      if (f.isFile() && f.getName().matches(pattern)) {
-        result.add(f.getAbsolutePath());
+      if (file.isFile() && file.getName().matches(pattern)) {
+        result.add(file.getAbsolutePath());
       }
     }
   }
+
 
   private List<String> getTestCasesFullyQualifiedName(File projectTestsCasesPath) {
 
@@ -32,7 +33,10 @@ public class JacocoService {
     return resultFiles;
   }
 
-  private List<String> getCommand(JacocoParameters jacocoParameters) {
+
+
+
+  private List<String> createExecFileCommand(JacocoParameters jacocoParameters) {
 
     final StringBuilder jarsRequired = new StringBuilder();
     jarsRequired.append("static-code-analyzers/jacoco/junit-4.12.jar");
@@ -65,7 +69,7 @@ public class JacocoService {
   public float run(JacocoParameters jacocoParameters) {
 
     final ProcessBuilder processBuilder = new ProcessBuilder();
-    processBuilder.command(getCommand(jacocoParameters));
+    processBuilder.command(createExecFileCommand(jacocoParameters));
     Process process = null;
 
     try {
