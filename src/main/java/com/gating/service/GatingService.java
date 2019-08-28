@@ -44,8 +44,9 @@ public class GatingService {
   private void determineCodeQuality(QualityParameters response, QualityParameters lastRunResults) {
 
     final ThresholdConfiguration thresholds = thresholdService.getThresholds();
-    if (lastRunResults != null && response.getNoOfWarnings() < lastRunResults.getNoOfWarnings()
-        && lastRunResults.getSecurityIssuesCount() < lastRunResults.getSecurityIssuesCount()) {
+    if (lastRunResults != null && response.getNoOfWarnings() <= lastRunResults.getNoOfWarnings()
+        && response.getSecurityIssuesCount() <= lastRunResults.getSecurityIssuesCount()
+        && response.getCyclomaticComplexity() <= lastRunResults.getCyclomaticComplexity()) {
       response.setFinalDecision("Better than previous result");
     } else {
       response.setFinalDecision("Worse than previous result");
@@ -53,7 +54,8 @@ public class GatingService {
 
 
     if (response.getNoOfWarnings() <= thresholds.getNoOfWarnings() && response.isCodeDuplication()
-        && response.getSecurityIssuesCount() <= thresholds.getSecurityIssuesCount()) {
+        && response.getSecurityIssuesCount() <= thresholds.getSecurityIssuesCount()
+        && response.getCyclomaticComplexity() <= thresholds.getCyclomaticComplexity()) {
       response.setFinalDecision(response.getFinalDecision() + " : Go");
     } else {
       response.setFinalDecision(response.getFinalDecision() + " : No Go");
@@ -130,11 +132,11 @@ public class GatingService {
     final QualityParameters response = new QualityParameters();
     final QualityParameters lastRunResults = getLastRunResults();
 
-    //response.setNoOfWarnings(pmdService.run(gatingContext.getPmdParameters()));
-    //response.setCodeDuplication(simianService.run(gatingContext.getSimianParameters()) == 0);
-    //response.setSecurityIssuesCount(vcgService.run(gatingContext.getVcgParameters()));
-    //response.setCyclomaticComplexity(cyvisService.run(gatingContext.getCyvisParameters()));
-    jacocoService.run(gatingContext.getJacocoParameters());
+    response.setNoOfWarnings(pmdService.run(gatingContext.getPmdParameters()));
+    response.setCodeDuplication(simianService.run(gatingContext.getSimianParameters()) == 0);
+    response.setSecurityIssuesCount(vcgService.run(gatingContext.getVcgParameters()));
+    response.setCyclomaticComplexity(cyvisService.run(gatingContext.getCyvisParameters()));
+    // jacocoService.run(gatingContext.getJacocoParameters());
 
 
 
@@ -142,7 +144,6 @@ public class GatingService {
     determineCodeQuality(response, lastRunResults);
     return response;
   }
-
 
 
 

@@ -39,8 +39,7 @@ public class CyvisService {
     command.add("/c");
     command.add("\"");
     command.add("cd");
-    command.add(
-        "C:\\eclipse-workspace\\staticanalysis.service\\static-code-analyzers\\cyvis-0.9\\cyvis-0.9.jar");
+    command.add("/static-code-analyzers/cyvis-0.9");
     command.add("&&");
 
     command.add("java");
@@ -52,7 +51,6 @@ public class CyvisService {
     command.add("report");
     command.add("\"");
     return command.toString();
-
   }
 
 
@@ -63,8 +61,7 @@ public class CyvisService {
     command.add("/c");
     command.add("\"");
     command.add("cd");
-    command.add(
-        "C:\\eclipse-workspace\\staticanalysis.service\\static-code-analyzers\\cyvis-0.9\\cyvis-0.9.jar");
+    command.add("/static-code-analyzers/cyvis-0.9");
     command.add("&&");
 
     command.add("jar");
@@ -74,12 +71,14 @@ public class CyvisService {
     command.add("\"");
 
     return command.toString();
-
   }
 
-  private void parseCyvisReport() {
+  private Map<String, Integer> parseCyvisReport() {
 
-    final String csvFile = "C:\\eclipse-workspace\\staticanalysis.service\\static-code-analyzers\\cyvis-0.9\\report.txt";
+    final String csvFile =
+        "C:\\eclipse-workspace\\staticanalysis.service\\static-code-analyzers\\cyvis-0.9\\report.txt";
+
+    // final String csvFile = "/staticanalysis.service/static-code-analyzers/cyvis-0.9/report.txt";
     BufferedReader br = null;
     String line = "";
     final String cvsSplitBy = ",";
@@ -90,13 +89,10 @@ public class CyvisService {
 
       br = new BufferedReader(new FileReader(csvFile));
       while ((line = br.readLine()) != null) {
-
         // use comma as separator
         final String[] complexity = line.split(cvsSplitBy);
-
         int column = 3;
         while (column < complexity.length) {
-
           methodComplexityMap.put(complexity[1].concat(".".concat(complexity[column - 1])),
               new Integer(complexity[column]));
           column += 4;
@@ -116,42 +112,10 @@ public class CyvisService {
         }
       }
     }
-    final Set<Map.Entry<String, Integer>> st = methodComplexityMap.entrySet();
 
-    for (final Map.Entry<String, Integer> me : st) {
-      System.out.print(me.getKey() + ":");
-      System.out.println(me.getValue());
-
-    }
-
+    return methodComplexityMap;
   }
 
-
-
-  // private String getCommand(CyvisParameters cyvisParameters) {
-  //
-  // final StringJoiner cyvisCommand = new StringJoiner(" ");
-  // cyvisCommand.add("jar");
-  // cyvisCommand.add("cf");
-  // cyvisCommand.add("code.jar");
-  // cyvisCommand.add(cyvisParameters.getSourceCodePath());
-  // cyvisCommand.add("&&");
-  // cyvisCommand.add("java");
-  // cyvisCommand.add("-jar");
-  // cyvisCommand.add("cyvis-0.9.jar");
-  // cyvisCommand.add("-p");
-  // cyvisCommand.add("code.jar");
-  // cyvisCommand.add("-t");
-  // cyvisCommand.add("report");
-  //
-  //
-  //
-  // final List<String> command = new ArrayList<String>();
-  // command.add("cmd");
-  // command.add("/c");
-  // command.add(cyvisCommand.toString());
-  // return command.toString();
-  // }
 
   public int run(CyvisParameters cyvisParameters) throws IOException, InterruptedException {
 
@@ -162,9 +126,22 @@ public class CyvisService {
     final Process p2 = Runtime.getRuntime().exec(getReportFromJarCommand());
     p2.waitFor();
 
-    parseCyvisReport();
+    return getMaxComplexity(parseCyvisReport());
+  }
 
-    return 0;
+
+  private int getMaxComplexity(Map<String, Integer> methodComplexityMap) {
+
+    final Set<Map.Entry<String, Integer>> st = methodComplexityMap.entrySet();
+    int maxComplexity = 0;
+
+    for (final Map.Entry<String, Integer> map : st) {
+      if (maxComplexity < map.getValue()) {
+        maxComplexity = map.getValue();
+      }
+    }
+    return maxComplexity;
+
   }
 
 
