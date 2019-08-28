@@ -44,23 +44,24 @@ public class GatingService {
   private void determineCodeQuality(QualityParameters response, QualityParameters lastRunResults) {
 
     final ThresholdConfiguration thresholds = thresholdService.getThresholds();
+
+    //Comparing the current results with previous results
     if (lastRunResults != null && response.getNoOfWarnings() <= lastRunResults.getNoOfWarnings()
         && response.getSecurityIssuesCount() <= lastRunResults.getSecurityIssuesCount()
         && response.getCyclomaticComplexity() <= lastRunResults.getCyclomaticComplexity()) {
-      response.setFinalDecision("Better than previous result");
+      response.setComparedToPreviousRun("Better than previous result");
     } else {
-      response.setFinalDecision("Worse than previous result");
+      response.setComparedToPreviousRun("Worse than previous result");
     }
 
-
+    //Comparing the current results with thresholds
     if (response.getNoOfWarnings() <= thresholds.getNoOfWarnings() && response.isCodeDuplication()
         && response.getSecurityIssuesCount() <= thresholds.getSecurityIssuesCount()
         && response.getCyclomaticComplexity() <= thresholds.getCyclomaticComplexity()) {
-      response.setFinalDecision(response.getFinalDecision() + " : Go");
+      response.setFinalDecision("Go");
     } else {
-      response.setFinalDecision(response.getFinalDecision() + " : No Go");
+      response.setFinalDecision("No Go");
     }
-
   }
 
 
@@ -86,6 +87,9 @@ public class GatingService {
       responseLine.append(response.isCodeDuplication());
       responseLine.append(CSV_SEPARATOR);
       responseLine.append(response.getFinalDecision());
+      responseLine.append(CSV_SEPARATOR);
+      responseLine.append(response.getComparedToPreviousRun());
+
 
       resultsCsvWriter.newLine();
       resultsCsvWriter.write(responseLine.toString());
@@ -132,14 +136,14 @@ public class GatingService {
     final QualityParameters response = new QualityParameters();
     final QualityParameters lastRunResults = getLastRunResults();
 
-    //    response.setNoOfWarnings(pmdService.run(gatingContext.getPmdParameters()));
-    //    response.setCodeDuplication(simianService.run(gatingContext.getSimianParameters()) == 0);
-    //    response.setSecurityIssuesCount(vcgService.run(gatingContext.getVcgParameters()));
-    //    response.setCyclomaticComplexity(cyvisService.run(gatingContext.getCyvisParameters()));
-    jacocoService.run(gatingContext.getJacocoParameters());
+    response.setNoOfWarnings(pmdService.run(gatingContext.getPmdParameters()));
+    response.setCodeDuplication(simianService.run(gatingContext.getSimianParameters()) == 0);
+    response.setSecurityIssuesCount(vcgService.run(gatingContext.getVcgParameters()));
+    response.setCyclomaticComplexity(cyvisService.run(gatingContext.getCyvisParameters()));
+    //jacocoService.run(gatingContext.getJacocoParameters());
 
-    saveResults(response);
     determineCodeQuality(response, lastRunResults);
+    saveResults(response);
     return response;
   }
 

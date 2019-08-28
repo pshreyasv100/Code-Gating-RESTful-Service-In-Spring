@@ -8,6 +8,7 @@ public class QualityParameters{
   private int cyclomaticComplexity;
   private boolean isCodeDuplication;
   private int securityIssuesCount;
+  private String comparedToPreviousRun;
   private String finalDecision;
 
 
@@ -65,6 +66,14 @@ public class QualityParameters{
 
   public void setFinalDecision(String finalDecision) {
     this.finalDecision = finalDecision;
+  }
+
+  public String getComparedToPreviousRun() {
+    return comparedToPreviousRun;
+  }
+
+  public void setComparedToPreviousRun(String comparedToPreviousRun) {
+    this.comparedToPreviousRun = comparedToPreviousRun;
   }
 
 
