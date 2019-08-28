@@ -2,14 +2,14 @@ package com.gating.codecoverage.service;
 
 public class JacocoParameters {
 
-  private String projectPath;
+  private String sourceCodePath;
 
-  public String getProjectPath() {
-    return projectPath;
+  public String getsourceCodePath() {
+    return sourceCodePath;
   }
 
-  public void setProjectPath(String projectPath) {
-    this.projectPath = projectPath;
+  public void setsourceCodePath(String projectPath) {
+    this.sourceCodePath = projectPath;
   }
 
 }

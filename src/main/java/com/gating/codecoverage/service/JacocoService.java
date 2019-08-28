@@ -25,16 +25,12 @@ public class JacocoService {
     }
   }
 
-
   private List<String> getTestCasesFullyQualifiedName(File projectTestsCasesPath) {
 
     final List<String> resultFiles = new ArrayList<String>();
     searchFilesInDirectory(".*\\.class", projectTestsCasesPath, resultFiles);
     return resultFiles;
   }
-
-
-
 
   private List<String> createExecFileCommand(JacocoParameters jacocoParameters) {
 
@@ -45,19 +41,18 @@ public class JacocoService {
     final StringBuilder jacocoCommand = new StringBuilder();
     jacocoCommand.append("java -cp ");
     jacocoCommand.append(jarsRequired);
-    jacocoCommand.append(jacocoParameters.getProjectPath() + "/target/test-classes");
-    jacocoCommand.append(jacocoParameters.getProjectPath() + "/target/classes");
-    jacocoCommand.append(" -javaagent" + "static-code-analyzers/jacoco/jacocoagent.jar");
+    jacocoCommand.append(jacocoParameters.getsourceCodePath() + "/target/test-classes");
+    jacocoCommand.append(jacocoParameters.getsourceCodePath() + "/target/classes");
+    jacocoCommand.append(" -javaagent:" + "static-code-analyzers/jacoco/jacocoagent.jar");
     jacocoCommand.append("=destfile=" + "jacoco.exec");
     jacocoCommand.append(" org.junit.runner.JUnitCore ");
 
     final List<String> allTests =
-        getTestCasesFullyQualifiedName(new File(jacocoParameters.getProjectPath() + "/target/test-classes"));
+        getTestCasesFullyQualifiedName(new File(jacocoParameters.getsourceCodePath() + "/target/test-classes"));
 
     for(final String testFile : allTests) {
       jacocoCommand.append(testFile);
     }
-
 
     final List<String> command = new ArrayList<String>();
     command.add("cmd");
@@ -66,15 +61,56 @@ public class JacocoService {
     return command;
   }
 
+  private List<String> createReportCommand(JacocoParameters jacocoParameters){
+
+    final StringBuilder jacococliJarLocation = new StringBuilder();
+    jacococliJarLocation.append("/static-code-analyzers/jacoco/jacococli.jar");
+    final StringBuilder finalCsvFileLocation = new StringBuilder();
+    finalCsvFileLocation.append("report2.csv");
+    final StringBuilder execFileLocation = new StringBuilder();
+    execFileLocation.append("jacoco.exec");
+
+    final StringBuilder jacocoReportGenerationCommand = new StringBuilder();
+    jacocoReportGenerationCommand.append("java -jar ");
+    jacocoReportGenerationCommand.append(jacococliJarLocation);
+    jacocoReportGenerationCommand.append(" report ");
+    jacocoReportGenerationCommand.append(execFileLocation);
+    jacocoReportGenerationCommand.append(" --classfiles ");
+    jacocoReportGenerationCommand.append(jacocoParameters.getsourceCodePath() + "/src/main/java");
+    jacocoReportGenerationCommand.append(" --classfiles ");
+    jacocoReportGenerationCommand.append(jacocoParameters.getsourceCodePath() + "/target/classes");
+    jacocoReportGenerationCommand.append(" --sourcefiles ");
+
+    jacocoReportGenerationCommand.append(jacocoParameters.getsourceCodePath() + "/src");
+    jacocoReportGenerationCommand.append(" --csv ");
+    jacocoReportGenerationCommand.append(finalCsvFileLocation);
+
+    final List<String> reportCommand = new ArrayList<String>();
+    reportCommand.add("cmd");
+    reportCommand.add("/c");
+    reportCommand.add(jacocoReportGenerationCommand.toString());
+
+    System.out.println(reportCommand);
+
+    return reportCommand;
+
+  }
+
   public float run(JacocoParameters jacocoParameters) {
 
-    final ProcessBuilder processBuilder = new ProcessBuilder();
-    processBuilder.command(createExecFileCommand(jacocoParameters));
-    Process process = null;
-
     try {
+      final ProcessBuilder processBuilder = new ProcessBuilder();
+      processBuilder.command(createExecFileCommand(jacocoParameters));
+      Process process = null;
       process = processBuilder.start();
       process.waitFor();
+
+      final ProcessBuilder processBuilder1 = new ProcessBuilder();
+      Process process1 = null;
+      processBuilder1.command(createReportCommand(jacocoParameters));
+      process1 = processBuilder1.start();
+      process1.waitFor();
+
     } catch (final IOException e) {
       logger.error("IOException occurred", e);
     } catch (final InterruptedException e) {

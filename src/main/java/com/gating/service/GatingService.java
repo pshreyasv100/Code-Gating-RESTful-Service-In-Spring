@@ -132,13 +132,11 @@ public class GatingService {
     final QualityParameters response = new QualityParameters();
     final QualityParameters lastRunResults = getLastRunResults();
 
-    response.setNoOfWarnings(pmdService.run(gatingContext.getPmdParameters()));
-    response.setCodeDuplication(simianService.run(gatingContext.getSimianParameters()) == 0);
-    response.setSecurityIssuesCount(vcgService.run(gatingContext.getVcgParameters()));
-    response.setCyclomaticComplexity(cyvisService.run(gatingContext.getCyvisParameters()));
-    // jacocoService.run(gatingContext.getJacocoParameters());
-
-
+    //    response.setNoOfWarnings(pmdService.run(gatingContext.getPmdParameters()));
+    //    response.setCodeDuplication(simianService.run(gatingContext.getSimianParameters()) == 0);
+    //    response.setSecurityIssuesCount(vcgService.run(gatingContext.getVcgParameters()));
+    //    response.setCyclomaticComplexity(cyvisService.run(gatingContext.getCyvisParameters()));
+    jacocoService.run(gatingContext.getJacocoParameters());
 
     saveResults(response);
     determineCodeQuality(response, lastRunResults);

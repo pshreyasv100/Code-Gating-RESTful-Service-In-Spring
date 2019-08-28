@@ -1,22 +1,33 @@
 Similarity Analyser 2.5.10 - http://www.harukizaemon.com/simian
 Copyright (c) 2003-2018 Simon Harris.  All rights reserved.
 Simian is not free unless used solely for non-commercial or evaluation purposes.
-<?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet href="simian.xsl" type="text/xsl"?>
-<simian version="2.5.10">
-    <check failOnDuplication="true" ignoreCharacterCase="true" ignoreCurlyBraces="true" ignoreIdentifierCase="true" ignoreModifiers="true" ignoreStringCase="true" threshold="6">
-        <set lineCount="6" fingerprint="9d28a107a023526eea593f84a92b4f0b">
-            <block sourceFile="C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\staticanalysis\service\VCGService.java" startLineNumber="76" endLineNumber="82"/>
-            <block sourceFile="C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\staticanalysis\service\PMDService.java" startLineNumber="62" endLineNumber="68"/>
-        </set>
-        <set lineCount="7" fingerprint="3f2617477ca0e1bead0d265200459d19">
-            <block sourceFile="C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\staticanalysis\service\PMDService.java" startLineNumber="24" endLineNumber="32"/>
-            <block sourceFile="C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\staticanalysis\service\VCGService.java" startLineNumber="23" endLineNumber="31"/>
-        </set>
-        <set lineCount="8" fingerprint="e11c75fdcf80d635e154b648bec95473">
-            <block sourceFile="C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\thresholdconfig\service\ThresholdConfiguration.java" startLineNumber="48" endLineNumber="61"/>
-            <block sourceFile="C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\service\QualityParameters.java" startLineNumber="30" endLineNumber="43"/>
-        </set>
-        <summary duplicateFileCount="4" duplicateLineCount="42" duplicateBlockCount="6" totalFileCount="18" totalRawLineCount="1008" totalSignificantLineCount="514" processingTime="1298"/>
-    </check>
-</simian>
+Error: Missing/invalid formatter type
+Usage: [options] [files]
+    -balanceCurlyBraces[+|-]         Accounts for curly braces when breaking lines
+    -balanceParentheses[+|-]         Accounts for parentheses when breaking lines
+    -balanceSquareBrackets[+|-]      Accounts for square brackets when breaking lines
+    -config=FNAME                    Reads the configuration from the specified file
+    -defaultLanguage=LANG            Assumes files are in the specified language if none can be inferred
+    -excludes=SPEC                   Excludes files matching the specified pattern
+    -failOnDuplication[+|-|%]        Exits with a failure return code if duplication detected
+    -formatter=TYPE[:FNAME]          Uses the specified output format when reporting
+    -ignoreBlocks=START:END          Ignores all lines between START/END
+    -ignoreCharacterCase[+|-]        Matches character literals irrespective of case
+    -ignoreCharacters[+|-]           Completely ignores character literals
+    -ignoreCurlyBraces[+|-]          Completely ignores curly braces
+    -ignoreIdentifierCase[+|-]       Matches identifiers irresepctive of case
+    -ignoreIdentifiers[+|-]          Completely ignores identifiers
+    -ignoreLiterals[+|-]             Completely ignores all literals (strings, numbers and characters)
+    -ignoreModifiers[+|-]            Ignores modifiers (public, private, static, etc.)
+    -ignoreNumbers[+|-]              Completely ignores numbers
+    -ignoreOverlappingBlocks[+|-]    Ignores blocks that wholly or partially overlap
+    -ignoreRegions[+|-]              Ignores all lines between #region/#endregion
+    -ignoreStringCase[+|-]           Matches string literals irrespective of case
+    -ignoreStrings[+|-]              Completely ignores the contents of strings
+    -ignoreSubtypeNames[+|-]         Matches on similar type names (eg. Reader and FilterReader)
+    -ignoreVariableNames[+|-]        Completely ignores variable names (fields, parameters and locals)
+    -includes=SPEC                   Including files matching the specified pattern
+    -language=LANG                   Assumes ALL files are in the specified language
+    -reportDuplicateText[+|-]        Prints the duplicate text in reports
+    -threshold=COUNT                 Matches will contain at least the specified number of lines
+

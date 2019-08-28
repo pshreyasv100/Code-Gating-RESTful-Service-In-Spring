@@ -2,52 +2,70 @@
 <pmd xmlns="http://pmd.sourceforge.net/report/2.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 http://pmd.sourceforge.net/report_2_0_0.xsd"
-    version="6.16.0" timestamp="2019-08-25T11:26:07.697">
-<file name="C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\Application.java">
-<violation beginline="7" endline="12" begincolumn="26" endcolumn="1" rule="UseUtilityClass" ruleset="Design" package="com.gating" class="Application" externalInfoUrl="https://pmd.github.io/pmd-6.16.0/pmd_rules_java_design.html#useutilityclass" priority="3">
+    version="6.16.0" timestamp="2019-08-28T09:34:40.266">
+<file name="C:\Users\320052310\Desktop\Test1\jacocoagent\doc\examples\build\src\main\java\org\jacoco\examples\expressions\IExpression.java">
+<violation beginline="16" endline="16" begincolumn="16" endcolumn="33" rule="UnnecessaryModifier" ruleset="Code Style" package="org.jacoco.examples.expressions" class="IExpression" method="evaluate" externalInfoUrl="https://pmd.github.io/pmd-6.16.0/pmd_rules_java_codestyle.html#unnecessarymodifier" priority="3">
+Unnecessary modifier 'public' on method 'evaluate': the method is declared in an interface type
+</violation>
+</file>
+<file name="C:\Users\320052310\Desktop\Test1\jacocoagent\doc\examples\build\src\main\java\org\jacoco\examples\parser\Main.java">
+<violation beginline="16" endline="26" begincolumn="19" endcolumn="1" rule="UseUtilityClass" ruleset="Design" package="org.jacoco.examples.parser" class="Main" externalInfoUrl="https://pmd.github.io/pmd-6.16.0/pmd_rules_java_design.html#useutilityclass" priority="3">
 All methods are static.  Consider using a utility class instead. Alternatively, you could add a private constructor or make the class abstract to silence this warning.
 </violation>
 </file>
-<file name="C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\service\GatingService.java">
-<violation beginline="64" endline="64" begincolumn="28" endcolumn="43" rule="CloseResource" ruleset="Error Prone" package="com.gating.service" class="GatingService" method="saveResults" variable="resultsCsvWriter" externalInfoUrl="https://pmd.github.io/pmd-6.16.0/pmd_rules_java_errorprone.html#closeresource" priority="3">
-Ensure that resources like this BufferedWriter object are closed after use
-</violation>
-<violation beginline="67" endline="67" begincolumn="20" endcolumn="32" rule="LocalVariableNamingConventions" ruleset="Code Style" package="com.gating.service" class="GatingService" method="saveResults" variable="CSV_SEPARATOR" externalInfoUrl="https://pmd.github.io/pmd-6.16.0/pmd_rules_java_codestyle.html#localvariablenamingconventions" priority="1">
-The final local variable name 'CSV_SEPARATOR' doesn't match '[a-z][a-zA-Z0-9]*'
-</violation>
-<violation beginline="87" endline="88" begincolumn="7" endcolumn="5" rule="EmptyCatchBlock" ruleset="Error Prone" package="com.gating.service" class="GatingService" method="saveResults" externalInfoUrl="https://pmd.github.io/pmd-6.16.0/pmd_rules_java_errorprone.html#emptycatchblock" priority="3">
-Avoid empty catch blocks
-</violation>
-<violation beginline="88" endline="89" begincolumn="7" endcolumn="5" rule="IdenticalCatchBranches" ruleset="Code Style" package="com.gating.service" class="GatingService" method="saveResults" externalInfoUrl="https://pmd.github.io/pmd-6.16.0/pmd_rules_java_codestyle.html#identicalcatchbranches" priority="3">
-'catch' branch identical to 'UnsupportedEncodingException' branch
-</violation>
-<violation beginline="88" endline="89" begincolumn="7" endcolumn="5" rule="EmptyCatchBlock" ruleset="Error Prone" package="com.gating.service" class="GatingService" method="saveResults" externalInfoUrl="https://pmd.github.io/pmd-6.16.0/pmd_rules_java_errorprone.html#emptycatchblock" priority="3">
-Avoid empty catch blocks
-</violation>
-<violation beginline="89" endline="90" begincolumn="7" endcolumn="5" rule="IdenticalCatchBranches" ruleset="Code Style" package="com.gating.service" class="GatingService" method="saveResults" externalInfoUrl="https://pmd.github.io/pmd-6.16.0/pmd_rules_java_codestyle.html#identicalcatchbranches" priority="3">
-'catch' branch identical to 'UnsupportedEncodingException' branch
-</violation>
-<violation beginline="89" endline="90" begincolumn="7" endcolumn="5" rule="EmptyCatchBlock" ruleset="Error Prone" package="com.gating.service" class="GatingService" method="saveResults" externalInfoUrl="https://pmd.github.io/pmd-6.16.0/pmd_rules_java_errorprone.html#emptycatchblock" priority="3">
-Avoid empty catch blocks
-</violation>
-<violation beginline="100" endline="100" begincolumn="26" endcolumn="31" rule="CloseResource" ruleset="Error Prone" package="com.gating.service" class="GatingService" method="getLastRunResults" variable="reader" externalInfoUrl="https://pmd.github.io/pmd-6.16.0/pmd_rules_java_errorprone.html#closeresource" priority="3">
-Ensure that resources like this BufferedReader object are closed after use
+<file name="C:\Users\320052310\Desktop\Test1\jacocoagent\doc\examples\build\src\test\java\org\jacoco\examples\parser\ExpressionParserTest.java">
+<violation beginline="15" endline="15" begincolumn="1" endcolumn="33" rule="UnusedImports" ruleset="Best Practices" package="org.jacoco.examples.parser" class="ExpressionParserTest" externalInfoUrl="https://pmd.github.io/pmd-6.16.0/pmd_rules_java_bestpractices.html#unusedimports" priority="4">
+Avoid unused imports such as 'org.junit.Assert'
 </violation>
 </file>
-<file name="C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\thresholdconfig\service\ThresholdConfiguration.java">
-<violation beginline="13" endline="13" begincolumn="10" endcolumn="36" rule="UnnecessaryConstructor" ruleset="Code Style" package="com.gating.thresholdconfig.service" class="ThresholdConfiguration" method="ThresholdConfiguration" externalInfoUrl="https://pmd.github.io/pmd-6.16.0/pmd_rules_java_codestyle.html#unnecessaryconstructor" priority="3">
-Avoid unnecessary constructors - the compiler will generate these for you
+<file name="C:\Users\320052310\Desktop\Test1\jacocoagent\doc\examples\java\CoreTutorial.java">
+<violation beginline="116" endline="116" begincolumn="29" endcolumn="36" rule="CloseResource" ruleset="Error Prone" package="org.jacoco.examples" class="CoreTutorial" method="execute" variable="original" externalInfoUrl="https://pmd.github.io/pmd-6.16.0/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this InputStream object are closed after use
 </violation>
-<violation beginline="13" endline="13" begincolumn="10" endcolumn="36" rule="UncommentedEmptyConstructor" ruleset="Documentation" package="com.gating.thresholdconfig.service" class="ThresholdConfiguration" method="ThresholdConfiguration" externalInfoUrl="https://pmd.github.io/pmd-6.16.0/pmd_rules_java_documentation.html#uncommentedemptyconstructor" priority="3">
-Document empty constructor
+<violation beginline="179" endline="186" begincolumn="17" endcolumn="17" rule="SwitchStmtsShouldHaveDefault" ruleset="Best Practices" package="org.jacoco.examples" class="CoreTutorial" method="getColor" externalInfoUrl="https://pmd.github.io/pmd-6.16.0/pmd_rules_java_bestpractices.html#switchstmtsshouldhavedefault" priority="3">
+Switch statements should have a default label
 </violation>
 </file>
-<file name="C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\thresholdconfig\service\ThresholdConfigurationService.java">
-<violation beginline="60" endline="60" begincolumn="30" endcolumn="36" rule="CloseResource" ruleset="Error Prone" package="com.gating.thresholdconfig.service" class="ThresholdConfigurationService" method="setThresholds" variable="fileOut" externalInfoUrl="https://pmd.github.io/pmd-6.16.0/pmd_rules_java_errorprone.html#closeresource" priority="3">
+<file name="C:\Users\320052310\Desktop\Test1\jacocoagent\doc\examples\java\ExecDump.java">
+<violation beginline="61" endline="61" begincolumn="39" endcolumn="40" rule="CloseResource" ruleset="Error Prone" package="org.jacoco.examples" class="ExecDump" method="dump" variable="in" externalInfoUrl="https://pmd.github.io/pmd-6.16.0/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this FileInputStream object are closed after use
+</violation>
+</file>
+<file name="C:\Users\320052310\Desktop\Test1\jacocoagent\doc\examples\java\ExecutionDataClient.java">
+<violation beginline="43" endline="43" begincolumn="40" endcolumn="48" rule="CloseResource" ruleset="Error Prone" package="org.jacoco.examples" class="ExecutionDataClient" method="main" variable="localFile" externalInfoUrl="https://pmd.github.io/pmd-6.16.0/pmd_rules_java_errorprone.html#closeresource" priority="3">
 Ensure that resources like this FileOutputStream object are closed after use
 </violation>
-<violation beginline="67" endline="69" begincolumn="7" endcolumn="5" rule="IdenticalCatchBranches" ruleset="Code Style" package="com.gating.thresholdconfig.service" class="ThresholdConfigurationService" method="setThresholds" externalInfoUrl="https://pmd.github.io/pmd-6.16.0/pmd_rules_java_codestyle.html#identicalcatchbranches" priority="3">
-'catch' branch identical to 'FileNotFoundException' branch
+<violation beginline="48" endline="48" begincolumn="30" endcolumn="35" rule="CloseResource" ruleset="Error Prone" package="org.jacoco.examples" class="ExecutionDataClient" method="main" variable="socket" externalInfoUrl="https://pmd.github.io/pmd-6.16.0/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this Socket object are closed after use
+</violation>
+</file>
+<file name="C:\Users\320052310\Desktop\Test1\jacocoagent\doc\examples\java\ExecutionDataServer.java">
+<violation beginline="50" endline="50" begincolumn="36" endcolumn="41" rule="CloseResource" ruleset="Error Prone" package="org.jacoco.examples" class="ExecutionDataServer" method="main" variable="server" externalInfoUrl="https://pmd.github.io/pmd-6.16.0/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this ServerSocket object are closed after use
+</violation>
+<violation beginline="82" endline="83" begincolumn="55" endcolumn="33" rule="EmptyWhileStmt" ruleset="Error Prone" package="org.jacoco.examples" class="ExecutionDataServer$Handler" method="run" externalInfoUrl="https://pmd.github.io/pmd-6.16.0/pmd_rules_java_errorprone.html#emptywhilestmt" priority="3">
+Avoid empty while statements
+</violation>
+</file>
+<file name="C:\Users\320052310\Desktop\Test1\jacocoagent\doc\examples\java\MBeanClient.java">
+<violation beginline="43" endline="43" begincolumn="36" endcolumn="39" rule="CloseResource" ruleset="Error Prone" package="org.jacoco.examples" class="MBeanClient" method="main" variable="jmxc" externalInfoUrl="https://pmd.github.io/pmd-6.16.0/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this JMXConnector object are closed after use
+</violation>
+<violation beginline="57" endline="57" begincolumn="40" endcolumn="48" rule="CloseResource" ruleset="Error Prone" package="org.jacoco.examples" class="MBeanClient" method="main" variable="localFile" externalInfoUrl="https://pmd.github.io/pmd-6.16.0/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this FileOutputStream object are closed after use
+</violation>
+</file>
+<file name="C:\Users\320052310\Desktop\Test1\jacocoagent\doc\examples\java\ReportGenerator.java">
+<violation beginline="131" endline="135" begincolumn="17" endcolumn="17" rule="ForLoopCanBeForeach" ruleset="Best Practices" package="org.jacoco.examples" class="ReportGenerator" method="main" externalInfoUrl="https://pmd.github.io/pmd-6.16.0/pmd_rules_java_bestpractices.html#forloopcanbeforeach" priority="3">
+This for loop can be replaced by a foreach loop
+</violation>
+</file>
+<file name="C:\Users\320052310\Desktop\Test1\src\main\java\com\maths\HtmlParser.java">
+<violation beginline="12" endline="25" begincolumn="25" endcolumn="1" rule="UseUtilityClass" ruleset="Design" package="com.maths" class="HtmlParser" externalInfoUrl="https://pmd.github.io/pmd-6.16.0/pmd_rules_java_design.html#useutilityclass" priority="3">
+All methods are static.  Consider using a utility class instead. Alternatively, you could add a private constructor or make the class abstract to silence this warning.
+</violation>
+<violation beginline="12" endline="25" begincolumn="8" endcolumn="1" rule="ClassNamingConventions" ruleset="Code Style" package="com.maths" class="HtmlParser" externalInfoUrl="https://pmd.github.io/pmd-6.16.0/pmd_rules_java_codestyle.html#classnamingconventions" priority="1">
+The utility class name 'HtmlParser' doesn't match '[A-Z][a-zA-Z0-9]+(Utils?|Helper)'
 </violation>
 </file>
 </pmd>

@@ -79,7 +79,7 @@ public class CyvisService {
         "C:\\eclipse-workspace\\staticanalysis.service\\static-code-analyzers\\cyvis-0.9\\report.txt";
 
     // final String csvFile = "/staticanalysis.service/static-code-analyzers/cyvis-0.9/report.txt";
-    BufferedReader br = null;
+    BufferedReader reader = null;
     String line = "";
     final String cvsSplitBy = ",";
 
@@ -87,8 +87,8 @@ public class CyvisService {
 
     try {
 
-      br = new BufferedReader(new FileReader(csvFile));
-      while ((line = br.readLine()) != null) {
+      reader = new BufferedReader(new FileReader(csvFile));
+      while ((line = reader.readLine()) != null) {
         // use comma as separator
         final String[] complexity = line.split(cvsSplitBy);
         int column = 3;
@@ -100,15 +100,15 @@ public class CyvisService {
       }
 
     } catch (final FileNotFoundException e) {
-      e.printStackTrace();
+      logger.error("FileNotFoundException occurred",e);
     } catch (final IOException e) {
-      e.printStackTrace();
+      logger.error("IOException occurred",e);
     } finally {
-      if (br != null) {
+      if (reader != null) {
         try {
-          br.close();
+          reader.close();
         } catch (final IOException e) {
-          e.printStackTrace();
+          logger.error("IOException occurred reader could not be closed",e);
         }
       }
     }
