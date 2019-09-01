@@ -3,7 +3,6 @@ package com.gating.staticanalysis.service;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.StringJoiner;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -16,6 +15,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+import com.gating.service.ProcessUtility;
 
 @Service
 public class PMDService {
@@ -24,21 +24,17 @@ public class PMDService {
   @Autowired
   Logger logger;
 
-  private ProcessBuilder processBuilder;
 
-  private void createProcess() {
-    processBuilder = new ProcessBuilder();
-    final Map<String, String> envMap = processBuilder.environment();
-    String path = envMap.get("Path");
-    path += "static-code-analyzers/pmd/bin;";
-    envMap.put("Path", path);
-  }
+  @Autowired
+  ProcessUtility processUtility;
 
-  private List<String> getCommand(PMDParameters params) {
+  private static final String PMD_BIN_PATH = "static-code-analyzers/pmd/bin;";
+
+  private List<String> getCommand(String srcPath, PMDParameters params) {
 
     final StringJoiner pmdCommand = new StringJoiner(" ");
     pmdCommand.add("pmd -d");
-    pmdCommand.add(params.getSourceCodePath());
+    pmdCommand.add(srcPath);
     pmdCommand.add("-f");
     pmdCommand.add(PMDParameters.outputFormat);
     pmdCommand.add("-R");
@@ -53,10 +49,8 @@ public class PMDService {
     return command;
   }
 
-
   private int getNumberOfViolations() {
 
-    logger.error("inside pmd");
     int violations = 0;
 
     final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -94,12 +88,10 @@ public class PMDService {
     return violations;
   }
 
+  public int run(String srcPath, PMDParameters params){
 
-  public int run(PMDParameters params) throws IOException, InterruptedException {
-    createProcess();
-    processBuilder.command(getCommand(params));
-    final Process process = processBuilder.start();
-    process.waitFor();
+    processUtility.initProcessBuilder(PMD_BIN_PATH);
+    processUtility.runProcess(getCommand(srcPath, params));
     return getNumberOfViolations();
   }
 

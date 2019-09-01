@@ -3,7 +3,6 @@ package com.gating.staticanalysis.service;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.StringJoiner;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -16,6 +15,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+import com.gating.service.ProcessUtility;
 
 @Service
 public class VCGService {
@@ -23,24 +23,20 @@ public class VCGService {
   @Autowired
   Logger logger;
 
-  private ProcessBuilder processBuilder;
+  @Autowired
+  ProcessUtility processUtility;
 
-  private void createProcess() {
-    processBuilder = new ProcessBuilder();
-    final Map<String, String> envMap = processBuilder.environment();
-    String path = envMap.get("Path");
-    path += "C:/Program Files (x86)/VisualCodeGrepper;";
-    envMap.put("Path", path);
-  }
+  private static final String VCG_BIN_PATH =  "C:\\Program Files (x86)\\VisualCodeGrepper;";
 
-  private List<String> getCommand(VCGParameters vcgParameters) {
+
+  private List<String> getCommand(String srcPath, VCGParameters vcgParameters) {
     final StringJoiner vcgCommand = new StringJoiner(" ");
     vcgCommand.add("Visualcodegrepper.exe");
     vcgCommand.add("-c");
     vcgCommand.add("-l");
     vcgCommand.add("Java");
     vcgCommand.add("-t");
-    vcgCommand.add(vcgParameters.getSourceCodePath());
+    vcgCommand.add(srcPath);
     vcgCommand.add(vcgParameters.getOutputFormat());
     vcgCommand.add(VCGParameters.VCG_REPORT_PATH);
 
@@ -51,26 +47,7 @@ public class VCGService {
     return command;
   }
 
-  public int run(VCGParameters vcgParameters) {
-
-    createProcess();
-    processBuilder.command(getCommand(vcgParameters));
-    Process process = null;
-
-    try {
-      process = processBuilder.start();
-      process.waitFor();
-    } catch (final IOException e) {
-      logger.error("IOException occured", e);
-    } catch (final InterruptedException e) {
-      logger.error("InterruptedException occured", e);
-      Thread.currentThread().interrupt();
-    }
-
-    return getCountOfSecurityIssues();
-  }
-
-  private int getCountOfSecurityIssues() {
+  private int getSecurityIssuesCountFromReport() {
 
     int securityIssuesCount = 0;
     final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -108,5 +85,14 @@ public class VCGService {
 
     return securityIssuesCount;
   }
+
+  public int run(String srcPath, VCGParameters vcgParameters) {
+
+    processUtility.initProcessBuilder(VCG_BIN_PATH);
+    processUtility.runProcess(getCommand(srcPath, vcgParameters));
+    return getSecurityIssuesCountFromReport();
+  }
+
+
 
 }

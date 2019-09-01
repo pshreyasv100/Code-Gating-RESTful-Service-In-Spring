@@ -1,13 +1,13 @@
 package com.gating.staticanalysis.service;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.gating.thresholdconfig.service.ThresholdConfigurationService;
+import com.gating.service.ProcessUtility;
+import com.gating.thresholdconfig.service.ThresholdConfigService;
 
 @Service
 public class SimianService {
@@ -16,16 +16,19 @@ public class SimianService {
   Logger logger;
 
   @Autowired
-  ThresholdConfigurationService thresholdConfigurationService;
+  ThresholdConfigService thresholdConfigurationService;
 
-  private List<String> getCommand(SimianParameters simianParameters) {
+  @Autowired
+  ProcessUtility processUtility;
+
+  private List<String> getCommand(String srcPath, SimianParameters simianParameters) {
 
     final StringJoiner simianCommand = new StringJoiner(" ");
     simianCommand.add("java -jar");
     simianCommand.add(SimianParameters.SIMIAN_JAR_PATH);
-    simianCommand.add(simianParameters.getSourceCodePath());
+    simianCommand.add(srcPath);
     simianCommand.add(
-        "-threshold=" + thresholdConfigurationService.getThresholds().getDuplicateLinesThreshold());
+        "-threshold=" + simianParameters.getDuplicateLinesThreshold());
     simianCommand.add("-formatter=text");
     simianCommand.add("-includes=**/*.java");
     simianCommand.add("-excludes=**/*Test.java");
@@ -40,26 +43,9 @@ public class SimianService {
   }
 
 
-  public int run(SimianParameters simianParameters) {
+  public int run(String srcPath, SimianParameters simianParameters) {
 
-    logger.error("inside simian");
-
-    final ProcessBuilder processBuilder = new ProcessBuilder();
-    processBuilder.command(getCommand(simianParameters));
-    Process process = null;
-
-    try {
-      process = processBuilder.start();
-      process.waitFor();
-      return process.exitValue();
-
-    } catch (final IOException e) {
-      logger.error("IOException occured", e);
-    } catch (final InterruptedException e) {
-      logger.error("InterruptedException occured", e);
-      Thread.currentThread().interrupt();
-    }
-
-    return Integer.valueOf(null);
+    processUtility.initProcessBuilder();
+    return processUtility.runProcess(getCommand(srcPath, simianParameters));
   }
 }

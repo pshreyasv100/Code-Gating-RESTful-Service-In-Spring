@@ -19,19 +19,6 @@ public class CyvisService {
   @Autowired
   Logger logger;
 
-
-  // private ProcessBuilder processBuilder;
-  //
-  // private void createProcess() {
-  // processBuilder = new ProcessBuilder();
-  // final Map<String, String> envMap = processBuilder.environment();
-  // String path = envMap.get("Path");
-  // path += "static-code-analyzers/cyvis-0.9;";
-  // envMap.put("Path", path);
-  // }
-
-
-
   private String getReportFromJarCommand() {
 
     final StringJoiner command = new StringJoiner(" ");
@@ -54,7 +41,7 @@ public class CyvisService {
   }
 
 
-  private String getJarFromSourceCodeCommand(String srcPath) throws IOException {
+  private String getJarFromSourceCodeCommand(String srcPath){
 
     final StringJoiner command = new StringJoiner(" ");
     command.add("cmd");
@@ -89,7 +76,6 @@ public class CyvisService {
 
       reader = new BufferedReader(new FileReader(csvFile));
       while ((line = reader.readLine()) != null) {
-        // use comma as separator
         final String[] complexity = line.split(cvsSplitBy);
         int column = 3;
         while (column < complexity.length) {
@@ -117,10 +103,10 @@ public class CyvisService {
   }
 
 
-  public int run(CyvisParameters cyvisParameters) throws IOException, InterruptedException {
+  public int run(String srcPath, CyvisParameters cyvisParameters) throws IOException, InterruptedException {
 
     final Process p1 =
-        Runtime.getRuntime().exec(getJarFromSourceCodeCommand(cyvisParameters.getSourceCodePath()));
+        Runtime.getRuntime().exec(getJarFromSourceCodeCommand(srcPath));
     p1.waitFor();
 
     final Process p2 = Runtime.getRuntime().exec(getReportFromJarCommand());

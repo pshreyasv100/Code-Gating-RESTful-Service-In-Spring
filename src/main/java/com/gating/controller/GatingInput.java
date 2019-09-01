@@ -1,5 +1,6 @@
 package com.gating.controller;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.gating.codecoverage.service.JacocoParameters;
 import com.gating.staticanalysis.service.CyvisParameters;
 import com.gating.staticanalysis.service.PMDParameters;
@@ -10,10 +11,22 @@ import com.gating.staticanalysis.service.VCGParameters;
 
 public class GatingInput {
 
+  @JsonProperty
+  private String sourceCodePath;
+
+  @JsonProperty
   private SimianParameters simianParameters;
+
+  @JsonProperty
   private PMDParameters pmdParameters;
+
+  @JsonProperty
   private VCGParameters vcgParameters;
+
+  @JsonProperty
   private JacocoParameters jacocoParameters;
+
+  @JsonProperty
   private CyvisParameters cyvisParameters;
 
 
@@ -43,7 +56,7 @@ public class GatingInput {
   }
 
   public PMDParameters getPmdParameters() {
-    return pmdParameters;
+    return this.pmdParameters;
   }
 
   public void setPmdParameters(PMDParameters pmdParameters) {
@@ -56,6 +69,14 @@ public class GatingInput {
 
   public void setVcgParameters(VCGParameters vcgParameters) {
     this.vcgParameters = vcgParameters;
+  }
+
+  public String getSourceCodePath() {
+    return sourceCodePath;
+  }
+
+  public void setSourceCodePath(String sourceCodePath) {
+    this.sourceCodePath = sourceCodePath;
   }
 
 

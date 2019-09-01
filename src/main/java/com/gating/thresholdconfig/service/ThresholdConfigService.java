@@ -9,9 +9,9 @@ import java.util.Properties;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ThresholdConfigurationService {
+public class ThresholdConfigService {
 
-  public ThresholdConfiguration getThresholds() {
+  public ThresholdConfig getThresholds() {
 
     FileInputStream fileInput = null;
     try{
@@ -19,13 +19,12 @@ public class ThresholdConfigurationService {
       fileInput = new FileInputStream(new File("src/main/resources/thresholdconfig.properties"));
       final Properties prop = new Properties();
       prop.load(fileInput);
-      final ThresholdConfiguration thresholdConfig = new ThresholdConfiguration();
+      final ThresholdConfig thresholdConfig = new ThresholdConfig();
 
       thresholdConfig.setCyclomaticComplexity(Integer.valueOf(prop.getProperty("cyclomaticComplexity")));
       thresholdConfig.setCodeCoverage(Float.valueOf(prop.getProperty("codeCoverage")));
       thresholdConfig.setTimeToRunTests(Integer.valueOf(prop.getProperty("timeToRunTests")));
       thresholdConfig.setNoOfWarnings(Integer.valueOf(prop.getProperty("noOfWarnings")));
-      thresholdConfig.setDuplicateLinesThreshold(Integer.valueOf(prop.getProperty("duplicateLinesThreshold")));
       thresholdConfig.setSecurityIssuesCount(Integer.valueOf(prop.getProperty("securityIssuesCount")));
 
       return thresholdConfig;
@@ -46,14 +45,13 @@ public class ThresholdConfigurationService {
 
 
 
-  public void setThresholds(ThresholdConfiguration newThresholds) {
+  public void setThresholds(ThresholdConfig newThresholds) {
 
     try {
       final Properties properties = new Properties();
       properties.setProperty("cyclomaticComplexity",String.valueOf(newThresholds.getCyclomaticComplexity()));
       properties.setProperty("codeCoverage", String.valueOf(newThresholds.getCodeCoverage()));
       properties.setProperty("timeToRunTests", String.valueOf(newThresholds.getTimeToRunTests()));
-      properties.setProperty("duplicateLinesThreshold",String.valueOf(newThresholds.getDuplicateLinesThreshold()));
       properties.setProperty("noOfWarnings", String.valueOf(newThresholds.getNoOfWarnings()));
       properties.setProperty("securityIssuesCount", String.valueOf(newThresholds.getSecurityIssuesCount()));
 

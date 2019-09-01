@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.gating.service.GatingService;
 import com.gating.service.QualityParameters;
-import com.gating.thresholdconfig.service.ThresholdConfiguration;
-import com.gating.thresholdconfig.service.ThresholdConfigurationService;
+import com.gating.thresholdconfig.service.ThresholdConfig;
+import com.gating.thresholdconfig.service.ThresholdConfigService;
 
 @RestController
 public class GatingController {
@@ -18,7 +18,7 @@ public class GatingController {
   GatingService gatingService;
 
   @Autowired
-  ThresholdConfigurationService thresholdConfService;
+  ThresholdConfigService thresholdConfService;
 
   @GetMapping(path = "/gating/analysis", consumes = {"application/json"})
   public QualityParameters handler(@RequestBody GatingInput gatingContext)
@@ -29,12 +29,12 @@ public class GatingController {
 
 
   @GetMapping(path = "/gating/thresholds/config")
-  public ThresholdConfiguration getThresholds() {
+  public ThresholdConfig getThresholds() {
     return thresholdConfService.getThresholds();
   }
 
   @PostMapping(path = "/gating/thresholds/config/new")
-  public void setThresholds(@RequestBody ThresholdConfiguration newThresholds){
+  public void setThresholds(@RequestBody ThresholdConfig newThresholds){
     thresholdConfService.setThresholds(newThresholds);
   }
 

@@ -2,7 +2,7 @@
 <pmd xmlns="http://pmd.sourceforge.net/report/2.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 http://pmd.sourceforge.net/report_2_0_0.xsd"
-    version="6.16.0" timestamp="2019-08-28T12:04:38.111">
+    version="6.16.0" timestamp="2019-09-01T10:54:20.719">
 <file name="C:\Users\320052310\Desktop\Test1\jacocoagent\doc\examples\build\src\main\java\org\jacoco\examples\expressions\IExpression.java">
 <violation beginline="16" endline="16" begincolumn="16" endcolumn="33" rule="UnnecessaryModifier" ruleset="Code Style" package="org.jacoco.examples.expressions" class="IExpression" method="evaluate" externalInfoUrl="https://pmd.github.io/pmd-6.16.0/pmd_rules_java_codestyle.html#unnecessarymodifier" priority="3">
 Unnecessary modifier 'public' on method 'evaluate': the method is declared in an interface type
@@ -58,14 +58,6 @@ Ensure that resources like this FileOutputStream object are closed after use
 <file name="C:\Users\320052310\Desktop\Test1\jacocoagent\doc\examples\java\ReportGenerator.java">
 <violation beginline="131" endline="135" begincolumn="17" endcolumn="17" rule="ForLoopCanBeForeach" ruleset="Best Practices" package="org.jacoco.examples" class="ReportGenerator" method="main" externalInfoUrl="https://pmd.github.io/pmd-6.16.0/pmd_rules_java_bestpractices.html#forloopcanbeforeach" priority="3">
 This for loop can be replaced by a foreach loop
-</violation>
-</file>
-<file name="C:\Users\320052310\Desktop\Test1\src\main\java\com\maths\HtmlParser.java">
-<violation beginline="12" endline="25" begincolumn="25" endcolumn="1" rule="UseUtilityClass" ruleset="Design" package="com.maths" class="HtmlParser" externalInfoUrl="https://pmd.github.io/pmd-6.16.0/pmd_rules_java_design.html#useutilityclass" priority="3">
-All methods are static.  Consider using a utility class instead. Alternatively, you could add a private constructor or make the class abstract to silence this warning.
-</violation>
-<violation beginline="12" endline="25" begincolumn="8" endcolumn="1" rule="ClassNamingConventions" ruleset="Code Style" package="com.maths" class="HtmlParser" externalInfoUrl="https://pmd.github.io/pmd-6.16.0/pmd_rules_java_codestyle.html#classnamingconventions" priority="1">
-The utility class name 'HtmlParser' doesn't match '[A-Z][a-zA-Z0-9]+(Utils?|Helper)'
 </violation>
 </file>
 </pmd>

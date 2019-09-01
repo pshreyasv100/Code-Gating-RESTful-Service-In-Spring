@@ -1,24 +1,15 @@
 package com.gating.thresholdconfig.service;
 
-public class ThresholdConfiguration {
+public class ThresholdConfig {
 
   private int cyclomaticComplexity;
   private float codeCoverage;
   private int timeToRunTests;
-  private int duplicateLinesThreshold;
   private int noOfWarnings;
   private int securityIssuesCount;
 
 
-  public ThresholdConfiguration() {}
-
-  public int getDuplicateLinesThreshold() {
-    return duplicateLinesThreshold;
-  }
-
-  public void setDuplicateLinesThreshold(int duplicateLinesThreshold) {
-    this.duplicateLinesThreshold = duplicateLinesThreshold;
-  }
+  public ThresholdConfig() {}
 
   public int getSecurityIssuesCount() {
     return securityIssuesCount;
