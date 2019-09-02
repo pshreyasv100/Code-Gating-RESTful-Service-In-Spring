@@ -8,6 +8,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
@@ -20,8 +21,7 @@ import com.gating.service.ProcessUtility;
 @Service
 public class VCGService {
 
-  @Autowired
-  Logger logger;
+  Logger logger = LoggerFactory.getLogger(VCGService.class);
 
   @Autowired
   ProcessUtility processUtility;

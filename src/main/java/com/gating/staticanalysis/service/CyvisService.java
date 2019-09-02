@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.StringJoiner;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.gating.service.ProcessUtility;
@@ -20,8 +21,7 @@ import com.gating.service.ProcessUtility;
 @Service
 public class CyvisService {
 
-  @Autowired
-  Logger logger;
+  Logger logger = LoggerFactory.getLogger(CyvisService.class);
 
   @Autowired
   ProcessUtility processUtility;
@@ -29,7 +29,6 @@ public class CyvisService {
   private static final String CYVIS_BIN_PATH = "static-code-analyzers/cyvis-0.9";
   private static final String PROJECT_JAR_PATH = "code.jar";
   private static final String CYVIS_REPORT_PATH = "static-code-analyzers/cyvis-0.9/report.txt";
-  private static final String CYVIS_FINAL_REPORT_PATH = "reports/cyvis_report.properties";
 
 
   private List<String> getReportFromJarCommand() {
@@ -104,7 +103,7 @@ public class CyvisService {
       }
 
     } catch (final FileNotFoundException e) {
-      logger.error("FileNotFoundException occurred",e);
+      logger.error("FileNotFoundException occurred : report file to be parsed by cyvis could not be found ",e);
     } catch (final IOException e) {
       logger.error("IOException occurred",e);
     } finally {
@@ -121,6 +120,8 @@ public class CyvisService {
   }
 
   public int run(String srcPath, CyvisParameters cyvisParameters){
+
+    logger.error("inside cyvis service");
 
     processUtility.initProcessBuilder();
     processUtility.runProcess(getJarFromSourceCodeCommand(srcPath),new File(CYVIS_BIN_PATH));

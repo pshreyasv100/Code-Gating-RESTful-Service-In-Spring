@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import org.slf4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,8 +13,8 @@ public class ProcessUtility {
 
   private ProcessBuilder processBuilder;
 
-  @Autowired
-  Logger logger;
+  Logger logger = LoggerFactory.getLogger(ProcessUtility.class);
+
 
   public void initProcessBuilder() {
     processBuilder = new ProcessBuilder();
@@ -53,10 +53,12 @@ public class ProcessUtility {
 
     processBuilder.directory(directoryToRunProcessIn);
     processBuilder.command(command);
+    final Map<String,String> map = processBuilder.environment();
     Process process = null;
     try {
       process = processBuilder.start();
       process.waitFor();
+      System.out.println(process.exitValue());
       return process.exitValue();
     } catch (final IOException e) {
       e.printStackTrace();

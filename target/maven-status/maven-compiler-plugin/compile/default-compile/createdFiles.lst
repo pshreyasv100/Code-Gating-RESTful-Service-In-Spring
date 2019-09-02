@@ -1,4 +1,3 @@
-com\gating\LoggerConfiguration.class
 com\gating\staticanalysis\service\SimianService.class
 com\gating\service\QualityParameters.class
 com\gating\staticanalysis\service\SimianParameters.class
