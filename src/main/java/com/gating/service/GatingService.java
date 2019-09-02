@@ -65,11 +65,11 @@ public class GatingService {
   }
 
 
-  private void saveResults(QualityParameters response) {
+  private void saveResults(QualityParameters response, String resultsLogPath) {
 
     try {
       final BufferedWriter resultsCsvWriter = new BufferedWriter(
-          new OutputStreamWriter(new FileOutputStream("resultsLog.csv", true), "UTF-8"));
+          new OutputStreamWriter(new FileOutputStream(resultsLogPath, true), "UTF-8"));
 
       final String CSV_SEPARATOR = ",";
       final StringBuilder responseLine = new StringBuilder();
@@ -133,21 +133,28 @@ public class GatingService {
   public QualityParameters gateCode(GatingInput gatingContext)
       throws IOException, InterruptedException {
 
+
+
     final QualityParameters response = new QualityParameters();
     final QualityParameters lastRunResults = getLastRunResults();
 
     response.setNoOfWarnings(
         pmdService.run(gatingContext.getSourceCodePath(), gatingContext.getPmdParameters()));
+
     response.setCodeDuplication(simianService.run(gatingContext.getSourceCodePath(),
         gatingContext.getSimianParameters()) == 0);
-    response.setSecurityIssuesCount(vcgService.run(gatingContext.getSourceCodePath(),gatingContext.getVcgParameters()));
-    response.setCyclomaticComplexity(cyvisService.run(gatingContext.getSourceCodePath(),
-        gatingContext.getCyvisParameters()));
-    response.setCodeCoverage(jacocoService.run(gatingContext.getSourceCodePath(),
-        gatingContext.getJacocoParameters()));
+
+    response.setSecurityIssuesCount(
+        vcgService.run(gatingContext.getSourceCodePath(), gatingContext.getVcgParameters()));
+
+    response.setCyclomaticComplexity(
+        cyvisService.run(gatingContext.getSourceCodePath(), gatingContext.getCyvisParameters()));
+
+    response.setCodeCoverage(
+        jacocoService.run(gatingContext.getSourceCodePath(), gatingContext.getJacocoParameters()));
 
     determineCodeQuality(response, lastRunResults);
-    saveResults(response);
+    saveResults(response, "resultsLog.csv");
     return response;
   }
 

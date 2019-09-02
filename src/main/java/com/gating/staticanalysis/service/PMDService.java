@@ -30,7 +30,7 @@ public class PMDService {
 
   private static final String PMD_BIN_PATH = "static-code-analyzers/pmd/bin;";
 
-  private List<String> getCommand(String srcPath, PMDParameters params) {
+  public List<String> getCommand(String srcPath, PMDParameters params) {
 
     final StringJoiner pmdCommand = new StringJoiner(" ");
     pmdCommand.add("pmd -d");
@@ -49,7 +49,7 @@ public class PMDService {
     return command;
   }
 
-  private int getNumberOfViolations() {
+  public int getNumberOfViolations(String pmdreportpath) {
 
     int violations = 0;
 
@@ -65,7 +65,7 @@ public class PMDService {
 
     try {
       if (builder != null) {
-        doc = builder.parse(PMDParameters.pmdReportPath);
+        doc = builder.parse(pmdreportpath);
       }
     } catch (final SAXException e) {
       logger.error("SAXException occured", e);
@@ -92,7 +92,7 @@ public class PMDService {
 
     processUtility.initProcessBuilder(PMD_BIN_PATH);
     processUtility.runProcess(getCommand(srcPath, params));
-    return getNumberOfViolations();
+    return getNumberOfViolations(PMDParameters.pmdReportPath);
   }
 
 }

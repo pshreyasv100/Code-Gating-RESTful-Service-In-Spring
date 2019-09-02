@@ -49,7 +49,7 @@ public class ProcessUtility {
 
   }
 
-  public int runProcess(String[] command, File directoryToRunProcessIn) {
+  public int runProcess(List<String> command, File directoryToRunProcessIn) {
 
     processBuilder.directory(directoryToRunProcessIn);
     processBuilder.command(command);

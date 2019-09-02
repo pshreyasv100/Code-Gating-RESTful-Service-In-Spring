@@ -1,16 +1,20 @@
 package com.gating.staticanalysis.service;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringJoiner;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.gating.service.ProcessUtility;
 
 
 @Service
@@ -19,53 +23,68 @@ public class CyvisService {
   @Autowired
   Logger logger;
 
-  private String getReportFromJarCommand() {
+  @Autowired
+  ProcessUtility processUtility;
 
-    final StringJoiner command = new StringJoiner(" ");
+  private static final String CYVIS_BIN_PATH = "static-code-analyzers/cyvis-0.9";
+  private static final String PROJECT_JAR_PATH = "code.jar";
+  private static final String CYVIS_REPORT_PATH = "static-code-analyzers/cyvis-0.9/report.txt";
+  private static final String CYVIS_FINAL_REPORT_PATH = "reports/cyvis_report.properties";
+
+
+  private List<String> getReportFromJarCommand() {
+
+    final StringJoiner cyvisCommand = new StringJoiner(" ");
+    cyvisCommand.add("java");
+    cyvisCommand.add("-jar");
+    cyvisCommand.add("cyvis-0.9.jar");
+    cyvisCommand.add("-p");
+    cyvisCommand.add(PROJECT_JAR_PATH);
+    cyvisCommand.add("-t");
+    cyvisCommand.add("report");
+
+    final List<String> command = new ArrayList<String>();
     command.add("cmd");
     command.add("/c");
-    command.add("\"");
-    command.add("cd");
-    command.add("/static-code-analyzers/cyvis-0.9");
-    command.add("&&");
+    command.add(cyvisCommand.toString());
 
-    command.add("java");
-    command.add("-jar");
-    command.add("cyvis-0.9.jar");
-    command.add("-p");
-    command.add("code.jar");
-    command.add("-t");
-    command.add("report");
-    command.add("\"");
-    return command.toString();
+    return command;
+  }
+
+  private List<String> getJarFromSourceCodeCommand(String srcPath){
+
+    final StringJoiner cyvisCommand = new StringJoiner(" ");
+    cyvisCommand.add("jar");
+    cyvisCommand.add("cf");
+    cyvisCommand.add(PROJECT_JAR_PATH);
+    cyvisCommand.add(srcPath);
+
+    final List<String> command = new ArrayList<String>();
+    command.add("cmd");
+    command.add("/c");
+    command.add(cyvisCommand.toString());
+
+    return command;
   }
 
 
-  private String getJarFromSourceCodeCommand(String srcPath){
 
-    final StringJoiner command = new StringJoiner(" ");
-    command.add("cmd");
-    command.add("/c");
-    command.add("\"");
-    command.add("cd");
-    command.add("/static-code-analyzers/cyvis-0.9");
-    command.add("&&");
+  private int getMaxComplexity(Map<String, Integer> methodComplexityMap) {
 
-    command.add("jar");
-    command.add("cf");
-    command.add("code.jar");
-    command.add(srcPath);
-    command.add("\"");
+    final Set<Map.Entry<String, Integer>> st = methodComplexityMap.entrySet();
+    int maxComplexity = 0;
 
-    return command.toString();
+    for (final Map.Entry<String, Integer> map : st) {
+      if (maxComplexity < map.getValue()) {
+        maxComplexity = map.getValue();
+      }
+    }
+    return maxComplexity;
+
   }
 
-  private Map<String, Integer> parseCyvisReport() {
+  private Map<String, Integer> parseCyvisReport(String csvFile) {
 
-    final String csvFile =
-        "C:\\eclipse-workspace\\staticanalysis.service\\static-code-analyzers\\cyvis-0.9\\report.txt";
-
-    // final String csvFile = "/staticanalysis.service/static-code-analyzers/cyvis-0.9/report.txt";
     BufferedReader reader = null;
     String line = "";
     final String cvsSplitBy = ",";
@@ -73,7 +92,6 @@ public class CyvisService {
     final Map<String, Integer> methodComplexityMap = new HashMap<String, Integer>();
 
     try {
-
       reader = new BufferedReader(new FileReader(csvFile));
       while ((line = reader.readLine()) != null) {
         final String[] complexity = line.split(cvsSplitBy);
@@ -102,33 +120,20 @@ public class CyvisService {
     return methodComplexityMap;
   }
 
+  public int run(String srcPath, CyvisParameters cyvisParameters){
 
-  public int run(String srcPath, CyvisParameters cyvisParameters) throws IOException, InterruptedException {
+    processUtility.initProcessBuilder();
+    processUtility.runProcess(getJarFromSourceCodeCommand(srcPath),new File(CYVIS_BIN_PATH));
+    processUtility.initProcessBuilder();
+    processUtility.runProcess(getReportFromJarCommand(),new File(CYVIS_BIN_PATH));
 
-    final Process p1 =
-        Runtime.getRuntime().exec(getJarFromSourceCodeCommand(srcPath));
-    p1.waitFor();
-
-    final Process p2 = Runtime.getRuntime().exec(getReportFromJarCommand());
-    p2.waitFor();
-
-    return getMaxComplexity(parseCyvisReport());
+    final Map<String, Integer> complexityMap = parseCyvisReport(CYVIS_REPORT_PATH);
+    return getMaxComplexity(complexityMap);
   }
 
 
-  private int getMaxComplexity(Map<String, Integer> methodComplexityMap) {
 
-    final Set<Map.Entry<String, Integer>> st = methodComplexityMap.entrySet();
-    int maxComplexity = 0;
 
-    for (final Map.Entry<String, Integer> map : st) {
-      if (maxComplexity < map.getValue()) {
-        maxComplexity = map.getValue();
-      }
-    }
-    return maxComplexity;
-
-  }
 
 
 }

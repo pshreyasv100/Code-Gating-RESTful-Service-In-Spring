@@ -132,8 +132,8 @@ public class JacocoService {
     final String[] maveninstall = {"cmd", "/c", "mvn", "install"};
 
 
-    processUtility.initProcessBuilder();
-    processUtility.runProcess(mavenclean, new  File(srcPath));
+    //processUtility.initProcessBuilder();
+    //processUtility.runProcess(mavenclean, new  File(srcPath));
 
     //    processUtility.initProcessBuilder();
     //    processUtility.runProcess(mavenclean, new  File(jacocoParameters.getsourceCodePath()));
