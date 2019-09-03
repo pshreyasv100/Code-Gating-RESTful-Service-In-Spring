@@ -16,6 +16,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.gating.service.ProcessUtility;
+import com.gating.toolconfig.service.ThresholdConfigService;
+import com.gating.toolconfig.service.ToolResponse;
+import com.gating.utility.ThresholdComparison;
 
 
 @Service
@@ -26,12 +29,15 @@ public class CyvisService {
   @Autowired
   ProcessUtility processUtility;
 
+  @Autowired
+  ThresholdConfigService thresholdConfigService;
+
   private static final String CYVIS_BIN_PATH = "static-code-analyzers/cyvis-0.9";
   private static final String PROJECT_JAR_PATH = "code.jar";
   private static final String CYVIS_REPORT_PATH = "static-code-analyzers/cyvis-0.9/report.txt";
 
 
-  private List<String> getReportFromJarCommand() {
+  public List<String> getReportFromJarCommand() {
 
     final StringJoiner cyvisCommand = new StringJoiner(" ");
     cyvisCommand.add("java");
@@ -50,7 +56,7 @@ public class CyvisService {
     return command;
   }
 
-  private List<String> getJarFromSourceCodeCommand(String srcPath){
+  public List<String> getJarFromSourceCodeCommand(String srcPath){
 
     final StringJoiner cyvisCommand = new StringJoiner(" ");
     cyvisCommand.add("jar");
@@ -68,7 +74,7 @@ public class CyvisService {
 
 
 
-  private int getMaxComplexity(Map<String, Integer> methodComplexityMap) {
+  public int getMaxComplexity(Map<String, Integer> methodComplexityMap) {
 
     final Set<Map.Entry<String, Integer>> st = methodComplexityMap.entrySet();
     int maxComplexity = 0;
@@ -82,7 +88,7 @@ public class CyvisService {
 
   }
 
-  private Map<String, Integer> parseCyvisReport(String csvFile) {
+  public Map<String, Integer> parseCyvisReport(String csvFile) {
 
     BufferedReader reader = null;
     String line = "";
@@ -119,9 +125,7 @@ public class CyvisService {
     return methodComplexityMap;
   }
 
-  public int run(String srcPath, CyvisParameters cyvisParameters){
-
-    logger.error("inside cyvis service");
+  public ToolResponse<Integer> run(String srcPath){
 
     processUtility.initProcessBuilder();
     processUtility.runProcess(getJarFromSourceCodeCommand(srcPath),new File(CYVIS_BIN_PATH));
@@ -129,7 +133,11 @@ public class CyvisService {
     processUtility.runProcess(getReportFromJarCommand(),new File(CYVIS_BIN_PATH));
 
     final Map<String, Integer> complexityMap = parseCyvisReport(CYVIS_REPORT_PATH);
-    return getMaxComplexity(complexityMap);
+    final int maxComplexity =  getMaxComplexity(complexityMap);
+    final int threshold = thresholdConfigService.getThresholds().getCyclomaticComplexity();
+    final String finalDecision = ThresholdComparison.isLessThanThreshold(maxComplexity, threshold) ? "Go" : "No Go";
+
+    return new ToolResponse<Integer>(maxComplexity, threshold, finalDecision);
   }
 
 

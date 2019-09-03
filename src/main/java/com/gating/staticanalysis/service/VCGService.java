@@ -17,6 +17,11 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import com.gating.service.ProcessUtility;
+import com.gating.toolconfig.service.ThresholdConfigService;
+import com.gating.toolconfig.service.ToolResponse;
+import com.gating.toolconfig.service.VCGConfig;
+import com.gating.toolconfig.service.VCGConfigService;
+import com.gating.utility.ThresholdComparison;
 
 @Service
 public class VCGService {
@@ -26,10 +31,13 @@ public class VCGService {
   @Autowired
   ProcessUtility processUtility;
 
-  private static final String VCG_BIN_PATH =  "C:\\Program Files (x86)\\VisualCodeGrepper;";
+  @Autowired
+  VCGConfigService vcgConfigService;
 
+  @Autowired
+  ThresholdConfigService thresholdConfigService;
 
-  private List<String> getCommand(String srcPath, VCGParameters vcgParameters) {
+  public List<String> getCommand(String srcPath, VCGConfig vcgConfig) {
     final StringJoiner vcgCommand = new StringJoiner(" ");
     vcgCommand.add("Visualcodegrepper.exe");
     vcgCommand.add("-c");
@@ -37,8 +45,8 @@ public class VCGService {
     vcgCommand.add("Java");
     vcgCommand.add("-t");
     vcgCommand.add(srcPath);
-    vcgCommand.add(vcgParameters.getOutputFormat());
-    vcgCommand.add(VCGParameters.VCG_REPORT_PATH);
+    vcgCommand.add(vcgConfig.getOutputFormat());
+    vcgCommand.add(VCGConfig.VCG_REPORT_PATH);
 
     final List<String> command = new ArrayList<String>();
     command.add("cmd");
@@ -47,7 +55,7 @@ public class VCGService {
     return command;
   }
 
-  private int getSecurityIssuesCountFromReport() {
+  public int getSecurityIssuesCountFromReport(String vcgReportPath) {
 
     int securityIssuesCount = 0;
     final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -61,8 +69,8 @@ public class VCGService {
     }
 
     try {
-      if(builder != null) {
-        doc = builder.parse(VCGParameters.VCG_REPORT_PATH);
+      if (builder != null) {
+        doc = builder.parse(vcgReportPath);
       }
     } catch (final SAXException e) {
       logger.error("SAXException occurred", e);
@@ -86,11 +94,18 @@ public class VCGService {
     return securityIssuesCount;
   }
 
-  public int run(String srcPath, VCGParameters vcgParameters) {
+  public ToolResponse<Integer> run(String srcPath) {
 
-    processUtility.initProcessBuilder(VCG_BIN_PATH);
-    processUtility.runProcess(getCommand(srcPath, vcgParameters));
-    return getSecurityIssuesCountFromReport();
+    final VCGConfig vcgConfig = vcgConfigService.getConfig();
+
+    processUtility.initProcessBuilder(VCGConfig.VCG_BIN_PATH);
+    processUtility.runProcess(getCommand(srcPath, vcgConfig));
+    final int securityIssues =  getSecurityIssuesCountFromReport(VCGConfig.VCG_REPORT_PATH);
+    final int threshold = thresholdConfigService.getThresholds().getSecurityIssuesCount();
+
+    final String finalDecision = ThresholdComparison.isLessThanThreshold(securityIssues, threshold) ? "Go" : "No Go";
+
+    return new ToolResponse<Integer>(securityIssues, threshold, finalDecision);
   }
 
 

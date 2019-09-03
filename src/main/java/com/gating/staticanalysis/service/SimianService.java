@@ -9,7 +9,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.gating.service.ProcessUtility;
-import com.gating.thresholdconfig.service.ThresholdConfigService;
+import com.gating.toolconfig.service.SimianConfig;
+import com.gating.toolconfig.service.SimianConfigService;
+import com.gating.toolconfig.service.ThresholdConfigService;
+import com.gating.toolconfig.service.ToolResponse;
 
 @Service
 public class SimianService {
@@ -23,9 +26,12 @@ public class SimianService {
   ThresholdConfigService thresholdConfigurationService;
 
   @Autowired
+  SimianConfigService simianConfigService;
+
+  @Autowired
   ProcessUtility processUtility;
 
-  private List<String> getCommand(SimianParameters simianParameters) {
+  public List<String> getCommand(SimianConfig simianParameters) {
 
     final StringJoiner simianCommand = new StringJoiner(" ");
     simianCommand.add("java");
@@ -43,14 +49,20 @@ public class SimianService {
     command.add("cmd");
     command.add("/c");
     command.add(simianCommand.toString());
-    System.out.println(command);
+
     return command;
   }
 
 
-  public int run(String srcPath, SimianParameters simianParameters) {
+  public ToolResponse<Integer> run(String srcPath) {
 
+    final SimianConfig simianConfig = simianConfigService.getConfig();
     processUtility.initProcessBuilder(new File(SIMIAN_BIN_PATH).getAbsolutePath());
-    return processUtility.runProcess(getCommand(simianParameters), new File(srcPath));
+    final int simianReturnValue =  processUtility.runProcess(getCommand(simianConfig), new File(srcPath));
+
+    if(simianReturnValue == 0) {
+      return new ToolResponse<Integer>(0, 0, "Go");
+    }
+    return new ToolResponse<Integer>(simianReturnValue, 0, "No Go : Code Duplication Present");
   }
 }

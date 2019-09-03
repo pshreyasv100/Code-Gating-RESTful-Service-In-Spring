@@ -17,6 +17,11 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import com.gating.service.ProcessUtility;
+import com.gating.toolconfig.service.PMDConfig;
+import com.gating.toolconfig.service.PMDConfigService;
+import com.gating.toolconfig.service.ThresholdConfigService;
+import com.gating.toolconfig.service.ToolResponse;
+import com.gating.utility.ThresholdComparison;
 
 @Service
 public class PMDService {
@@ -27,19 +32,26 @@ public class PMDService {
   @Autowired
   ProcessUtility processUtility;
 
+  @Autowired
+  ThresholdConfigService thresholdConfService;
+
+  @Autowired
+  PMDConfigService pmdConfigService;
+
+
   private static final String PMD_BIN_PATH = "static-code-analyzers/pmd/bin;";
 
-  public List<String> getCommand(String srcPath, PMDParameters params) {
+  public List<String> getCommand(String srcPath, PMDConfig params) {
 
     final StringJoiner pmdCommand = new StringJoiner(" ");
     pmdCommand.add("pmd -d");
     pmdCommand.add(srcPath);
     pmdCommand.add("-f");
-    pmdCommand.add(PMDParameters.outputFormat);
+    pmdCommand.add(PMDConfig.outputFormat);
     pmdCommand.add("-R");
     pmdCommand.add(params.getRuleSet());
     pmdCommand.add(">");
-    pmdCommand.add(PMDParameters.pmdReportPath);
+    pmdCommand.add(PMDConfig.pmdReportPath);
 
     final List<String> command = new ArrayList<String>();
     command.add("cmd");
@@ -87,11 +99,20 @@ public class PMDService {
     return violations;
   }
 
-  public int run(String srcPath, PMDParameters params){
 
+  public ToolResponse<Integer> run(String srcPath) {
+
+    final PMDConfig params = pmdConfigService.getConfig();
     processUtility.initProcessBuilder(PMD_BIN_PATH);
     processUtility.runProcess(getCommand(srcPath, params));
-    return getNumberOfViolations(PMDParameters.pmdReportPath);
+
+    final int warnings = getNumberOfViolations(PMDConfig.pmdReportPath);
+    final int warningsThreshold = thresholdConfService.getThresholds().getNoOfWarnings();
+
+    final String decision =
+        ThresholdComparison.isLessThanThreshold(warnings, warningsThreshold) ? "Go" : "No Go";
+
+    return new ToolResponse<Integer>(warnings, warningsThreshold, decision);
   }
 
 }

@@ -10,14 +10,13 @@ import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.gating.codecoverage.service.JacocoService;
-import com.gating.controller.GatingInput;
 import com.gating.staticanalysis.service.CyvisService;
+import com.gating.staticanalysis.service.JacocoService;
 import com.gating.staticanalysis.service.PMDService;
 import com.gating.staticanalysis.service.SimianService;
 import com.gating.staticanalysis.service.VCGService;
-import com.gating.thresholdconfig.service.ThresholdConfig;
-import com.gating.thresholdconfig.service.ThresholdConfigService;
+import com.gating.toolconfig.service.ThresholdConfig;
+import com.gating.toolconfig.service.ThresholdConfigService;
 
 @Service
 public class GatingService {
@@ -77,8 +76,8 @@ public class GatingService {
       responseLine.append(response.getTimeToRunTests());
       responseLine.append(CSV_SEPARATOR);
       responseLine.append(response.getNoOfWarnings());
-      responseLine.append(CSV_SEPARATOR);
-      responseLine.append(response.getCodeCoverage());
+      //      responseLine.append(CSV_SEPARATOR);
+      //      responseLine.append(response.getCodeCoverage());
       responseLine.append(CSV_SEPARATOR);
       responseLine.append(response.getCyclomaticComplexity());
       responseLine.append(CSV_SEPARATOR);
@@ -121,7 +120,7 @@ public class GatingService {
       lastResult = new QualityParameters();
       lastResult.setTimeToRunTests(Integer.valueOf(lastRowArray[0]));
       lastResult.setNoOfWarnings(Integer.valueOf(lastRowArray[1]));
-      lastResult.setCodeCoverage(Float.valueOf(lastRowArray[2]));
+      //lastResult.setCodeCoverage(Float.valueOf(lastRowArray[2]));
       lastResult.setCyclomaticComplexity(Integer.valueOf(lastRowArray[3]));
       lastResult.setSecurityIssuesCount(Integer.valueOf(lastRowArray[4]));
       lastResult.setCodeDuplication(Boolean.valueOf(lastRowArray[5]));
@@ -130,28 +129,17 @@ public class GatingService {
   }
 
 
-  public QualityParameters gateCode(GatingInput gatingContext)
+  public QualityParameters gateCode(String sourceCodePath)
       throws IOException, InterruptedException {
-
-
 
     final QualityParameters response = new QualityParameters();
     final QualityParameters lastRunResults = getLastRunResults();
 
-    response.setNoOfWarnings(
-        pmdService.run(gatingContext.getSourceCodePath(), gatingContext.getPmdParameters()));
-
-    response.setCodeDuplication(simianService.run(gatingContext.getSourceCodePath(),
-        gatingContext.getSimianParameters()) == 0);
-
-    response.setSecurityIssuesCount(
-        vcgService.run(gatingContext.getSourceCodePath(), gatingContext.getVcgParameters()));
-
-    response.setCyclomaticComplexity(
-        cyvisService.run(gatingContext.getSourceCodePath(), gatingContext.getCyvisParameters()));
-
-    response.setCodeCoverage(
-        jacocoService.run(gatingContext.getSourceCodePath(), gatingContext.getJacocoParameters()));
+    response.setNoOfWarnings(pmdService.run(sourceCodePath).getValue());
+    response.setCodeDuplication(simianService.run(sourceCodePath).getValue() == 0);
+    response.setSecurityIssuesCount(vcgService.run(sourceCodePath).getValue());
+    response.setCyclomaticComplexity(cyvisService.run(sourceCodePath).getValue());
+    //response.setCodeCoverage(jacocoService.run(sourceCodePath).getValue());
 
     determineCodeQuality(response, lastRunResults);
     saveResults(response, "resultsLog.csv");
