@@ -114,7 +114,7 @@ public class CyvisService {
     return methodComplexityMap;
   }
 
-  public ToolResponse<Integer> run(String srcPath){
+  public ToolResponse<Integer> run(String srcPath) throws IOException, InterruptedException{
 
     processUtility.runProcess(getCommand(srcPath), null);
 

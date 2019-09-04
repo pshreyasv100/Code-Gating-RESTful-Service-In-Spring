@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import com.gating.service.ProcessUtility;
 import com.gating.toolconfig.service.ThresholdConfigService;
 import com.gating.toolconfig.service.ToolResponse;
+import com.gating.utility.DirectorySearch;
 import com.gating.utility.ThresholdComparison;
 
 @Service
@@ -28,22 +29,9 @@ public class JacocoService {
   @Autowired
   ThresholdConfigService thresholdConfigService;
 
-  private void searchFilesInDirectory(final String pattern, final File folder, List<String> result) {
-
-    for (final File file : folder.listFiles()) {
-      if (file.isDirectory()) {
-        searchFilesInDirectory(pattern, file, result);
-      }
-      if (file.isFile() && file.getName().matches(pattern)) {
-        result.add(file.getAbsolutePath());
-      }
-    }
-  }
-
   private List<String> getAllTestCasesPath(File projectTestsCasesPath) {
-
     final List<String> resultFiles = new ArrayList<String>();
-    searchFilesInDirectory(".*\\.class", projectTestsCasesPath, resultFiles);
+    DirectorySearch.searchFilesInDirectory(".*\\.class", projectTestsCasesPath, resultFiles);
     return resultFiles;
   }
 

@@ -2,6 +2,7 @@ package com.gating.service;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
@@ -57,7 +58,8 @@ public class GatingService {
     // Comparing the current results with thresholds
     if (response.getNoOfWarnings() <= thresholds.getNoOfWarnings() && response.isCodeDuplication()
         && response.getSecurityIssuesCount() <= thresholds.getSecurityIssuesCount()
-        && response.getCyclomaticComplexity() <= thresholds.getCyclomaticComplexity()) {
+        && response.getCyclomaticComplexity() <= thresholds.getCyclomaticComplexity()
+        && response.getCodeCoverage() >= thresholds.getCodeCoverage()) {
       response.setFinalDecision("Go");
     } else {
       response.setFinalDecision("No Go");
@@ -129,17 +131,24 @@ public class GatingService {
   }
 
 
-  public QualityParameters gateCode(String sourceCodePath)
+  public QualityParameters gateCode(String srcPath)
       throws IOException, InterruptedException, InvalidInputException {
 
     final QualityParameters response = new QualityParameters();
     final QualityParameters lastRunResults = getLastRunResults();
 
-    response.setNoOfWarnings(pmdService.run(sourceCodePath).getValue());
-    response.setCodeDuplication(simianService.run(sourceCodePath).getValue() == 0);
-    response.setSecurityIssuesCount(vcgService.run(sourceCodePath).getValue());
-    response.setCyclomaticComplexity(cyvisService.run(sourceCodePath).getValue());
-    response.setCodeCoverage(jacocoService.run(sourceCodePath).getValue());
+    response.setNoOfWarnings(pmdService.run(srcPath).getValue());
+    response.setCodeDuplication(simianService.run(srcPath).getValue() == 0);
+    response.setSecurityIssuesCount(vcgService.run(srcPath).getValue());
+    response.setCyclomaticComplexity(cyvisService.run(srcPath).getValue());
+
+    if (!(new File(srcPath + "/target/test-classes")).exists()) {
+      throw new InvalidInputException(
+          "Cannot run jacoco since project does not contain testcase classes,", null);
+    } else {
+      response.setCodeCoverage(jacocoService.run(srcPath).getValue());
+    }
+
 
     determineCodeQuality(response, lastRunResults);
     saveResults(response, "resultsLog.csv");

@@ -3,7 +3,6 @@ com\gating\staticanalysis\service\SimianService.class
 com\gating\staticanalysis\service\JacocoService.class
 com\gating\controller\GatingController.class
 com\gating\toolconfig\service\ThresholdConfigService.class
-com\gating\toolconfig\service\VCGConfig.class
 com\gating\toolconfig\service\SimianConfig.class
 com\gating\toolconfig\service\ToolResponse.class
 com\gating\service\QualityParameters.class
@@ -13,7 +12,6 @@ com\gating\toolconfig\service\ThresholdConfig.class
 com\gating\staticanalysis\service\VCGService.class
 com\gating\service\ProcessUtility.class
 com\gating\staticanalysis\service\CyvisService.class
-com\gating\toolconfig\service\CyvisConfig.class
 com\gating\staticanalysis\service\PMDService.class
 com\gating\toolconfig\service\PMDConfigService.class
 com\gating\utility\InvalidInputException.class

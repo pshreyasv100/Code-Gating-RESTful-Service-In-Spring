@@ -1,6 +1,7 @@
 package com.gating.staticanalysis.service;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
@@ -20,8 +21,6 @@ public class SimianService {
   Logger logger = LoggerFactory.getLogger(SimianService.class);
 
   private static final String SIMIAN_BIN_PATH = "static-code-analyzers/simian/bin;";
-  private static final String SIMIAN_REPORT_PATH =
-      "static-code-analyzers/reports/simian_report.txt";
 
   @Autowired
   ThresholdConfigService thresholdConfigurationService;
@@ -45,7 +44,6 @@ public class SimianService {
     simianCommand.add("-formatter=plain");
     simianCommand.add(">");
     simianCommand.add(System.getProperty("user.dir") + "//reports//simian_report.txt");
-
     final List<String> command = new ArrayList<String>();
     command.add("cmd");
     command.add("/c");
@@ -55,7 +53,7 @@ public class SimianService {
   }
 
 
-  public ToolResponse<Integer> run(String srcPath) {
+  public ToolResponse<Integer> run(String srcPath) throws IOException, InterruptedException {
 
     final SimianConfig simianConfig = simianConfigService.getConfig();
     final int simianReturnValue = processUtility.runProcess(getCommand(simianConfig, srcPath),

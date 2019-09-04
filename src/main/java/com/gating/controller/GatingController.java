@@ -2,6 +2,8 @@ package com.gating.controller;
 
 import java.io.File;
 import java.io.IOException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -56,15 +58,15 @@ public class GatingController {
   @Autowired
   SimianConfigService simianConfigService;
 
+  Logger logger = LoggerFactory.getLogger(GatingController.class);
+
 
   private void validateSourceCodePath(String src) throws InvalidInputException {
-
     final File sourcePath = new File(src);
-    if(!(sourcePath.isDirectory() && sourcePath.exists())) {
-      throw new InvalidInputException("InvalidInputException raised, source code project does not exist", src);
+    if (!(sourcePath.isDirectory() && sourcePath.exists())) {
+      throw new InvalidInputException(
+          "InvalidInputException raised, source code project does not exist", src);
     }
-
-
   }
 
   @GetMapping(path = "/allservices")
@@ -76,26 +78,42 @@ public class GatingController {
   }
 
   @GetMapping(path = "/pmdservice")
-  public ToolResponse<Integer> pmdRequestHandler(@RequestParam String sourceCodePath) throws InvalidInputException {
+  public ToolResponse<Integer> pmdRequestHandler(@RequestParam String sourceCodePath)
+      throws InvalidInputException {
 
     validateSourceCodePath(sourceCodePath);
-    return pmdService.run(sourceCodePath);
+    try {
+      return pmdService.run(sourceCodePath);
+    } catch (final IOException e) {
+      logger.error("PMD Service threw IOException", e.getMessage());
+    } catch (final InterruptedException e) {
+      logger.error("PMD Service threw InterruptedException", e.getMessage());
+      Thread.currentThread().interrupt();
+
+    }
+    return null;
   }
 
   @GetMapping(path = "/simianservice")
-  public ToolResponse<Integer> simianRequestHandler(@RequestParam String sourceCodePath) throws InvalidInputException {
+  public ToolResponse<Integer> simianRequestHandler(@RequestParam String sourceCodePath)
+      throws InvalidInputException, IOException, InterruptedException {
+
     validateSourceCodePath(sourceCodePath);
     return simianService.run(sourceCodePath);
   }
 
   @GetMapping(path = "/cyvisservice")
-  public ToolResponse<Integer> cyvisRequestHandler(@RequestParam String sourceCodePath) throws InvalidInputException {
+  public ToolResponse<Integer> cyvisRequestHandler(@RequestParam String sourceCodePath)
+      throws InvalidInputException, IOException, InterruptedException {
+
     validateSourceCodePath(sourceCodePath);
     return cyvisService.run(sourceCodePath);
   }
 
   @GetMapping(path = "/vcgservice")
-  public ToolResponse<Integer> vcgRequestHandler(@RequestParam String sourceCodePath) throws InvalidInputException {
+  public ToolResponse<Integer> vcgRequestHandler(@RequestParam String sourceCodePath)
+      throws InvalidInputException, IOException, InterruptedException {
+
     validateSourceCodePath(sourceCodePath);
     return vcgService.run(sourceCodePath);
   }
@@ -123,7 +141,7 @@ public class GatingController {
     pmdConfigService.setConfig(newConfig);
   }
 
-  @GetMapping(path= "/pmd/config")
+  @GetMapping(path = "/pmd/config")
   public PMDConfig getPmdConfig() {
     return pmdConfigService.getConfig();
   }
@@ -134,7 +152,7 @@ public class GatingController {
     simianConfigService.setConfig(newConfig);
   }
 
-  @GetMapping(path= "/simian/config")
+  @GetMapping(path = "/simian/config")
   public SimianConfig getSimianConfig() {
     return simianConfigService.getConfig();
   }

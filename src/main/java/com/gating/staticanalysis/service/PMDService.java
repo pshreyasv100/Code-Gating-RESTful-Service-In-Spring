@@ -94,7 +94,7 @@ public class PMDService {
   }
 
 
-  public ToolResponse<Integer> run(String srcPath) throws InvalidInputException {
+  public ToolResponse<Integer> run(String srcPath) throws InvalidInputException, IOException, InterruptedException {
 
     final PMDConfig params = pmdConfigService.getConfig();
     List<String> command;

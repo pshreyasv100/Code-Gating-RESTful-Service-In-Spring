@@ -10,11 +10,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProcessUtility {
 
-  private ProcessBuilder processBuilder;
 
   Logger logger = LoggerFactory.getLogger(ProcessUtility.class);
 
-  public int runProcess(List<String> command, String toolBinPath) {
+  public int runProcess(List<String> command, String toolBinPath) throws IOException, InterruptedException {
 
     final ProcessBuilder processBuilder = new ProcessBuilder();
     final Map<String, String> envMap = processBuilder.environment();
@@ -22,21 +21,13 @@ public class ProcessUtility {
     path += toolBinPath;
     envMap.put("Path", path);
 
-
     processBuilder.command(command);
     Process process = null;
 
-    try {
-      process = processBuilder.start();
-      process.waitFor();
-      return process.exitValue();
-    } catch (final IOException e) {
-      e.printStackTrace();
-    } catch (final InterruptedException e) {
-      e.printStackTrace();
-    }
+    process = processBuilder.start();
+    process.waitFor();
+    return process.exitValue();
 
-    return 1;
 
   }
 }

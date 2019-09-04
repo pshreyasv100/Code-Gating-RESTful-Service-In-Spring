@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
+import java.util.regex.Pattern;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -19,13 +20,16 @@ import org.xml.sax.SAXException;
 import com.gating.service.ProcessUtility;
 import com.gating.toolconfig.service.ThresholdConfigService;
 import com.gating.toolconfig.service.ToolResponse;
-import com.gating.toolconfig.service.VCGConfig;
+import com.gating.utility.InvalidInputException;
 import com.gating.utility.ThresholdComparison;
 
 @Service
 public class VCGService {
 
   Logger logger = LoggerFactory.getLogger(VCGService.class);
+
+  public static final String VCG_BIN_PATH =  "C:\\Program Files (x86)\\VisualCodeGrepper;";
+  public static final String VCG_REPORT_PATH = System.getProperty("user.dir") + "//reports//vcg_report.xml";
 
   @Autowired
   ProcessUtility processUtility;
@@ -42,7 +46,7 @@ public class VCGService {
     vcgCommand.add("-t");
     vcgCommand.add(srcPath);
     vcgCommand.add("-x");
-    vcgCommand.add(VCGConfig.VCG_REPORT_PATH);
+    vcgCommand.add(VCG_REPORT_PATH);
 
     final List<String> command = new ArrayList<String>();
     command.add("cmd");
@@ -51,7 +55,11 @@ public class VCGService {
     return command;
   }
 
-  public int getSecurityIssuesCountFromReport(String vcgReportPath) {
+  public int getIssuesCountFromXML(String vcgReportPath) throws InvalidInputException {
+
+    if (!Pattern.matches(".*\\.xml", vcgReportPath)) {
+      throw new InvalidInputException("Report  to VCG XML :",vcgReportPath);
+    }
 
     int securityIssuesCount = 0;
     final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -90,10 +98,10 @@ public class VCGService {
     return securityIssuesCount;
   }
 
-  public ToolResponse<Integer> run(String srcPath) {
+  public ToolResponse<Integer> run(String srcPath) throws InvalidInputException, IOException, InterruptedException {
 
-    processUtility.runProcess(getCommand(srcPath), VCGConfig.VCG_BIN_PATH);
-    final int securityIssues =  getSecurityIssuesCountFromReport(VCGConfig.VCG_REPORT_PATH);
+    processUtility.runProcess(getCommand(srcPath), VCG_BIN_PATH);
+    final int securityIssues =  getIssuesCountFromXML(VCG_REPORT_PATH);
     final int threshold = thresholdConfigService.getThresholds().getSecurityIssuesCount();
     final String finalDecision = ThresholdComparison.isLessThanThreshold(securityIssues, threshold) ? "Go" : "No Go";
 
