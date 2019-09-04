@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
+import java.util.regex.Pattern;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -12,8 +13,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import com.gating.service.ProcessUtility;
@@ -21,13 +20,13 @@ import com.gating.toolconfig.service.PMDConfig;
 import com.gating.toolconfig.service.PMDConfigService;
 import com.gating.toolconfig.service.ThresholdConfigService;
 import com.gating.toolconfig.service.ToolResponse;
+import com.gating.utility.InvalidInputException;
 import com.gating.utility.ThresholdComparison;
 
 @Service
 public class PMDService {
 
   Logger logger = LoggerFactory.getLogger(PMDService.class);
-
 
   @Autowired
   ProcessUtility processUtility;
@@ -39,19 +38,23 @@ public class PMDService {
   PMDConfigService pmdConfigService;
 
 
-  private static final String PMD_BIN_PATH = "static-code-analyzers/pmd/bin;";
+  public List<String> getCommand(String srcPath, PMDConfig params, String outputFormat,
+      String pmdReportPath) throws InvalidInputException {
 
-  public List<String> getCommand(String srcPath, PMDConfig params) {
+    if (!Pattern.matches(".*\\.xml", params.getRuleSet())) {
+      throw new InvalidInputException("ruleset required by pmd must be an xml file, input given ",
+          params.getRuleSet());
+    }
 
     final StringJoiner pmdCommand = new StringJoiner(" ");
     pmdCommand.add("pmd -d");
     pmdCommand.add(srcPath);
     pmdCommand.add("-f");
-    pmdCommand.add(PMDConfig.outputFormat);
+    pmdCommand.add(outputFormat);
     pmdCommand.add("-R");
     pmdCommand.add(params.getRuleSet());
     pmdCommand.add(">");
-    pmdCommand.add(PMDConfig.pmdReportPath);
+    pmdCommand.add(pmdReportPath);
 
     final List<String> command = new ArrayList<String>();
     command.add("cmd");
@@ -62,8 +65,7 @@ public class PMDService {
 
   public int getNumberOfViolations(String pmdreportpath) {
 
-    int violations = 0;
-
+    final int violations = 0;
     final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
     DocumentBuilder builder = null;
     Document doc = null;
@@ -84,34 +86,32 @@ public class PMDService {
       logger.error("File not found exception occured", e);
     }
 
-    if (doc != null && doc.getElementsByTagName("file") != null) {
-      final NodeList fileList = doc.getElementsByTagName("file");
-      for (int i = 0; i < fileList.getLength(); i++) {
-        final Node p = fileList.item(i);
-        if (p.getNodeType() == Node.ELEMENT_NODE) {
-          final Element file = (Element) p;
-          final NodeList violationList = file.getChildNodes();
-          violations += violationList.getLength();
-        }
-      }
+    if (doc != null && doc.getElementsByTagName("violation") != null) {
+      final NodeList violationList = doc.getElementsByTagName("violation");
+      return violationList.getLength();
     }
-
-    return violations;
+    return 0;
   }
 
 
-  public ToolResponse<Integer> run(String srcPath) {
+  public ToolResponse<Integer> run(String srcPath) throws InvalidInputException {
 
     final PMDConfig params = pmdConfigService.getConfig();
-    processUtility.initProcessBuilder(PMD_BIN_PATH);
-    processUtility.runProcess(getCommand(srcPath, params));
+    List<String> command;
 
-    final int warnings = getNumberOfViolations(PMDConfig.pmdReportPath);
+    try {
+      command = getCommand(srcPath, params, PMDConfig.OUTPUT_FORMAT, PMDConfig.PMD_REPORT_PATH);
+      processUtility.runProcess(command, PMDConfig.PMD_BIN_PATH);
+    } catch (final InvalidInputException e) {
+      logger.error("InvalidInputException raised" + e.getMessage());
+    }
+
+    final int warnings = getNumberOfViolations(PMDConfig.PMD_REPORT_PATH);
     final int warningsThreshold = thresholdConfService.getThresholds().getNoOfWarnings();
-
     final String decision =
         ThresholdComparison.isLessThanThreshold(warnings, warningsThreshold) ? "Go" : "No Go";
 
+    final ToolResponse<Integer> res = new ToolResponse<Integer>(warnings, warningsThreshold, decision);
     return new ToolResponse<Integer>(warnings, warningsThreshold, decision);
   }
 

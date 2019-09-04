@@ -2,11 +2,11 @@ package com.gating.toolconfig.service;
 
 public class PMDConfig {
 
+  public static final String PMD_REPORT_PATH = "reports/pmd_report.xml";
+  public static final String PMD_BIN_PATH = "static-code-analyzers/pmd/bin;";
+  public static final String OUTPUT_FORMAT = "xml";
 
   private String ruleSet;
-  public static final String pmdReportPath = "reports/pmd_report.xml";
-  public static final String outputFormat = "xml";
-
 
 
   public void setRuleSet(String resultSet) {

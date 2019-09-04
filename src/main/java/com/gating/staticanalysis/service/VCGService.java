@@ -20,7 +20,6 @@ import com.gating.service.ProcessUtility;
 import com.gating.toolconfig.service.ThresholdConfigService;
 import com.gating.toolconfig.service.ToolResponse;
 import com.gating.toolconfig.service.VCGConfig;
-import com.gating.toolconfig.service.VCGConfigService;
 import com.gating.utility.ThresholdComparison;
 
 @Service
@@ -32,12 +31,9 @@ public class VCGService {
   ProcessUtility processUtility;
 
   @Autowired
-  VCGConfigService vcgConfigService;
-
-  @Autowired
   ThresholdConfigService thresholdConfigService;
 
-  public List<String> getCommand(String srcPath, VCGConfig vcgConfig) {
+  public List<String> getCommand(String srcPath) {
     final StringJoiner vcgCommand = new StringJoiner(" ");
     vcgCommand.add("Visualcodegrepper.exe");
     vcgCommand.add("-c");
@@ -45,7 +41,7 @@ public class VCGService {
     vcgCommand.add("Java");
     vcgCommand.add("-t");
     vcgCommand.add(srcPath);
-    vcgCommand.add(vcgConfig.getOutputFormat());
+    vcgCommand.add("-x");
     vcgCommand.add(VCGConfig.VCG_REPORT_PATH);
 
     final List<String> command = new ArrayList<String>();
@@ -96,13 +92,9 @@ public class VCGService {
 
   public ToolResponse<Integer> run(String srcPath) {
 
-    final VCGConfig vcgConfig = vcgConfigService.getConfig();
-
-    processUtility.initProcessBuilder(VCGConfig.VCG_BIN_PATH);
-    processUtility.runProcess(getCommand(srcPath, vcgConfig));
+    processUtility.runProcess(getCommand(srcPath), VCGConfig.VCG_BIN_PATH);
     final int securityIssues =  getSecurityIssuesCountFromReport(VCGConfig.VCG_REPORT_PATH);
     final int threshold = thresholdConfigService.getThresholds().getSecurityIssuesCount();
-
     final String finalDecision = ThresholdComparison.isLessThanThreshold(securityIssues, threshold) ? "Go" : "No Go";
 
     return new ToolResponse<Integer>(securityIssues, threshold, finalDecision);

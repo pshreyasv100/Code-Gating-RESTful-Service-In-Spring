@@ -1,0 +1,21 @@
+Similarity Analyser 2.5.10 - http://www.harukizaemon.com/simian
+Copyright (c) 2003-2018 Simon Harris.  All rights reserved.
+Simian is not free unless used solely for non-commercial or evaluation purposes.
+{failOnDuplication=true, ignoreCharacterCase=true, ignoreCurlyBraces=true, ignoreIdentifierCase=true, ignoreModifiers=true, ignoreStringCase=true, threshold=6}
+Found 6 duplicate lines with fingerprint b8cb008f5bf2b6fa2d2feb7081bc0bfa in the following files:
+ Between lines 60 and 66 in C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\toolconfig\service\ThresholdConfigService.java
+ Between lines 52 and 58 in C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\toolconfig\service\SimianConfigService.java
+ Between lines 52 and 58 in C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\toolconfig\service\PMDConfigService.java
+Found 6 duplicate lines with fingerprint 9d28a107a023526eea593f84a92b4f0b in the following files:
+ Between lines 57 and 63 in C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\staticanalysis\service\VCGService.java
+ Between lines 69 and 75 in C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\staticanalysis\service\PMDService.java
+Found 8 duplicate lines with fingerprint 45c64e8156ff5d974d8cd3d9d63c51ed in the following files:
+ Between lines 32 and 43 in C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\toolconfig\service\ThresholdConfigService.java
+ Between lines 27 and 38 in C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\toolconfig\service\SimianConfigService.java
+ Between lines 28 and 39 in C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\toolconfig\service\PMDConfigService.java
+Found 8 duplicate lines with fingerprint e11c75fdcf80d635e154b648bec95473 in the following files:
+ Between lines 39 and 52 in C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\toolconfig\service\ThresholdConfig.java
+ Between lines 31 and 44 in C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\service\QualityParameters.java
+Found 70 duplicate lines in 10 blocks in 7 files
+Processed a total of 1120 significant (2610 raw) lines in 41 files
+Processing time: 1.336sec

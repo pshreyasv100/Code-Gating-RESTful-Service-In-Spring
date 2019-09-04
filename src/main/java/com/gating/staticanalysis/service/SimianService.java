@@ -20,7 +20,8 @@ public class SimianService {
   Logger logger = LoggerFactory.getLogger(SimianService.class);
 
   private static final String SIMIAN_BIN_PATH = "static-code-analyzers/simian/bin;";
-  private static final String SIMIAN_REPORT_PATH = "static-code-analyzers/reports/simian_report.txt";
+  private static final String SIMIAN_REPORT_PATH =
+      "static-code-analyzers/reports/simian_report.txt";
 
   @Autowired
   ThresholdConfigService thresholdConfigurationService;
@@ -31,19 +32,19 @@ public class SimianService {
   @Autowired
   ProcessUtility processUtility;
 
-  public List<String> getCommand(SimianConfig simianParameters) {
+  public List<String> getCommand(SimianConfig simianParameters, String srcPath) {
 
     final StringJoiner simianCommand = new StringJoiner(" ");
     simianCommand.add("java");
     simianCommand.add("-jar");
     simianCommand.add("simian-2.5.10.jar");
-    simianCommand.add(
-        "-threshold=" + simianParameters.getDuplicateLinesThreshold());
+    simianCommand.add(srcPath + "\\**\\*.java");
+    simianCommand.add("-threshold=" + simianParameters.getDuplicateLinesThreshold());
     simianCommand.add("-includes=**/*.java");
     simianCommand.add("-excludes=**/*Test.java");
     simianCommand.add("-formatter=plain");
     simianCommand.add(">");
-    simianCommand.add("report.txt");
+    simianCommand.add(System.getProperty("user.dir") + "//reports//simian_report.txt");
 
     final List<String> command = new ArrayList<String>();
     command.add("cmd");
@@ -57,10 +58,10 @@ public class SimianService {
   public ToolResponse<Integer> run(String srcPath) {
 
     final SimianConfig simianConfig = simianConfigService.getConfig();
-    processUtility.initProcessBuilder(new File(SIMIAN_BIN_PATH).getAbsolutePath());
-    final int simianReturnValue =  processUtility.runProcess(getCommand(simianConfig), new File(srcPath));
+    final int simianReturnValue = processUtility.runProcess(getCommand(simianConfig, srcPath),
+        new File(SIMIAN_BIN_PATH).getAbsolutePath());
 
-    if(simianReturnValue == 0) {
+    if (simianReturnValue == 0) {
       return new ToolResponse<Integer>(0, 0, "Go");
     }
     return new ToolResponse<Integer>(simianReturnValue, 0, "No Go : Code Duplication Present");

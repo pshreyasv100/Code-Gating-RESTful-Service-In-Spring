@@ -1,7 +1,6 @@
 package com.gating.staticanalysis.service;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -36,17 +35,24 @@ public class CyvisService {
   private static final String PROJECT_JAR_PATH = "code.jar";
   private static final String CYVIS_REPORT_PATH = "static-code-analyzers/cyvis-0.9/report.txt";
 
-
-  public List<String> getReportFromJarCommand() {
+  public List<String> getCommand(String srcPath){
 
     final StringJoiner cyvisCommand = new StringJoiner(" ");
+    cyvisCommand.add("cd");
+    cyvisCommand.add(System.getProperty("user.dir")+"\\static-code-analyzers\\cyvis-0.9");
+    cyvisCommand.add("&&");
+    cyvisCommand.add("jar");
+    cyvisCommand.add("cf");
+    cyvisCommand.add(PROJECT_JAR_PATH);
+    cyvisCommand.add(srcPath);
+    cyvisCommand.add("&&");
     cyvisCommand.add("java");
     cyvisCommand.add("-jar");
     cyvisCommand.add("cyvis-0.9.jar");
     cyvisCommand.add("-p");
     cyvisCommand.add(PROJECT_JAR_PATH);
     cyvisCommand.add("-t");
-    cyvisCommand.add("report");
+    cyvisCommand.add(System.getProperty("user.dir")+ "\\reports\\cyvis_report.txt");
 
     final List<String> command = new ArrayList<String>();
     command.add("cmd");
@@ -55,23 +61,6 @@ public class CyvisService {
 
     return command;
   }
-
-  public List<String> getJarFromSourceCodeCommand(String srcPath){
-
-    final StringJoiner cyvisCommand = new StringJoiner(" ");
-    cyvisCommand.add("jar");
-    cyvisCommand.add("cf");
-    cyvisCommand.add(PROJECT_JAR_PATH);
-    cyvisCommand.add(srcPath);
-
-    final List<String> command = new ArrayList<String>();
-    command.add("cmd");
-    command.add("/c");
-    command.add(cyvisCommand.toString());
-
-    return command;
-  }
-
 
 
   public int getMaxComplexity(Map<String, Integer> methodComplexityMap) {
@@ -127,12 +116,9 @@ public class CyvisService {
 
   public ToolResponse<Integer> run(String srcPath){
 
-    processUtility.initProcessBuilder();
-    processUtility.runProcess(getJarFromSourceCodeCommand(srcPath),new File(CYVIS_BIN_PATH));
-    processUtility.initProcessBuilder();
-    processUtility.runProcess(getReportFromJarCommand(),new File(CYVIS_BIN_PATH));
+    processUtility.runProcess(getCommand(srcPath), null);
 
-    final Map<String, Integer> complexityMap = parseCyvisReport(CYVIS_REPORT_PATH);
+    final Map<String, Integer> complexityMap = parseCyvisReport(System.getProperty("user.dir")+ "\\reports\\cyvis_report.txt");
     final int maxComplexity =  getMaxComplexity(complexityMap);
     final int threshold = thresholdConfigService.getThresholds().getCyclomaticComplexity();
     final String finalDecision = ThresholdComparison.isLessThanThreshold(maxComplexity, threshold) ? "Go" : "No Go";

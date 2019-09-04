@@ -17,6 +17,7 @@ import com.gating.staticanalysis.service.SimianService;
 import com.gating.staticanalysis.service.VCGService;
 import com.gating.toolconfig.service.ThresholdConfig;
 import com.gating.toolconfig.service.ThresholdConfigService;
+import com.gating.utility.InvalidInputException;
 
 @Service
 public class GatingService {
@@ -76,8 +77,8 @@ public class GatingService {
       responseLine.append(response.getTimeToRunTests());
       responseLine.append(CSV_SEPARATOR);
       responseLine.append(response.getNoOfWarnings());
-      //      responseLine.append(CSV_SEPARATOR);
-      //      responseLine.append(response.getCodeCoverage());
+      responseLine.append(CSV_SEPARATOR);
+      responseLine.append(response.getCodeCoverage());
       responseLine.append(CSV_SEPARATOR);
       responseLine.append(response.getCyclomaticComplexity());
       responseLine.append(CSV_SEPARATOR);
@@ -107,7 +108,6 @@ public class GatingService {
     String lastRow = null;
     QualityParameters lastResult = null;
     final BufferedReader reader = new BufferedReader(new FileReader("resultsLog.csv"));
-    // reading header and moving to next line
     currentRow = reader.readLine();
 
     while ((currentRow = reader.readLine()) != null) {
@@ -120,7 +120,7 @@ public class GatingService {
       lastResult = new QualityParameters();
       lastResult.setTimeToRunTests(Integer.valueOf(lastRowArray[0]));
       lastResult.setNoOfWarnings(Integer.valueOf(lastRowArray[1]));
-      //lastResult.setCodeCoverage(Float.valueOf(lastRowArray[2]));
+      lastResult.setCodeCoverage(Float.valueOf(lastRowArray[2]));
       lastResult.setCyclomaticComplexity(Integer.valueOf(lastRowArray[3]));
       lastResult.setSecurityIssuesCount(Integer.valueOf(lastRowArray[4]));
       lastResult.setCodeDuplication(Boolean.valueOf(lastRowArray[5]));
@@ -130,7 +130,7 @@ public class GatingService {
 
 
   public QualityParameters gateCode(String sourceCodePath)
-      throws IOException, InterruptedException {
+      throws IOException, InterruptedException, InvalidInputException {
 
     final QualityParameters response = new QualityParameters();
     final QualityParameters lastRunResults = getLastRunResults();
@@ -139,7 +139,7 @@ public class GatingService {
     response.setCodeDuplication(simianService.run(sourceCodePath).getValue() == 0);
     response.setSecurityIssuesCount(vcgService.run(sourceCodePath).getValue());
     response.setCyclomaticComplexity(cyvisService.run(sourceCodePath).getValue());
-    //response.setCodeCoverage(jacocoService.run(sourceCodePath).getValue());
+    response.setCodeCoverage(jacocoService.run(sourceCodePath).getValue());
 
     determineCodeQuality(response, lastRunResults);
     saveResults(response, "resultsLog.csv");

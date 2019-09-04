@@ -169,12 +169,10 @@ public class JacocoService {
 
     for(final String testClass:allTests) {
       final String classFullyQualifiedName = getFullyQualifiedClassName(testClass);
-      processUtility.initProcessBuilder();
-      processUtility.runProcess(createExecFileCommand(srcPath, classFullyQualifiedName));
+      processUtility.runProcess(createExecFileCommand(srcPath, classFullyQualifiedName), null);
     }
 
-    processUtility.initProcessBuilder();
-    processUtility.runProcess(createReportCommand(srcPath));
+    processUtility.runProcess(createReportCommand(srcPath), null);
 
     final float threshold = thresholdConfigService.getThresholds().getCodeCoverage();
     final float codeCoverage =  getCoverageFromReport();

@@ -1,5 +1,6 @@
 package com.gating.controller;
 
+import java.io.File;
 import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +23,7 @@ import com.gating.toolconfig.service.SimianConfigService;
 import com.gating.toolconfig.service.ThresholdConfig;
 import com.gating.toolconfig.service.ThresholdConfigService;
 import com.gating.toolconfig.service.ToolResponse;
+import com.gating.utility.InvalidInputException;
 
 @RestController
 @RequestMapping(path = "/gating")
@@ -55,37 +57,54 @@ public class GatingController {
   SimianConfigService simianConfigService;
 
 
+  private void validateSourceCodePath(String src) throws InvalidInputException {
+
+    final File sourcePath = new File(src);
+    if(!(sourcePath.isDirectory() && sourcePath.exists())) {
+      throw new InvalidInputException("InvalidInputException raised, source code project does not exist", src);
+    }
+
+
+  }
+
   @GetMapping(path = "/allservices")
   public QualityParameters allServices(@RequestParam String sourceCodePath)
-      throws IOException, InterruptedException {
+      throws IOException, InterruptedException, InvalidInputException {
 
+    validateSourceCodePath(sourceCodePath);
     return gatingService.gateCode(sourceCodePath);
   }
 
   @GetMapping(path = "/pmdservice")
-  public ToolResponse<Integer> pmdRequestHandler(@RequestParam String sourceCodePath) {
+  public ToolResponse<Integer> pmdRequestHandler(@RequestParam String sourceCodePath) throws InvalidInputException {
+
+    validateSourceCodePath(sourceCodePath);
     return pmdService.run(sourceCodePath);
   }
 
   @GetMapping(path = "/simianservice")
-  public ToolResponse<Integer> simianRequestHandler(@RequestParam String sourceCodePath) {
+  public ToolResponse<Integer> simianRequestHandler(@RequestParam String sourceCodePath) throws InvalidInputException {
+    validateSourceCodePath(sourceCodePath);
     return simianService.run(sourceCodePath);
   }
 
   @GetMapping(path = "/cyvisservice")
-  public ToolResponse<Integer> cyvisRequestHandler(@RequestParam String sourceCodePath) {
+  public ToolResponse<Integer> cyvisRequestHandler(@RequestParam String sourceCodePath) throws InvalidInputException {
+    validateSourceCodePath(sourceCodePath);
     return cyvisService.run(sourceCodePath);
   }
 
   @GetMapping(path = "/vcgservice")
-  public ToolResponse<Integer> vcgRequestHandler(@RequestParam String sourceCodePath) {
+  public ToolResponse<Integer> vcgRequestHandler(@RequestParam String sourceCodePath) throws InvalidInputException {
+    validateSourceCodePath(sourceCodePath);
     return vcgService.run(sourceCodePath);
   }
 
   @GetMapping(path = "/jacocoservice")
   public ToolResponse<Float> jacocoRequestHandler(@RequestParam String sourceCodePath)
-      throws IOException, InterruptedException {
+      throws IOException, InterruptedException, InvalidInputException {
 
+    validateSourceCodePath(sourceCodePath);
     return jacocoService.run(sourceCodePath);
   }
 

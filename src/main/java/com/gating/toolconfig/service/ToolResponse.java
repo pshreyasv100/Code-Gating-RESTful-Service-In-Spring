@@ -3,6 +3,12 @@ package com.gating.toolconfig.service;
 public class ToolResponse<T> {
 
 
+  @Override
+  public String toString() {
+    return "ToolResponse [value=" + value + ", threshold=" + threshold + ", finalResult="
+        + finalResult + "]";
+  }
+
   private T value;
   private T threshold;
   private String finalResult;
