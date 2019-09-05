@@ -3,15 +3,16 @@ package com.gating.service;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
+import javax.xml.parsers.ParserConfigurationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.xml.sax.SAXException;
 import com.gating.staticanalysis.service.CyvisService;
+import com.gating.staticanalysis.service.JacocoResponse;
 import com.gating.staticanalysis.service.JacocoService;
 import com.gating.staticanalysis.service.PMDService;
 import com.gating.staticanalysis.service.SimianService;
@@ -42,24 +43,22 @@ public class GatingService {
   ThresholdConfigService thresholdService;
 
 
-  private void determineCodeQuality(QualityParameters response, QualityParameters lastRunResults) {
+  private void determineCodeQuality(QualityParameters response,
+      Boolean usePreviousResultsAsThreshold) throws IOException, InvalidInputException {
 
-    final ThresholdConfig thresholds = thresholdService.getThresholds();
+    ThresholdConfig thresholds;
 
-    // Comparing the current results with previous results
-    if (lastRunResults != null && response.getNoOfWarnings() <= lastRunResults.getNoOfWarnings()
-        && response.getSecurityIssuesCount() <= lastRunResults.getSecurityIssuesCount()
-        && response.getCyclomaticComplexity() <= lastRunResults.getCyclomaticComplexity()) {
-      response.setComparedToPreviousRun("Better than previous result");
+    if (usePreviousResultsAsThreshold) {
+      thresholds = getLastRunResults();
     } else {
-      response.setComparedToPreviousRun("Worse than previous result");
+      thresholds = thresholdService.getThresholds();
     }
 
-    // Comparing the current results with thresholds
     if (response.getNoOfWarnings() <= thresholds.getNoOfWarnings() && response.isCodeDuplication()
         && response.getSecurityIssuesCount() <= thresholds.getSecurityIssuesCount()
         && response.getCyclomaticComplexity() <= thresholds.getCyclomaticComplexity()
-        && response.getCodeCoverage() >= thresholds.getCodeCoverage()) {
+        && response.getCodeCoverage() >= thresholds.getCodeCoverage()
+        && response.getTimeToRunTests() <= thresholds.getTimeToRunTests()) {
       response.setFinalDecision("Go");
     } else {
       response.setFinalDecision("No Go");
@@ -67,11 +66,12 @@ public class GatingService {
   }
 
 
-  private void saveResults(QualityParameters response, String resultsLogPath) {
+  private void saveResults(QualityParameters response, String resultsLogPath) throws IOException {
 
+    BufferedWriter csvWriter = null;
     try {
-      final BufferedWriter resultsCsvWriter = new BufferedWriter(
-          new OutputStreamWriter(new FileOutputStream(resultsLogPath, true), "UTF-8"));
+      csvWriter =
+          new BufferedWriter(new OutputStreamWriter(new FileOutputStream(resultsLogPath, true)));
 
       final String CSV_SEPARATOR = ",";
       final StringBuilder responseLine = new StringBuilder();
@@ -89,37 +89,41 @@ public class GatingService {
       responseLine.append(response.isCodeDuplication());
       responseLine.append(CSV_SEPARATOR);
       responseLine.append(response.getFinalDecision());
-      responseLine.append(CSV_SEPARATOR);
-      responseLine.append(response.getComparedToPreviousRun());
 
+      csvWriter.newLine();
+      csvWriter.write(responseLine.toString());
 
-      resultsCsvWriter.newLine();
-      resultsCsvWriter.write(responseLine.toString());
-      resultsCsvWriter.close();
-    } catch (final UnsupportedEncodingException e) {
-    } catch (final FileNotFoundException e) {
-    } catch (final IOException e) {
+    } finally {
+      if (csvWriter != null) {
+        csvWriter.close();
+      }
     }
 
   }
 
 
-  private QualityParameters getLastRunResults() throws IOException {
+  private ThresholdConfig getLastRunResults() throws IOException, InvalidInputException {
 
     String currentRow;
     String lastRow = null;
-    QualityParameters lastResult = null;
-    final BufferedReader reader = new BufferedReader(new FileReader("resultsLog.csv"));
+    final ThresholdConfig lastResult = new ThresholdConfig();
+    final BufferedReader reader =
+        new BufferedReader(new FileReader(System.getProperty("user.dir") + "\\resultsLog.csv"));
     currentRow = reader.readLine();
+
+    if (reader.readLine() == null) {
+      reader.close();
+      throw new InvalidInputException("No previous results found", null);
+    }
 
     while ((currentRow = reader.readLine()) != null) {
       lastRow = currentRow;
     }
 
     reader.close();
+
     if (lastRow != null) {
       final String[] lastRowArray = lastRow.split(",");
-      lastResult = new QualityParameters();
       lastResult.setTimeToRunTests(Integer.valueOf(lastRowArray[0]));
       lastResult.setNoOfWarnings(Integer.valueOf(lastRowArray[1]));
       lastResult.setCodeCoverage(Float.valueOf(lastRowArray[2]));
@@ -131,12 +135,14 @@ public class GatingService {
   }
 
 
-  public QualityParameters gateCode(String srcPath)
-      throws IOException, InterruptedException, InvalidInputException {
+  public QualityParameters gateCode(String srcPath, Boolean usePreviousResultsAsThreshold)
+      throws IOException, InterruptedException, InvalidInputException, SAXException,
+      ParserConfigurationException {
+
+    jacocoService.buildProject(srcPath);
 
     final QualityParameters response = new QualityParameters();
-    final QualityParameters lastRunResults = getLastRunResults();
-
+    response.setProjectPath(srcPath);
     response.setNoOfWarnings(pmdService.run(srcPath).getValue());
     response.setCodeDuplication(simianService.run(srcPath).getValue() == 0);
     response.setSecurityIssuesCount(vcgService.run(srcPath).getValue());
@@ -146,15 +152,14 @@ public class GatingService {
       throw new InvalidInputException(
           "Cannot run jacoco since project does not contain testcase classes,", null);
     } else {
-      response.setCodeCoverage(jacocoService.run(srcPath).getValue());
+
+      final JacocoResponse res = jacocoService.run(srcPath);
+      response.setCodeCoverage(res.getCodeCoverage());
+      response.setTimeToRunTests(res.getTimeToRunTest());
     }
 
-
-    determineCodeQuality(response, lastRunResults);
+    determineCodeQuality(response, usePreviousResultsAsThreshold);
     saveResults(response, "resultsLog.csv");
     return response;
   }
-
-
-
 }

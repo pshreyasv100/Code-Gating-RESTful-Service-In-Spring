@@ -1,39 +1,22 @@
 package com.gating.service;
 
-public class QualityParameters{
+public class QualityParameters {
 
-  private int timeToRunTests;
+  private String projectPath;
+  private float timeToRunTest;
   private int noOfWarnings;
   private float codeCoverage;
   private int cyclomaticComplexity;
   private boolean isCodeDuplication;
   private int securityIssuesCount;
-  private String comparedToPreviousRun;
   private String finalDecision;
 
-
-  public int getSecurityIssuesCount() {
-    return securityIssuesCount;
+  public float getTimeToRunTests() {
+    return timeToRunTest;
   }
 
-  public void setSecurityIssuesCount(int securityIssuesCount) {
-    this.securityIssuesCount = securityIssuesCount;
-  }
-
-  public boolean isCodeDuplication() {
-    return isCodeDuplication;
-  }
-
-  public void setCodeDuplication(boolean isCodeDuplication) {
-    this.isCodeDuplication = isCodeDuplication;
-  }
-
-  public int getTimeToRunTests() {
-    return timeToRunTests;
-  }
-
-  public void setTimeToRunTests(int timeToRunTests) {
-    this.timeToRunTests = timeToRunTests;
+  public void setTimeToRunTests(float timeToRunTest) {
+    this.timeToRunTest = timeToRunTest;
   }
 
   public int getNoOfWarnings() {
@@ -60,6 +43,22 @@ public class QualityParameters{
     this.cyclomaticComplexity = cyclomaticComplexity;
   }
 
+  public boolean isCodeDuplication() {
+    return isCodeDuplication;
+  }
+
+  public void setCodeDuplication(boolean isCodeDuplication) {
+    this.isCodeDuplication = isCodeDuplication;
+  }
+
+  public int getSecurityIssuesCount() {
+    return securityIssuesCount;
+  }
+
+  public void setSecurityIssuesCount(int securityIssuesCount) {
+    this.securityIssuesCount = securityIssuesCount;
+  }
+
   public String getFinalDecision() {
     return finalDecision;
   }
@@ -68,12 +67,12 @@ public class QualityParameters{
     this.finalDecision = finalDecision;
   }
 
-  public String getComparedToPreviousRun() {
-    return comparedToPreviousRun;
+  public String getProjectPath() {
+    return projectPath;
   }
 
-  public void setComparedToPreviousRun(String comparedToPreviousRun) {
-    this.comparedToPreviousRun = comparedToPreviousRun;
+  public void setProjectPath(String projectPath) {
+    this.projectPath = projectPath;
   }
 
 

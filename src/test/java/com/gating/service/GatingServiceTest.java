@@ -1,11 +1,13 @@
 package com.gating.service;
 
 import java.io.IOException;
+import javax.xml.parsers.ParserConfigurationException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.xml.sax.SAXException;
 import com.gating.Application;
 import com.gating.staticanalysis.service.CyvisService;
 import com.gating.staticanalysis.service.JacocoService;
@@ -43,17 +45,19 @@ public class GatingServiceTest {
 
 
   @Test(expected = InvalidInputException.class)
-  public void JacocoDoesNotRun_WhenProjectDoesNotContainTestCases() throws IOException, InterruptedException, InvalidInputException {
+  public void JacocoDoesNotRun_WhenProjectDoesNotContainTestCases() throws IOException,
+  InterruptedException, InvalidInputException, SAXException, ParserConfigurationException {
     final String srcPath = "C:\\bootcamp\\java\\code\\stack";
-    gatingService.gateCode(srcPath);
+    gatingService.gateCode(srcPath, false);
   }
 
 
   @Test
-  public void testGateCode() throws IOException, InterruptedException, InvalidInputException {
+  public void testGateCode() throws IOException, InterruptedException, InvalidInputException,
+  SAXException, ParserConfigurationException {
 
     final String SourceCodePath = "C:\\Users\\320052310\\Desktop\\Test1";
-    gatingService.gateCode(SourceCodePath);
+    gatingService.gateCode(SourceCodePath,false);
     assert(true);
   }
 

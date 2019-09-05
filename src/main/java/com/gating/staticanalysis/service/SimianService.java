@@ -43,15 +43,15 @@ public class SimianService {
     simianCommand.add("-excludes=**/*Test.java");
     simianCommand.add("-formatter=plain");
     simianCommand.add(">");
-    simianCommand.add(System.getProperty("user.dir") + "//reports//simian_report.txt");
+    simianCommand.add(System.getProperty("user.dir") + "\\reports\\simian_report.txt");
     final List<String> command = new ArrayList<String>();
     command.add("cmd");
     command.add("/c");
     command.add(simianCommand.toString());
 
+    System.out.println(command);
     return command;
   }
-
 
   public ToolResponse<Integer> run(String srcPath) throws IOException, InterruptedException {
 

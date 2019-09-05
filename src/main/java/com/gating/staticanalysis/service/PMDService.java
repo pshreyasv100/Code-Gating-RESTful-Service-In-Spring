@@ -63,29 +63,16 @@ public class PMDService {
     return command;
   }
 
-  public int getNumberOfViolations(String pmdreportpath) {
+  public int getNumberOfViolations(String pmdreportpath) throws SAXException, IOException, ParserConfigurationException {
 
-    final int violations = 0;
     final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
     DocumentBuilder builder = null;
     Document doc = null;
 
-    try {
-      builder = factory.newDocumentBuilder();
-    } catch (final ParserConfigurationException e) {
-      logger.error("ParserConfigurationException occured", e);
+    builder = factory.newDocumentBuilder();
+    if (builder != null) {
+      doc = builder.parse(pmdreportpath);
     }
-
-    try {
-      if (builder != null) {
-        doc = builder.parse(pmdreportpath);
-      }
-    } catch (final SAXException e) {
-      logger.error("SAXException occured", e);
-    } catch (final IOException e) {
-      logger.error("File not found exception occured", e);
-    }
-
     if (doc != null && doc.getElementsByTagName("violation") != null) {
       final NodeList violationList = doc.getElementsByTagName("violation");
       return violationList.getLength();
@@ -94,24 +81,19 @@ public class PMDService {
   }
 
 
-  public ToolResponse<Integer> run(String srcPath) throws InvalidInputException, IOException, InterruptedException {
+  public ToolResponse<Integer> run(String srcPath)
+      throws InvalidInputException, IOException, InterruptedException, SAXException, ParserConfigurationException {
 
     final PMDConfig params = pmdConfigService.getConfig();
     List<String> command;
-
-    try {
-      command = getCommand(srcPath, params, PMDConfig.OUTPUT_FORMAT, PMDConfig.PMD_REPORT_PATH);
-      processUtility.runProcess(command, PMDConfig.PMD_BIN_PATH);
-    } catch (final InvalidInputException e) {
-      logger.error("InvalidInputException raised" + e.getMessage());
-    }
+    command = getCommand(srcPath, params, PMDConfig.OUTPUT_FORMAT, PMDConfig.PMD_REPORT_PATH);
+    processUtility.runProcess(command, PMDConfig.PMD_BIN_PATH);
 
     final int warnings = getNumberOfViolations(PMDConfig.PMD_REPORT_PATH);
     final int warningsThreshold = thresholdConfService.getThresholds().getNoOfWarnings();
     final String decision =
         ThresholdComparison.isLessThanThreshold(warnings, warningsThreshold) ? "Go" : "No Go";
 
-    final ToolResponse<Integer> res = new ToolResponse<Integer>(warnings, warningsThreshold, decision);
     return new ToolResponse<Integer>(warnings, warningsThreshold, decision);
   }
 

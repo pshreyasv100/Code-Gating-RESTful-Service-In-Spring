@@ -31,15 +31,15 @@ public class CyvisService {
   @Autowired
   ThresholdConfigService thresholdConfigService;
 
-  private static final String CYVIS_BIN_PATH = "static-code-analyzers/cyvis-0.9";
+  private static final String CYVIS_BIN_PATH = System.getProperty("user.dir")+"\\static-code-analyzers\\cyvis-0.9";
   private static final String PROJECT_JAR_PATH = "code.jar";
-  private static final String CYVIS_REPORT_PATH = "static-code-analyzers/cyvis-0.9/report.txt";
+  private static final String CYVIS_REPORT_PATH = System.getProperty("user.dir")+ "\\reports\\cyvis_report.txt";
 
   public List<String> getCommand(String srcPath){
 
     final StringJoiner cyvisCommand = new StringJoiner(" ");
     cyvisCommand.add("cd");
-    cyvisCommand.add(System.getProperty("user.dir")+"\\static-code-analyzers\\cyvis-0.9");
+    cyvisCommand.add(CYVIS_BIN_PATH);
     cyvisCommand.add("&&");
     cyvisCommand.add("jar");
     cyvisCommand.add("cf");
@@ -52,7 +52,7 @@ public class CyvisService {
     cyvisCommand.add("-p");
     cyvisCommand.add(PROJECT_JAR_PATH);
     cyvisCommand.add("-t");
-    cyvisCommand.add(System.getProperty("user.dir")+ "\\reports\\cyvis_report.txt");
+    cyvisCommand.add(CYVIS_REPORT_PATH);
 
     final List<String> command = new ArrayList<String>();
     command.add("cmd");
@@ -118,7 +118,7 @@ public class CyvisService {
 
     processUtility.runProcess(getCommand(srcPath), null);
 
-    final Map<String, Integer> complexityMap = parseCyvisReport(System.getProperty("user.dir")+ "\\reports\\cyvis_report.txt");
+    final Map<String, Integer> complexityMap = parseCyvisReport(CYVIS_REPORT_PATH);
     final int maxComplexity =  getMaxComplexity(complexityMap);
     final int threshold = thresholdConfigService.getThresholds().getCyclomaticComplexity();
     final String finalDecision = ThresholdComparison.isLessThanThreshold(maxComplexity, threshold) ? "Go" : "No Go";

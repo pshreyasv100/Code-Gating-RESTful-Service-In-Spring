@@ -2,7 +2,6 @@ package com.gating.toolconfig.service;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
@@ -11,60 +10,44 @@ import org.springframework.stereotype.Service;
 @Service
 public class ThresholdConfigService {
 
-  public ThresholdConfig getThresholds() {
+  public ThresholdConfig getThresholds() throws IOException {
 
     FileInputStream fileInput = null;
-    try{
+    fileInput = new FileInputStream(new File("src/main/resources/threshold.config.properties"));
+    final Properties prop = new Properties();
+    prop.load(fileInput);
+    final ThresholdConfig thresholdConfig = new ThresholdConfig();
 
-      fileInput = new FileInputStream(new File("src/main/resources/threshold.config.properties"));
-      final Properties prop = new Properties();
-      prop.load(fileInput);
-      final ThresholdConfig thresholdConfig = new ThresholdConfig();
+    thresholdConfig
+    .setCyclomaticComplexity(Integer.valueOf(prop.getProperty("cyclomaticComplexity")));
+    thresholdConfig.setCodeCoverage(Float.valueOf(prop.getProperty("codeCoverage")));
+    thresholdConfig.setTimeToRunTests(Integer.valueOf(prop.getProperty("timeToRunTests")));
+    thresholdConfig.setNoOfWarnings(Integer.valueOf(prop.getProperty("noOfWarnings")));
+    thresholdConfig
+    .setSecurityIssuesCount(Integer.valueOf(prop.getProperty("securityIssuesCount")));
 
-      thresholdConfig.setCyclomaticComplexity(Integer.valueOf(prop.getProperty("cyclomaticComplexity")));
-      thresholdConfig.setCodeCoverage(Float.valueOf(prop.getProperty("codeCoverage")));
-      thresholdConfig.setTimeToRunTests(Integer.valueOf(prop.getProperty("timeToRunTests")));
-      thresholdConfig.setNoOfWarnings(Integer.valueOf(prop.getProperty("noOfWarnings")));
-      thresholdConfig.setSecurityIssuesCount(Integer.valueOf(prop.getProperty("securityIssuesCount")));
-
-      return thresholdConfig;
-
-    } catch (final IOException ex) {
-      ex.printStackTrace();
-    }
-
-    finally {
-      try {
-        fileInput.close();
-      } catch (final IOException e) {
-        e.printStackTrace();
-      }
-    }
-    return null;
+    fileInput.close();
+    return thresholdConfig;
   }
 
 
 
-  public void setThresholds(ThresholdConfig newThresholds) {
+  public void setThresholds(ThresholdConfig newThresholds) throws IOException {
 
-    try {
-      final Properties properties = new Properties();
-      properties.setProperty("cyclomaticComplexity",String.valueOf(newThresholds.getCyclomaticComplexity()));
-      properties.setProperty("codeCoverage", String.valueOf(newThresholds.getCodeCoverage()));
-      properties.setProperty("timeToRunTests", String.valueOf(newThresholds.getTimeToRunTests()));
-      properties.setProperty("noOfWarnings", String.valueOf(newThresholds.getNoOfWarnings()));
-      properties.setProperty("securityIssuesCount", String.valueOf(newThresholds.getSecurityIssuesCount()));
 
-      final FileOutputStream fileOut =
-          new FileOutputStream(new File("src/main/resources/threshold.config.properties"));
-      properties.store(fileOut, null);
-      fileOut.close();
+    final Properties properties = new Properties();
+    properties.setProperty("cyclomaticComplexity",
+        String.valueOf(newThresholds.getCyclomaticComplexity()));
+    properties.setProperty("codeCoverage", String.valueOf(newThresholds.getCodeCoverage()));
+    properties.setProperty("timeToRunTests", String.valueOf(newThresholds.getTimeToRunTests()));
+    properties.setProperty("noOfWarnings", String.valueOf(newThresholds.getNoOfWarnings()));
+    properties.setProperty("securityIssuesCount",
+        String.valueOf(newThresholds.getSecurityIssuesCount()));
 
-    } catch (final FileNotFoundException e) {
-      e.printStackTrace();
-    } catch (final IOException e) {
-      e.printStackTrace();
-    }
+    final FileOutputStream fileOut =
+        new FileOutputStream(new File("src/main/resources/threshold.config.properties"));
+    properties.store(fileOut, null);
+    fileOut.close();
   }
 
 }

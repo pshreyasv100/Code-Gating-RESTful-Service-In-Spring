@@ -2,6 +2,7 @@ package com.gating.controller;
 
 import java.io.File;
 import java.io.IOException;
+import javax.xml.parsers.ParserConfigurationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.xml.sax.SAXException;
 import com.gating.service.GatingService;
 import com.gating.service.QualityParameters;
 import com.gating.staticanalysis.service.CyvisService;
+import com.gating.staticanalysis.service.JacocoResponse;
 import com.gating.staticanalysis.service.JacocoService;
 import com.gating.staticanalysis.service.PMDService;
 import com.gating.staticanalysis.service.SimianService;
@@ -70,31 +73,24 @@ public class GatingController {
   }
 
   @GetMapping(path = "/allservices")
-  public QualityParameters allServices(@RequestParam String sourceCodePath)
-      throws IOException, InterruptedException, InvalidInputException {
+  public QualityParameters allServices(@RequestParam String sourceCodePath,
+      @RequestParam Boolean usePreviousResultsAsThreshold) throws IOException, InterruptedException,
+  InvalidInputException, SAXException, ParserConfigurationException {
 
     validateSourceCodePath(sourceCodePath);
-    return gatingService.gateCode(sourceCodePath);
+    return gatingService.gateCode(sourceCodePath, usePreviousResultsAsThreshold);
   }
 
-  @GetMapping(path = "/pmdservice")
+  @GetMapping(path = "warnings/pmd")
   public ToolResponse<Integer> pmdRequestHandler(@RequestParam String sourceCodePath)
-      throws InvalidInputException {
+      throws InvalidInputException, IOException, InterruptedException, SAXException,
+      ParserConfigurationException {
 
     validateSourceCodePath(sourceCodePath);
-    try {
-      return pmdService.run(sourceCodePath);
-    } catch (final IOException e) {
-      logger.error("PMD Service threw IOException", e.getMessage());
-    } catch (final InterruptedException e) {
-      logger.error("PMD Service threw InterruptedException", e.getMessage());
-      Thread.currentThread().interrupt();
-
-    }
-    return null;
+    return pmdService.run(sourceCodePath);
   }
 
-  @GetMapping(path = "/simianservice")
+  @GetMapping(path = "duplication/simian")
   public ToolResponse<Integer> simianRequestHandler(@RequestParam String sourceCodePath)
       throws InvalidInputException, IOException, InterruptedException {
 
@@ -102,7 +98,8 @@ public class GatingController {
     return simianService.run(sourceCodePath);
   }
 
-  @GetMapping(path = "/cyvisservice")
+
+  @GetMapping(path = "complexity/cyvis")
   public ToolResponse<Integer> cyvisRequestHandler(@RequestParam String sourceCodePath)
       throws InvalidInputException, IOException, InterruptedException {
 
@@ -110,7 +107,8 @@ public class GatingController {
     return cyvisService.run(sourceCodePath);
   }
 
-  @GetMapping(path = "/vcgservice")
+
+  @GetMapping(path = "security/vcg")
   public ToolResponse<Integer> vcgRequestHandler(@RequestParam String sourceCodePath)
       throws InvalidInputException, IOException, InterruptedException {
 
@@ -118,42 +116,50 @@ public class GatingController {
     return vcgService.run(sourceCodePath);
   }
 
-  @GetMapping(path = "/jacocoservice")
-  public ToolResponse<Float> jacocoRequestHandler(@RequestParam String sourceCodePath)
+  @GetMapping(path = "coverage/jacoco")
+  public ToolResponse<JacocoResponse> jacocoRequestHandler(@RequestParam String sourceCodePath)
       throws IOException, InterruptedException, InvalidInputException {
 
     validateSourceCodePath(sourceCodePath);
-    return jacocoService.run(sourceCodePath);
+    jacocoService.buildProject(sourceCodePath);
+
+    final JacocoResponse response = jacocoService.run(sourceCodePath);
+    final float coverageThreshold = thresholdConfigService.getThresholds().getCodeCoverage();
+    final float timeThreshold = thresholdConfigService.getThresholds().getTimeToRunTests();
+    final JacocoResponse thresholds = new JacocoResponse(timeThreshold, coverageThreshold, null);
+
+    return new ToolResponse<JacocoResponse>(response, thresholds, response.getFinalResult());
+
   }
 
   @GetMapping(path = "/thresholds/config")
-  public ThresholdConfig getThresholds() {
+  public ThresholdConfig getThresholds() throws IOException {
     return thresholdConfigService.getThresholds();
   }
 
   @PostMapping(path = "/thresholds/config/new")
-  public void setThresholds(@RequestBody ThresholdConfig newThresholds) {
+  public void setThresholds(@RequestBody ThresholdConfig newThresholds) throws IOException {
     thresholdConfigService.setThresholds(newThresholds);
   }
 
   @PostMapping(path = "/pmd/config/new")
-  public void setPmdConfig(@RequestBody PMDConfig newConfig) {
+  public void setPmdConfig(@RequestBody PMDConfig newConfig) throws IOException {
     pmdConfigService.setConfig(newConfig);
   }
 
   @GetMapping(path = "/pmd/config")
-  public PMDConfig getPmdConfig() {
+  public PMDConfig getPmdConfig() throws IOException {
     return pmdConfigService.getConfig();
   }
 
 
   @PostMapping(path = "/simian/config/new")
-  public void setSimianConfig(@RequestBody SimianConfig newConfig) {
+  public void setSimianConfig(@RequestBody SimianConfig newConfig) throws IOException {
     simianConfigService.setConfig(newConfig);
   }
 
   @GetMapping(path = "/simian/config")
-  public SimianConfig getSimianConfig() {
+  public SimianConfig getSimianConfig() throws IOException {
     return simianConfigService.getConfig();
   }
 

@@ -10,9 +10,11 @@ C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\utility\Thr
 C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\toolconfig\service\PMDConfig.java
 C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\toolconfig\service\PMDConfigService.java
 C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\toolconfig\service\SimianConfig.java
+C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\staticanalysis\service\JacocoResponse.java
 C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\staticanalysis\service\JacocoService.java
 C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\utility\DirectorySearch.java
 C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\staticanalysis\service\PMDService.java
+C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\controller\GatingToolErrorAdvice.java
 C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\service\QualityParameters.java
 C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\toolconfig\service\SimianConfigService.java
 C:\eclipse-workspace\staticanalysis.service\src\main\java\com\gating\staticanalysis\service\CyvisService.java

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringJoiner;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -13,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.gating.service.ProcessUtility;
 import com.gating.toolconfig.service.ThresholdConfigService;
-import com.gating.toolconfig.service.ToolResponse;
 import com.gating.utility.DirectorySearch;
 import com.gating.utility.ThresholdComparison;
 
@@ -21,6 +21,7 @@ import com.gating.utility.ThresholdComparison;
 public class JacocoService {
 
   Logger logger = LoggerFactory.getLogger(JacocoService.class);
+
 
 
   @Autowired
@@ -60,24 +61,25 @@ public class JacocoService {
 
   public String getFullyQualifiedClassName(String pathOfClass) {
 
-    final String[] paths=pathOfClass.split("\\\\");
-    boolean flag=false;
-    String pathvar="";
-    for(int i=0;i<paths.length-1;i++) {
-      if(paths[i].equals("test-classes")) {
-        flag=true;
-        i+=1;
+    final String[] paths = pathOfClass.split("\\\\");
+    boolean flag = false;
+    String pathvar = "";
+    for (int i = 0; i < paths.length - 1; i++) {
+      if (paths[i].equals("test-classes")) {
+        flag = true;
+        i += 1;
       }
-      if(flag) {
-        pathvar+=paths[i]+".";
+      if (flag) {
+        pathvar += paths[i] + ".";
       }
     }
-    paths[paths.length-1] = paths[paths.length-1].replace(".class", "");
-    pathvar+=paths[paths.length-1];
+    paths[paths.length - 1] = paths[paths.length - 1].replace(".class", "");
+    pathvar += paths[paths.length - 1];
     return pathvar;
   }
 
-  private List<String> createReportCommand(String srcPath){
+
+  private List<String> createReportCommand(String srcPath) {
 
     final StringBuilder jacococliJarLocation = new StringBuilder();
     jacococliJarLocation.append("static-code-analyzers/jacoco/jacococli.jar");
@@ -117,59 +119,61 @@ public class JacocoService {
   }
 
 
+  public List<String> getBuildCommand(String operation, String srcPath) {
 
-  public ToolResponse<Float> run(String srcPath) throws IOException, InterruptedException {
+    final StringJoiner buildCommand = new StringJoiner("");
+    buildCommand.add("mvn");
+    buildCommand.add(operation);
+    buildCommand.add(srcPath);
 
-
-    final String[] mavenclean = {"cmd", "/c", "mvn", "clean"};
-    final String[] mavencompile = {"cmd", "/c", "mvn", "compile"};
-    final String[] maventestcompile = {"cmd", "/c", "mvn", "test-compile"};
-    final String[] maveninstall = {"cmd", "/c", "mvn", "install"};
-
-
-    //processUtility.initProcessBuilder();
-    //processUtility.runProcess(mavenclean, new  File(srcPath));
-
-    //    processUtility.initProcessBuilder();
-    //    processUtility.runProcess(mavenclean, new  File(jacocoParameters.getsourceCodePath()));
-
-    //    processBuilder.command(mavenclean);
-    //    final Process process1 = processBuilder.start();
-    //    process1.waitFor();
-    //
-    //    processBuilder.command(mavencompile);
-    //    final Process process2 = processBuilder.start();
-    //    process2.waitFor();
-    //
-    //
-    //    processBuilder.command(maventestcompile);
-    //    final Process process3 = processBuilder.start();
-    //    process3.waitFor();
-    //
-    //
-    //    processBuilder.command(maveninstall);
-    //    final Process process4 = processBuilder.start();
-    //    process4.waitFor();
-
-
-    final List<String> allTests =
-        getAllTestCasesPath(new File(srcPath + "/target/test-classes"));
-
-    for(final String testClass:allTests) {
-      final String classFullyQualifiedName = getFullyQualifiedClassName(testClass);
-      processUtility.runProcess(createExecFileCommand(srcPath, classFullyQualifiedName), null);
-    }
-
-    processUtility.runProcess(createReportCommand(srcPath), null);
-
-    final float threshold = thresholdConfigService.getThresholds().getCodeCoverage();
-    final float codeCoverage =  getCoverageFromReport();
-    final String finalDecision = ThresholdComparison.isGreaterThanThreshold(codeCoverage, threshold) ? "Go" : "No Go";
-
-    return new ToolResponse<Float>(codeCoverage, threshold, finalDecision);
+    final List<String> command = new ArrayList<String>();
+    command.add("cmd");
+    command.add("/c");
+    return command;
   }
 
 
+  public void buildProject(String srcPath) throws IOException, InterruptedException {
+    processUtility.runProcess(getBuildCommand("clean", srcPath), null);
+    processUtility.runProcess(getBuildCommand("compile", srcPath), null);
+    processUtility.runProcess(getBuildCommand("test-compile", srcPath), null);
+    processUtility.runProcess(getBuildCommand("install", srcPath), null);
+  }
+
+
+
+  public JacocoResponse run(String srcPath) throws IOException, InterruptedException {
+
+    final List<String> allTests = getAllTestCasesPath(new File(srcPath + "/target/test-classes"));
+    long timeToRunTests = 0;
+
+    for (final String testClass : allTests) {
+      final String classFullyQualifiedName = getFullyQualifiedClassName(testClass);
+
+      final long startTime = System.currentTimeMillis();
+      processUtility.runProcess(createExecFileCommand(srcPath, classFullyQualifiedName), null);
+      final long endTime = System.currentTimeMillis();
+      final long timeTaken = (endTime - startTime);
+      timeToRunTests = timeToRunTests + timeTaken;
+    }
+
+    timeToRunTests = timeToRunTests / 1000;
+
+    processUtility.runProcess(createReportCommand(srcPath), null);
+
+    final float coverageThreshold = thresholdConfigService.getThresholds().getCodeCoverage();
+    final float timeThreshold = thresholdConfigService.getThresholds().getTimeToRunTests();
+    final float codeCoverage = getCoverageFromReport();
+
+    final String finalDecision =
+        ThresholdComparison.isGreaterThanThreshold(codeCoverage, coverageThreshold)
+        && ThresholdComparison.isLessThanThreshold(timeToRunTests, timeThreshold) ? "Go"
+            : "No Go";
+
+    final JacocoResponse response = new JacocoResponse(timeToRunTests, codeCoverage, finalDecision);
+
+    return response;
+  }
 
 }
 

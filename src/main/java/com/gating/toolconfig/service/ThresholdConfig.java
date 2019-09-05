@@ -7,6 +7,7 @@ public class ThresholdConfig {
   private int timeToRunTests;
   private int noOfWarnings;
   private int securityIssuesCount;
+  private Boolean codeDuplication;
 
 
   public ThresholdConfig() {}
@@ -50,6 +51,14 @@ public class ThresholdConfig {
 
   public void setNoOfWarnings(int noOfWarnings) {
     this.noOfWarnings = noOfWarnings;
+  }
+
+  public Boolean getCodeDuplication() {
+    return codeDuplication;
+  }
+
+  public void setCodeDuplication(Boolean codeDuplication) {
+    this.codeDuplication = codeDuplication;
   }
 
 
