@@ -2,11 +2,11 @@
 
 ## INTRODUCTION
 The project is aimed at building a Gating web service to help Developers write clean code. Given a source code repository, the web service 
-calculates Cyclomatic complexities, Code Coverage, Duplication, Number of warnings and Security Flaws using respective tools.
-The project integrates required tools and acts as a single point for the user's input. The Service generates a detailed report of the 
-checks performed against the source code and intimates the user if the code is good enough.
+calculates Cyclomatic complexities, Code Coverage, Duplication, Number of warnings and Security Flaws using respective tools. The Service generates a detailed report of the checks performed against the source code and intimates the user if the code is good enough.
 
 ## USAGE
+
+This project is helpful for developers in writing clean code by checking the Gating parameters for codes in a covenient way. Tools/Services exist for checking the Gating parameter individually. The project builds a web service that acts as a single point for user input and checks for all Gating parameters collectively by integrating all required tools 
 
 
 
