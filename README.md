@@ -5,7 +5,7 @@ The project is aimed at building a Gating web service to help Developers write c
 
 
 ## Gating Service Design
-
+![GatingServiceDesign](https://user-images.githubusercontent.com/29699403/64340966-fcb9ea80-d004-11e9-8bf7-e61760e36e74.JPG)
 
 
 
