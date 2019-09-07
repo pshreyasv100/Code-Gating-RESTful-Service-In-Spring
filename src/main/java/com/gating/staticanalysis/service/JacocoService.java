@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 import com.gating.service.ProcessUtility;
 import com.gating.toolconfig.service.ThresholdConfigService;
 import com.gating.utility.DirectorySearch;
-import com.gating.utility.ThresholdComparison;
+import com.gating.utility.Utility;
 
 @Service
 public class JacocoService {
@@ -145,7 +145,7 @@ public class JacocoService {
   public JacocoResponse run(String srcPath) throws IOException, InterruptedException {
 
     final List<String> allTests = getAllTestCasesPath(new File(srcPath + "/target/test-classes"));
-    long timeToRunTests = 0;
+    float timeToRunTests = 0;
 
     for (final String testClass : allTests) {
       final String classFullyQualifiedName = getFullyQualifiedClassName(testClass);
@@ -158,7 +158,6 @@ public class JacocoService {
     }
 
     timeToRunTests = timeToRunTests / 1000;
-
     processUtility.runProcess(createReportCommand(srcPath), null);
 
     final float coverageThreshold = thresholdConfigService.getThresholds().getCodeCoverage();
@@ -166,13 +165,11 @@ public class JacocoService {
     final float codeCoverage = getCoverageFromReport();
 
     final String finalDecision =
-        ThresholdComparison.isGreaterThanThreshold(codeCoverage, coverageThreshold)
-        && ThresholdComparison.isLessThanThreshold(timeToRunTests, timeThreshold) ? "Go"
+        Utility.isGreaterThan(codeCoverage, coverageThreshold)
+        && Utility.isLessThan(timeToRunTests, timeThreshold) ? "Go"
             : "No Go";
 
-    final JacocoResponse response = new JacocoResponse(timeToRunTests, codeCoverage, finalDecision);
-
-    return response;
+    return new JacocoResponse(timeToRunTests, codeCoverage, finalDecision);
   }
 
 }

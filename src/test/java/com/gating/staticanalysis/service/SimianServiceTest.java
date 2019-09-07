@@ -25,7 +25,6 @@ public class SimianServiceTest {
     final ToolResponse<Integer> expected = new ToolResponse<Integer>(1, 0, "No Go : Code Duplication Present");
 
     assertEquals(expected.getValue(), actual.getValue());
-
   }
 
 }

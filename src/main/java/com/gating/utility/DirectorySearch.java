@@ -11,7 +11,7 @@ public class DirectorySearch {
       if (file.isDirectory()) {
         searchFilesInDirectory(pattern, file, result);
       }
-      if (file.isFile() && file.getName().matches(pattern)) {
+      if (file.getName().matches(pattern)) {
         result.add(file.getAbsolutePath());
       }
     }

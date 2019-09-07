@@ -7,6 +7,8 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.xml.parsers.ParserConfigurationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +22,7 @@ import com.gating.staticanalysis.service.VCGService;
 import com.gating.toolconfig.service.ThresholdConfig;
 import com.gating.toolconfig.service.ThresholdConfigService;
 import com.gating.utility.InvalidInputException;
+import com.gating.utility.Utility;
 
 @Service
 public class GatingService {
@@ -48,21 +51,30 @@ public class GatingService {
 
     ThresholdConfig thresholds;
 
+
     if (usePreviousResultsAsThreshold) {
       thresholds = getLastRunResults();
     } else {
       thresholds = thresholdService.getThresholds();
     }
 
-    if (response.getNoOfWarnings() <= thresholds.getNoOfWarnings() && response.isCodeDuplication()
-        && response.getSecurityIssuesCount() <= thresholds.getSecurityIssuesCount()
-        && response.getCyclomaticComplexity() <= thresholds.getCyclomaticComplexity()
-        && response.getCodeCoverage() >= thresholds.getCodeCoverage()
-        && response.getTimeToRunTests() <= thresholds.getTimeToRunTests()) {
-      response.setFinalDecision("Go");
-    } else {
-      response.setFinalDecision("No Go");
+    final List<Boolean> allResults = new ArrayList<Boolean>();
+
+    allResults.add(Utility.isLessThan(response.getNoOfWarnings(), thresholds.getNoOfWarnings()));
+    allResults.add(response.getCodeDuplication() == 0);
+    allResults.add(Utility.isLessThan(response.getSecurityIssuesCount(), thresholds.getSecurityIssuesCount()));
+    allResults.add(Utility.isLessThan(response.getCyclomaticComplexity(), thresholds.getCyclomaticComplexity()));
+    allResults.add(Utility.isGreaterThan(response.getCodeCoverage(), thresholds.getCodeCoverage()));
+    allResults.add(Utility.isLessThan(response.getTimeToRunTests(), thresholds.getTimeToRunTests()));
+
+    for(final Boolean result: allResults) {
+      if(!result) {
+        response.setFinalDecision("No Go");
+        return;
+      }
     }
+
+    response.setFinalDecision("Go");
   }
 
 
@@ -86,7 +98,7 @@ public class GatingService {
       responseLine.append(CSV_SEPARATOR);
       responseLine.append(response.getSecurityIssuesCount());
       responseLine.append(CSV_SEPARATOR);
-      responseLine.append(response.isCodeDuplication());
+      responseLine.append(response.getCodeDuplication());
       responseLine.append(CSV_SEPARATOR);
       responseLine.append(response.getFinalDecision());
 
@@ -129,7 +141,7 @@ public class GatingService {
       lastResult.setCodeCoverage(Float.valueOf(lastRowArray[2]));
       lastResult.setCyclomaticComplexity(Integer.valueOf(lastRowArray[3]));
       lastResult.setSecurityIssuesCount(Integer.valueOf(lastRowArray[4]));
-      lastResult.setCodeDuplication(Boolean.valueOf(lastRowArray[5]));
+      lastResult.setCodeDuplication(Integer.valueOf(lastRowArray[5]));
     }
     return lastResult;
   }
@@ -144,7 +156,7 @@ public class GatingService {
     final QualityParameters response = new QualityParameters();
     response.setProjectPath(srcPath);
     response.setNoOfWarnings(pmdService.run(srcPath).getValue());
-    response.setCodeDuplication(simianService.run(srcPath).getValue() == 0);
+    response.setCodeDuplication(simianService.run(srcPath).getValue());
     response.setSecurityIssuesCount(vcgService.run(srcPath).getValue());
     response.setCyclomaticComplexity(cyvisService.run(srcPath).getValue());
 

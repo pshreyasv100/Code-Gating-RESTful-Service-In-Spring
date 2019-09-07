@@ -7,7 +7,7 @@ public class QualityParameters {
   private int noOfWarnings;
   private float codeCoverage;
   private int cyclomaticComplexity;
-  private boolean isCodeDuplication;
+  private int codeDuplication;
   private int securityIssuesCount;
   private String finalDecision;
 
@@ -43,12 +43,12 @@ public class QualityParameters {
     this.cyclomaticComplexity = cyclomaticComplexity;
   }
 
-  public boolean isCodeDuplication() {
-    return isCodeDuplication;
+  public int getCodeDuplication() {
+    return codeDuplication;
   }
 
-  public void setCodeDuplication(boolean isCodeDuplication) {
-    this.isCodeDuplication = isCodeDuplication;
+  public void setCodeDuplication(int integer) {
+    this.codeDuplication = integer;
   }
 
   public int getSecurityIssuesCount() {

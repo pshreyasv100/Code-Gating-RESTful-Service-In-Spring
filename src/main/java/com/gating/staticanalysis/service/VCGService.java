@@ -21,7 +21,7 @@ import com.gating.service.ProcessUtility;
 import com.gating.toolconfig.service.ThresholdConfigService;
 import com.gating.toolconfig.service.ToolResponse;
 import com.gating.utility.InvalidInputException;
-import com.gating.utility.ThresholdComparison;
+import com.gating.utility.Utility;
 
 @Service
 public class VCGService {
@@ -103,7 +103,7 @@ public class VCGService {
     processUtility.runProcess(getCommand(srcPath), VCG_BIN_PATH);
     final int securityIssues =  getIssuesCountFromXML(VCG_REPORT_PATH);
     final int threshold = thresholdConfigService.getThresholds().getSecurityIssuesCount();
-    final String finalDecision = ThresholdComparison.isLessThanThreshold(securityIssues, threshold) ? "Go" : "No Go";
+    final String finalDecision = Utility.isLessThan(securityIssues, threshold) ? "Go" : "No Go";
 
     return new ToolResponse<Integer>(securityIssues, threshold, finalDecision);
   }

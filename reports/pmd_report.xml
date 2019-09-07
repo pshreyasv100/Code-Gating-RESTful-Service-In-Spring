@@ -2,7 +2,7 @@
 <pmd xmlns="http://pmd.sourceforge.net/report/2.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 http://pmd.sourceforge.net/report_2_0_0.xsd"
-    version="6.16.0" timestamp="2019-09-05T15:35:22.651">
+    version="6.16.0" timestamp="2019-09-07T11:49:00.369">
 <file name="C:\eclipse-workspace\demoo\src\demoo\demoo.java">
 <violation beginline="3" endline="23" begincolumn="8" endcolumn="1" rule="ClassNamingConventions" ruleset="Code Style" package="demoo" class="demoo" externalInfoUrl="https://pmd.github.io/pmd-6.16.0/pmd_rules_java_codestyle.html#classnamingconventions" priority="1">
 The class name 'demoo' doesn't match '[A-Z][a-zA-Z0-9]*'

@@ -21,7 +21,7 @@ import com.gating.toolconfig.service.PMDConfigService;
 import com.gating.toolconfig.service.ThresholdConfigService;
 import com.gating.toolconfig.service.ToolResponse;
 import com.gating.utility.InvalidInputException;
-import com.gating.utility.ThresholdComparison;
+import com.gating.utility.Utility;
 
 @Service
 public class PMDService {
@@ -92,7 +92,7 @@ public class PMDService {
     final int warnings = getNumberOfViolations(PMDConfig.PMD_REPORT_PATH);
     final int warningsThreshold = thresholdConfService.getThresholds().getNoOfWarnings();
     final String decision =
-        ThresholdComparison.isLessThanThreshold(warnings, warningsThreshold) ? "Go" : "No Go";
+        Utility.isLessThan(warnings, warningsThreshold) ? "Go" : "No Go";
 
     return new ToolResponse<Integer>(warnings, warningsThreshold, decision);
   }

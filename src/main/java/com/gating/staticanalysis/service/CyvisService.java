@@ -1,7 +1,6 @@
 package com.gating.staticanalysis.service;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,7 +16,7 @@ import org.springframework.stereotype.Service;
 import com.gating.service.ProcessUtility;
 import com.gating.toolconfig.service.ThresholdConfigService;
 import com.gating.toolconfig.service.ToolResponse;
-import com.gating.utility.ThresholdComparison;
+import com.gating.utility.Utility;
 
 
 @Service
@@ -77,7 +76,7 @@ public class CyvisService {
 
   }
 
-  public Map<String, Integer> parseCyvisReport(String csvFile) {
+  public Map<String, Integer> parseCyvisReport(String csvFile) throws NumberFormatException, IOException {
 
     BufferedReader reader = null;
     String line = "";
@@ -85,30 +84,20 @@ public class CyvisService {
 
     final Map<String, Integer> methodComplexityMap = new HashMap<String, Integer>();
 
-    try {
-      reader = new BufferedReader(new FileReader(csvFile));
-      while ((line = reader.readLine()) != null) {
-        final String[] complexity = line.split(cvsSplitBy);
-        int column = 3;
-        while (column < complexity.length) {
-          methodComplexityMap.put(complexity[1].concat(".".concat(complexity[column - 1])),
-              new Integer(complexity[column]));
-          column += 4;
-        }
-      }
 
-    } catch (final FileNotFoundException e) {
-      logger.error("FileNotFoundException occurred : report file to be parsed by cyvis could not be found ",e);
-    } catch (final IOException e) {
-      logger.error("IOException occurred",e);
-    } finally {
-      if (reader != null) {
-        try {
-          reader.close();
-        } catch (final IOException e) {
-          logger.error("IOException occurred reader could not be closed",e);
-        }
+    reader = new BufferedReader(new FileReader(csvFile));
+    while ((line = reader.readLine()) != null) {
+      final String[] complexity = line.split(cvsSplitBy);
+      int column = 3;
+      while (column < complexity.length) {
+        methodComplexityMap.put(complexity[1].concat(".".concat(complexity[column - 1])),
+            new Integer(complexity[column]));
+        column += 4;
       }
+    }
+
+    if(reader != null) {
+      reader.close();
     }
 
     return methodComplexityMap;
@@ -121,7 +110,7 @@ public class CyvisService {
     final Map<String, Integer> complexityMap = parseCyvisReport(CYVIS_REPORT_PATH);
     final int maxComplexity =  getMaxComplexity(complexityMap);
     final int threshold = thresholdConfigService.getThresholds().getCyclomaticComplexity();
-    final String finalDecision = ThresholdComparison.isLessThanThreshold(maxComplexity, threshold) ? "Go" : "No Go";
+    final String finalDecision = Utility.isLessThan(maxComplexity, threshold) ? "Go" : "No Go";
 
     return new ToolResponse<Integer>(maxComplexity, threshold, finalDecision);
   }

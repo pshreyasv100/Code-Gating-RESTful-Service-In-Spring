@@ -1,4 +1,3 @@
-com\gating\utility\ThresholdComparison.class
 com\gating\staticanalysis\service\SimianService.class
 com\gating\staticanalysis\service\JacocoService.class
 com\gating\controller\GatingController.class
