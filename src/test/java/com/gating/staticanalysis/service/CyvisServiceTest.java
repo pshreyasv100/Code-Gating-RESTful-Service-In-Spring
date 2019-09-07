@@ -31,11 +31,7 @@ public class CyvisServiceTest {
     final int expected = 2;
     assertEquals(expected, actual);
   }
-
-  @Test
-  public void testParseCyvisReport() {
-    fail("Not yet implemented");
-  }
+  
 
   @Test
   public void testRun() throws IOException, InterruptedException {

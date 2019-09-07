@@ -22,8 +22,6 @@ public class SimianService {
 
   Logger logger = LoggerFactory.getLogger(SimianService.class);
 
-  private static final String SIMIAN_BIN_PATH = "static-code-analyzers/simian/bin;";
-
   @Autowired
   ThresholdConfigService thresholdService;
 
@@ -41,7 +39,8 @@ public class SimianService {
     simianCommand.add("&&");
     simianCommand.add("java");
     simianCommand.add("-jar");
-    simianCommand.add("simian-2.5.10.jar");
+    simianCommand.add(
+        System.getProperty("user.dir") + "\\static-code-analyzers\\simian\\bin\\simian-2.5.10.jar");
     simianCommand.add("-threshold=" + simianParameters.getDuplicateLinesThreshold());
     simianCommand.add("-includes=**/*.java");
     simianCommand.add("-excludes=**/*Test.java");
@@ -65,14 +64,12 @@ public class SimianService {
     String secondPrevLine = null;
     String thirdPrevLine = null;
 
-
     while ((line = reader.readLine()) != null) {
       thirdPrevLine = secondPrevLine;
       secondPrevLine = prevLine;
       prevLine = line;
     }
     reader.close();
-
     return Integer.valueOf(thirdPrevLine.split(" ")[1]);
   }
 
@@ -82,13 +79,14 @@ public class SimianService {
     int duplicateLinesFound = 0;
     final int threshold = thresholdService.getThresholds().getCodeDuplication();
     final SimianConfig simianConfig = simianConfigService.getConfig();
-    final int simianReturnValue = processUtility.runProcess(getCommand(simianConfig, srcPath),
-        new File(SIMIAN_BIN_PATH).getAbsolutePath());
+    final int simianReturnValue =
+        processUtility.runProcess(getCommand(simianConfig, srcPath), null);
 
-    if (simianReturnValue  == 0) {
+    if (simianReturnValue == 0) {
       return new ToolResponse<Integer>(0, threshold, "Go");
     }
-    duplicateLinesFound = parseSimianReport(System.getProperty("user.dir") + "\\reports\\simian_report.txt");
+    duplicateLinesFound =
+        parseSimianReport(System.getProperty("user.dir") + "\\reports\\simian_report.txt");
     return new ToolResponse<Integer>(duplicateLinesFound, threshold, "No Go");
 
   }

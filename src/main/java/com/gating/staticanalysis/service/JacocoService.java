@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.gating.service.ProcessUtility;
 import com.gating.toolconfig.service.ThresholdConfigService;
-import com.gating.utility.DirectorySearch;
 import com.gating.utility.Utility;
 
 @Service
@@ -32,7 +31,7 @@ public class JacocoService {
 
   private List<String> getAllTestCasesPath(File projectTestsCasesPath) {
     final List<String> resultFiles = new ArrayList<String>();
-    DirectorySearch.searchFilesInDirectory(".*\\.class", projectTestsCasesPath, resultFiles);
+    Utility.searchFilesInDirectory(".*\\.class", projectTestsCasesPath, resultFiles);
     return resultFiles;
   }
 

@@ -1,9 +1,9 @@
 -------------------------------------------------------------------------------
 Test set: com.gating.staticanalysis.service.SimianServiceTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.319 sec <<< FAILURE!
-testRun(com.gating.staticanalysis.service.SimianServiceTest)  Time elapsed: 0.317 sec  <<< FAILURE!
-java.lang.AssertionError: expected:<1> but was:<28>
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.101 sec <<< FAILURE!
+testRun(com.gating.staticanalysis.service.SimianServiceTest)  Time elapsed: 0.097 sec  <<< FAILURE!
+java.lang.AssertionError: expected:<1> but was:<0>
 	at org.junit.Assert.fail(Assert.java:88)
 	at org.junit.Assert.failNotEquals(Assert.java:834)
 	at org.junit.Assert.assertEquals(Assert.java:118)

@@ -1,13 +1,14 @@
 com\gating\staticanalysis\service\SimianService.class
+com\gating\utility\Utility.class
 com\gating\staticanalysis\service\JacocoService.class
 com\gating\controller\GatingController.class
 com\gating\toolconfig\service\ThresholdConfigService.class
+com\gating\staticanalysis\service\JacocoResponse.class
 com\gating\toolconfig\service\SimianConfig.class
 com\gating\controller\GatingToolErrorAdvice.class
 com\gating\toolconfig\service\ToolResponse.class
 com\gating\service\QualityParameters.class
 com\gating\toolconfig\service\SimianConfigService.class
-com\gating\utility\DirectorySearch.class
 com\gating\Application.class
 com\gating\toolconfig\service\ThresholdConfig.class
 com\gating\staticanalysis\service\VCGService.class

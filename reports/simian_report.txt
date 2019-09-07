@@ -10,4 +10,4 @@ Found 8 duplicate lines with fingerprint 9bad060210bd322fa39634ff337f6cbe in the
  Between lines 5 and 15 in C:\bootcamp\java\code\stack\src\com\philps\training\generics\FixedArrayStack.java
 Found 28 duplicate lines in 4 blocks in 4 files
 Processed a total of 91 significant (205 raw) lines in 12 files
-Processing time: 0.118sec
+Processing time: 0.220sec
