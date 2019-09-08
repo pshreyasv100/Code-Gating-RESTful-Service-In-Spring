@@ -30,6 +30,9 @@ Thresholds can be configured or the results of previous run also can be used as 
 * ProcessUtility: All Services using a tool invoke this service to create a Process for running the tool as command line command.
 * ThresholdConfigService: It lets the user to configure the threshold for GatingService as per the requirement.
 
+**Detailed Description of Services** can be found [here](./DesignDetails.md)
+
+
 ## Project STRUCTURE
 
 * **staticanalysis/service:** Contains all the service classes to generate result value for all quality parameters.
