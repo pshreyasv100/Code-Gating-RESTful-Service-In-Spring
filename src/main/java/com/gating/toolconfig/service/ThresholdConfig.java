@@ -4,7 +4,7 @@ public class ThresholdConfig {
 
   private int cyclomaticComplexity;
   private float codeCoverage;
-  private int timeToRunTests;
+  private Float timeToRunTests;
   private int noOfWarnings;
   private int securityIssuesCount;
   private int codeDuplication;
@@ -37,12 +37,12 @@ public class ThresholdConfig {
     this.codeCoverage = codeCoverage;
   }
 
-  public int getTimeToRunTests() {
+  public float getTimeToRunTests() {
     return timeToRunTests;
   }
 
-  public void setTimeToRunTests(int timeToRunTests) {
-    this.timeToRunTests = timeToRunTests;
+  public void setTimeToRunTests(Float time) {
+    this.timeToRunTests = time;
   }
 
   public int getNoOfWarnings() {

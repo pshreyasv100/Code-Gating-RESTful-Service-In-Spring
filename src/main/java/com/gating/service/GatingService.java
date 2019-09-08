@@ -136,7 +136,7 @@ public class GatingService {
 
     if (lastRow != null) {
       final String[] lastRowArray = lastRow.split(",");
-      lastResult.setTimeToRunTests(Integer.valueOf(lastRowArray[0]));
+      lastResult.setTimeToRunTests(Float.valueOf(lastRowArray[0]));
       lastResult.setNoOfWarnings(Integer.valueOf(lastRowArray[1]));
       lastResult.setCodeCoverage(Float.valueOf(lastRowArray[2]));
       lastResult.setCyclomaticComplexity(Integer.valueOf(lastRowArray[3]));
