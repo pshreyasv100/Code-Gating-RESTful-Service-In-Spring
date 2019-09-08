@@ -63,7 +63,7 @@ public class PMDService {
     return command;
   }
 
-  public int getNumberOfViolations(String pmdreportpath) throws SAXException, IOException, ParserConfigurationException {
+  public int parsePMDXMLReport(String pmdreportpath) throws SAXException, IOException, ParserConfigurationException {
 
     final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
     DocumentBuilder builder = null;
@@ -89,7 +89,7 @@ public class PMDService {
     command = getCommand(srcPath, params, PMDConfig.OUTPUT_FORMAT, PMDConfig.PMD_REPORT_PATH);
     processUtility.runProcess(command, PMDConfig.PMD_BIN_PATH);
 
-    final int warnings = getNumberOfViolations(PMDConfig.PMD_REPORT_PATH);
+    final int warnings = parsePMDXMLReport(PMDConfig.PMD_REPORT_PATH);
     final int warningsThreshold = thresholdConfService.getThresholds().getNoOfWarnings();
     final String decision =
         Utility.isLessThan(warnings, warningsThreshold) ? "Go" : "No Go";

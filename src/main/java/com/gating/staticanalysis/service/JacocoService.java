@@ -77,7 +77,6 @@ public class JacocoService {
     return pathvar;
   }
 
-
   private List<String> createReportCommand(String srcPath) {
 
     final StringBuilder jacococliJarLocation = new StringBuilder();
@@ -117,7 +116,6 @@ public class JacocoService {
     return Float.valueOf(divTag.text().replaceAll("%", ""));
   }
 
-
   public List<String> getBuildCommand(String operation, String srcPath) {
 
     final StringJoiner buildCommand = new StringJoiner("");
@@ -131,15 +129,12 @@ public class JacocoService {
     return command;
   }
 
-
   public void buildProject(String srcPath) throws IOException, InterruptedException {
     processUtility.runProcess(getBuildCommand("clean", srcPath), null);
     processUtility.runProcess(getBuildCommand("compile", srcPath), null);
     processUtility.runProcess(getBuildCommand("test-compile", srcPath), null);
     processUtility.runProcess(getBuildCommand("install", srcPath), null);
   }
-
-
 
   public JacocoResponse run(String srcPath) throws IOException, InterruptedException {
 

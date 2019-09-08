@@ -1031,3 +1031,20 @@ Verify the connector's configuration, identify and stop any process that's liste
 2019-09-07 19:31:03.217  INFO 18592 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
 2019-09-07 19:31:03.223  INFO 18592 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
 2019-09-07 19:31:03.233  INFO 18592 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 10 ms
+2019-09-07 19:48:54.689  INFO 25464 --- [main] com.gating.Application                   : Starting Application on YY165907 with PID 25464 (C:\eclipse-workspace\staticanalysis.service\target\classes started by 320052310 in C:\eclipse-workspace\staticanalysis.service)
+2019-09-07 19:48:54.693  INFO 25464 --- [main] com.gating.Application                   : No active profile set, falling back to default profiles: default
+2019-09-07 19:48:56.719  INFO 25464 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2019-09-07 19:48:56.750  INFO 25464 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-09-07 19:48:56.752  INFO 25464 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.21]
+2019-09-07 19:48:56.898  INFO 25464 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-09-07 19:48:56.898  INFO 25464 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2135 ms
+2019-09-07 19:48:57.360  INFO 25464 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
+2019-09-07 19:48:57.561  INFO 25464 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-09-07 19:48:57.734  INFO 25464 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2019-09-07 19:48:57.776  INFO 25464 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2019-09-07 19:48:57.816  INFO 25464 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2019-09-07 19:48:58.089  INFO 25464 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-09-07 19:48:58.093  INFO 25464 --- [main] com.gating.Application                   : Started Application in 3.831 seconds (JVM running for 4.269)
+2019-09-07 19:49:03.799  INFO 25464 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-09-07 19:49:03.800  INFO 25464 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-09-07 19:49:03.810  INFO 25464 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 10 ms

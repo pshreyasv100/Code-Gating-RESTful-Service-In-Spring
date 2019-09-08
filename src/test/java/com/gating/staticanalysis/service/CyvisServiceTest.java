@@ -1,7 +1,6 @@
 package com.gating.staticanalysis.service;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -31,7 +30,7 @@ public class CyvisServiceTest {
     final int expected = 2;
     assertEquals(expected, actual);
   }
-  
+
 
   @Test
   public void testRun() throws IOException, InterruptedException {

@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Utility {
 
+  private Utility() {}
 
   public static boolean isLessThan(float value, float threshold) {
     return value <= threshold;

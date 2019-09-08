@@ -31,6 +31,12 @@ public class SimianService {
   @Autowired
   ProcessUtility processUtility;
 
+
+  private static final String SIMIAN_JAR_PATH =
+      System.getProperty("user.dir") + "\\static-code-analyzers\\simian\\bin\\simian-2.5.10.jar";
+  private static final String SIMIAN_REPORT_PATH =
+      System.getProperty("user.dir") + "\\reports\\simian_report.txt";
+
   public List<String> getCommand(SimianConfig simianParameters, String srcPath) {
 
     final StringJoiner simianCommand = new StringJoiner(" ");
@@ -39,14 +45,13 @@ public class SimianService {
     simianCommand.add("&&");
     simianCommand.add("java");
     simianCommand.add("-jar");
-    simianCommand.add(
-        System.getProperty("user.dir") + "\\static-code-analyzers\\simian\\bin\\simian-2.5.10.jar");
+    simianCommand.add(SIMIAN_JAR_PATH);
     simianCommand.add("-threshold=" + simianParameters.getDuplicateLinesThreshold());
     simianCommand.add("-includes=**/*.java");
     simianCommand.add("-excludes=**/*Test.java");
     simianCommand.add("-formatter=plain");
     simianCommand.add(">");
-    simianCommand.add(System.getProperty("user.dir") + "\\reports\\simian_report.txt");
+    simianCommand.add(SIMIAN_REPORT_PATH);
 
     final List<String> command = new ArrayList<String>();
     command.add("cmd");
@@ -55,10 +60,9 @@ public class SimianService {
     return command;
   }
 
-  public int parseSimianReport(String reportPath) throws IOException {
+  public int parseSimianTextReport(String reportPath) throws IOException {
 
     final BufferedReader reader = new BufferedReader(new FileReader(new File(reportPath)));
-
     String line;
     String prevLine = null;
     String secondPrevLine = null;
@@ -85,8 +89,7 @@ public class SimianService {
     if (simianReturnValue == 0) {
       return new ToolResponse<Integer>(0, threshold, "Go");
     }
-    duplicateLinesFound =
-        parseSimianReport(System.getProperty("user.dir") + "\\reports\\simian_report.txt");
+    duplicateLinesFound = parseSimianTextReport(SIMIAN_REPORT_PATH);
     return new ToolResponse<Integer>(duplicateLinesFound, threshold, "No Go");
 
   }
