@@ -5,11 +5,11 @@ The project is aimed at building a Gating web service to help Developers write c
 
 ## Getting started
 
- Please follow the steps in [setup](setup.md) before using the service
- Start the service in eclipse 
- Rest endpoints can be tested using swagger on browser on endpoint(localhost:8080/swagger-ui.html)
- The Tools & Services Section describes about the different tools used by the service
- The Project structure section will help you understand the overall project structure
+ - Please follow the steps in [setup](./setup.md) before using the service
+ - Start the service in eclipse 
+ - Rest endpoints can be tested using swagger on browser on endpoint(localhost:8080/swagger-ui.html)
+ - The Tools & Services Section describes about the different tools used by the service
+ - The Project structure section will help you understand the overall project structure
 
 
 
