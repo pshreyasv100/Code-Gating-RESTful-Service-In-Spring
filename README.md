@@ -5,7 +5,7 @@ The project is aimed at building a Gating web service to help Developers write c
 
 ## Getting started
 
- - Please follow the steps in [setup](./Setup.md) before using the service
+ - Please follow the steps in [setup](./documentation/Setup.md) before using the service
  - Start the service in eclipse 
  - Rest endpoints can be tested using swagger on browser on endpoint(localhost:8080/swagger-ui.html)
  - The Tools & Services Section describes about the different tools used by the service
@@ -30,7 +30,7 @@ Thresholds can be configured or the results of previous run also can be used as 
 * ProcessUtility: All Services using a tool invoke this service to run the command inside a process.
 * ThresholdConfigService: It lets the user to configure the threshold for GatingService as per the requirement.
 
-**Detailed Description of Services** can be found [here](./DesignDetails.md)
+**Detailed Description of Services** can be found [here](./documentation/DesignDetails.md)
 
 
 ## Project STRUCTURE
