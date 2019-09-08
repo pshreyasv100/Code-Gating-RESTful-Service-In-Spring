@@ -4,11 +4,12 @@
 The project is aimed at building a Gating web service to help Developers write clean code. Given a source code repository, the web service calculates Cyclomatic complexities, Code Coverage, Duplication, Number of warnings and Security Flaws using respective tools. The Service generates a detailed report of the checks performed against the source code, compares with thresholds for above quality parameters and gives a final "Go" or "No go" decision. Each tool can be run individually as a service or all at once. The results of each run are saved in csv file.
 
 ## Getting started
-* Start the service in eclipse 
-* Rest endpoints can be tested using swagger on browser on endpoint(localhost:8080/swagger-ui.html)
 
-* The Tools & Services Section describes about the different tools used by the service
-* The Project structure section will help you understand the overall project structure
+ Please follow the steps in [setup](setup.md) before using the service
+ Start the service in eclipse 
+ Rest endpoints can be tested using swagger on browser on endpoint(localhost:8080/swagger-ui.html)
+ The Tools & Services Section describes about the different tools used by the service
+ The Project structure section will help you understand the overall project structure
 
 
 
