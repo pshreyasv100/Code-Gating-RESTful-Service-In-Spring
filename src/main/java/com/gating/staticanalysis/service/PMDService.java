@@ -37,7 +37,6 @@ public class PMDService {
   @Autowired
   PMDConfigService pmdConfigService;
 
-
   public List<String> getCommand(String srcPath, PMDConfig params, String outputFormat,
       String pmdReportPath) throws InvalidInputException {
 

@@ -21,7 +21,7 @@ public class ThresholdConfigService {
     thresholdConfig
     .setCyclomaticComplexity(Integer.valueOf(prop.getProperty("cyclomaticComplexity")));
     thresholdConfig.setCodeCoverage(Float.valueOf(prop.getProperty("codeCoverage")));
-    thresholdConfig.setTimeToRunTests(Integer.valueOf(prop.getProperty("timeToRunTests")));
+    thresholdConfig.setTimeToRunTests(Float.valueOf(prop.getProperty("timeToRunTests")));
     thresholdConfig.setNoOfWarnings(Integer.valueOf(prop.getProperty("noOfWarnings")));
     thresholdConfig
     .setSecurityIssuesCount(Integer.valueOf(prop.getProperty("securityIssuesCount")));

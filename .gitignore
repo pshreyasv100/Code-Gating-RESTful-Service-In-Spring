@@ -2,3 +2,7 @@
 .settings 
 .classpath 
 .project
+*.log
+reports/
+static-code-analyzers/cyvis-0.9
+static-code-analzyers/pmd

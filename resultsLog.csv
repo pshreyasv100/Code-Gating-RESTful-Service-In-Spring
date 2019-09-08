@@ -1,18 +1,1 @@
 TimeToRunTests,NoOfWarnings,CodeCoverage,CyclomaticComplexity,SecurityIssuesCount,isCodeDuplication,getFinalDecision
-
-0.0,13,71.0,1,27,false,No Go
-0.0,13,71.0,1,27,true,Go
-1.0,13,71.0,1,27,true,Go
-0.0,13,71.0,1,27,true,No Go
-0.0,13,71.0,1,27,true,No Go
-0.972,13,71.0,1,27,true,No Go
-0.826,13,71.0,1,27,true,No Go
-0.99,13,71.0,1,23,false,No Go
-1.868,13,71.0,1,27,false,No Go
-0.963,13,71.0,1,27,true,No Go
-1.014,13,71.0,1,27,true,No Go
-1.176,13,71.0,1,23,0,No Go
-1.223,13,71.0,1,23,0,No Go
-1.133,13,71.0,1,23,0,No Go
-1.12,13,71.0,1,23,0,No Go
-1.024,13,71.0,1,23,0,No Go
