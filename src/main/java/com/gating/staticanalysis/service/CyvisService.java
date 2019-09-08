@@ -31,7 +31,7 @@ public class CyvisService {
   ThresholdConfigService thresholdConfigService;
 
   private static final String CYVIS_BIN_PATH = System.getProperty("user.dir")+"\\static-code-analyzers\\cyvis-0.9";
-  private static final String PROJECT_JAR_PATH = "code.jar";
+  private static final String PROJECT_JAR_PATH = System.getProperty("user.dir") + "\\reports\\code.jar";
   private static final String CYVIS_REPORT_PATH = System.getProperty("user.dir")+ "\\reports\\cyvis_report.txt";
 
   public List<String> getCommand(String srcPath){
@@ -53,7 +53,7 @@ public class CyvisService {
     cyvisCommand.add("-t");
     cyvisCommand.add(CYVIS_REPORT_PATH);
 
-    final List<String> command = new ArrayList<String>();
+    final List<String> command = new ArrayList<>();
     command.add("cmd");
     command.add("/c");
     command.add(cyvisCommand.toString());
@@ -81,9 +81,7 @@ public class CyvisService {
     BufferedReader reader = null;
     String line = "";
     final String cvsSplitBy = ",";
-
-    final Map<String, Integer> methodComplexityMap = new HashMap<String, Integer>();
-
+    final Map<String, Integer> methodComplexityMap = new HashMap<>();
 
     reader = new BufferedReader(new FileReader(csvFile));
     while ((line = reader.readLine()) != null) {
@@ -95,7 +93,6 @@ public class CyvisService {
         column += 4;
       }
     }
-
     if(reader != null) {
       reader.close();
     }
@@ -106,13 +103,12 @@ public class CyvisService {
   public ToolResponse<Integer> run(String srcPath) throws IOException, InterruptedException{
 
     processUtility.runProcess(getCommand(srcPath), null);
-
     final Map<String, Integer> complexityMap = parseCyvisReport(CYVIS_REPORT_PATH);
     final int maxComplexity =  getMaxComplexity(complexityMap);
     final int threshold = thresholdConfigService.getThresholds().getCyclomaticComplexity();
     final String finalDecision = Utility.isLessThan(maxComplexity, threshold) ? "Go" : "No Go";
 
-    return new ToolResponse<Integer>(maxComplexity, threshold, finalDecision);
+    return new ToolResponse<>(maxComplexity, threshold, finalDecision);
   }
 
 

@@ -14,6 +14,62 @@
 	</properties>
 
 
+	<build>
+		<plugins>
+			<!-- Treat compiler warnings as errors and fail the build on compiler 
+				warnings -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version>
+				<configuration>
+					<encoding>UTF-8</encoding>
+					<source>1.8</source>
+					<target>1.8</target>
+					<fork>true</fork>
+					<executable>C:\Program Files\Java\jdk1.8.0_181\bin\javac</executable>
+					<compilerArgs>
+						<arg>-Xlint:all</arg>
+						<arg>-Werror</arg>
+					</compilerArgs>
+					<showWarnings>true</showWarnings>
+					<showDeprecation>true</showDeprecation>
+				</configuration>
+				<executions>
+					<execution>
+						<id>compile</id>
+						<phase>process-sources</phase>
+						<goals>
+							<goal>compile</goal>
+						</goals>
+						<configuration>
+							<compilerArgument>-Xlint:-processing</compilerArgument>
+							<failOnWarning>true</failOnWarning>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- Fail the build if any dependency analysis warnings are encountered -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>3.1.1</version>
+				<executions>
+					<execution>
+						<id>analyze</id>
+						<goals>
+							<goal>analyze-only</goal>
+						</goals>
+						<configuration>
+							<failOnWarning>true</failOnWarning>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
 
 	<dependencies>
 
@@ -80,10 +136,6 @@
 			<artifactId>json</artifactId>
 			<version>20180130</version>
 		</dependency>
-
-
-
-
 	</dependencies>
 
 

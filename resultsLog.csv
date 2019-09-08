@@ -1,1 +1,5 @@
 TimeToRunTests,NoOfWarnings,CodeCoverage,CyclomaticComplexity,SecurityIssuesCount,isCodeDuplication,getFinalDecision
+
+1.039,13,71.0,1,0,0,No Go
+1.98,13,71.0,1,27,0,No Go
+1.011,13,71.0,1,27,0,No Go
