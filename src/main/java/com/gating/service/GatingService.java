@@ -62,13 +62,16 @@ public class GatingService {
 
     allResults.add(Utility.isLessThan(response.getNoOfWarnings(), thresholds.getNoOfWarnings()));
     allResults.add(response.getCodeDuplication() == 0);
-    allResults.add(Utility.isLessThan(response.getSecurityIssuesCount(), thresholds.getSecurityIssuesCount()));
-    allResults.add(Utility.isLessThan(response.getCyclomaticComplexity(), thresholds.getCyclomaticComplexity()));
+    allResults.add(
+        Utility.isLessThan(response.getSecurityIssuesCount(), thresholds.getSecurityIssuesCount()));
+    allResults.add(Utility.isLessThan(response.getCyclomaticComplexity(),
+        thresholds.getCyclomaticComplexity()));
     allResults.add(Utility.isGreaterThan(response.getCodeCoverage(), thresholds.getCodeCoverage()));
-    allResults.add(Utility.isLessThan(response.getTimeToRunTests(), thresholds.getTimeToRunTests()));
+    allResults
+    .add(Utility.isLessThan(response.getTimeToRunTests(), thresholds.getTimeToRunTests()));
 
-    for(final Boolean result: allResults) {
-      if(!result) {
+    for (final Boolean result : allResults) {
+      if (!result) {
         response.setFinalDecision("No Go");
         return;
       }
@@ -81,9 +84,10 @@ public class GatingService {
   private void saveResults(QualityParameters response, String resultsLogPath) throws IOException {
 
     BufferedWriter csvWriter = null;
-    try {
-      csvWriter =
-          new BufferedWriter(new OutputStreamWriter(new FileOutputStream(resultsLogPath, true)));
+    try{
+
+      csvWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(resultsLogPath, true)));
+
 
       final String CSV_SEPARATOR = ",";
       final StringBuilder responseLine = new StringBuilder();
@@ -121,9 +125,10 @@ public class GatingService {
     final ThresholdConfig lastResult = new ThresholdConfig();
     final BufferedReader reader =
         new BufferedReader(new FileReader(System.getProperty("user.dir") + "\\resultsLog.csv"));
+
     currentRow = reader.readLine();
 
-    if ((currentRow =reader.readLine()) != null) {
+    if ((currentRow =reader.readLine()) == null) {
       reader.close();
       throw new InvalidInputException("No previous results found", null);
     }

@@ -20,6 +20,7 @@ import org.xml.sax.SAXException;
 import com.gating.service.ProcessUtility;
 import com.gating.toolconfig.service.ThresholdConfigService;
 import com.gating.toolconfig.service.ToolResponse;
+import com.gating.toolconfig.service.VCGConfig;
 import com.gating.utility.InvalidInputException;
 import com.gating.utility.Utility;
 
@@ -29,7 +30,6 @@ public class VCGService {
   Logger logger = LoggerFactory.getLogger(VCGService.class);
 
 
-  public static final String VCG_BIN_PATH =  "C:\\Program Files (x86)\\VisualCodeGrepper;";
   public static final String VCG_REPORT_PATH = System.getProperty("user.dir") + "//reports//vcg_report.xml";
 
   @Autowired
@@ -101,7 +101,7 @@ public class VCGService {
 
   public ToolResponse<Integer> run(String srcPath) throws InvalidInputException, IOException, InterruptedException {
 
-    processUtility.runProcess(getCommand(srcPath), VCG_BIN_PATH);
+    processUtility.runProcess(getCommand(srcPath), VCGConfig.VCG_BIN_PATH);
     final int securityIssues =  getIssuesCountFromXML(VCG_REPORT_PATH);
     final int threshold = thresholdConfigService.getThresholds().getSecurityIssuesCount();
     final String finalDecision = Utility.isLessThan(securityIssues, threshold) ? "Go" : "No Go";

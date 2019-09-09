@@ -32,12 +32,11 @@ public class CyvisService {
   @Autowired
   ThresholdConfigService thresholdConfigService;
 
-  private static final String CYVIS_BIN_PATH =
-      System.getProperty("user.dir") + "\\static-code-analyzers\\cyvis-0.9";
-  private static final String PROJECT_JAR_PATH =
-      System.getProperty("user.dir") + "\\reports\\code.jar";
-  private static final String CYVIS_REPORT_PATH =
-      System.getProperty("user.dir") + "\\reports\\cyvis_report.txt";
+  private static final String USER_DIR = "user.dir";
+
+  private static final String CYVIS_BIN_PATH = System.getProperty(USER_DIR) + "\\static-code-analyzers\\cyvis-0.9";
+  private static final String PROJECT_JAR_PATH = System.getProperty(USER_DIR) + "\\reports\\code.jar";
+  private static final String CYVIS_REPORT_PATH = System.getProperty(USER_DIR) + "\\reports\\cyvis_report.txt";
 
   private List<String> generateJarFromProjectCommand(String srcPath) {
 
@@ -108,6 +107,7 @@ public class CyvisService {
     final String cvsSplitBy = ",";
     final Map<String, Integer> methodComplexityMap = new HashMap<>();
     reader = new BufferedReader(new FileReader(csvFile));
+
     while ((line = reader.readLine()) != null) {
       final String[] complexity = line.split(cvsSplitBy);
       int column = 3;
