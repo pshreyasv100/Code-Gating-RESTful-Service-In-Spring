@@ -31,7 +31,7 @@ public class JacocoService {
   ThresholdConfigService thresholdConfigService;
 
   private List<String> getAllTestCasesPath(File projectTestsCasesPath) {
-    final List<String> resultFiles = new ArrayList<>();
+    final List<String> resultFiles = new ArrayList<String>();
     Utility.searchFilesInDirectory(".*\\.class", projectTestsCasesPath, resultFiles);
     return resultFiles;
   }
@@ -52,7 +52,7 @@ public class JacocoService {
     jacocoCommand.append(" org.junit.runner.JUnitCore ");
     jacocoCommand.append(classFullyQualifiedName);
 
-    final List<String> command = new ArrayList<>();
+    final List<String> command = new ArrayList<String>();
     command.add("cmd");
     command.add("/c");
     command.add(jacocoCommand.toString());
@@ -102,7 +102,7 @@ public class JacocoService {
     jacocoReportGenerationCommand.append(" --html ");
     jacocoReportGenerationCommand.append(finalCsvFileLocation);
 
-    final List<String> reportCommand = new ArrayList<>();
+    final List<String> reportCommand = new ArrayList<String>();
     reportCommand.add("cmd");
     reportCommand.add("/c");
     reportCommand.add(jacocoReportGenerationCommand.toString());
@@ -125,7 +125,7 @@ public class JacocoService {
     buildCommand.add(operation);
     buildCommand.add(srcPath);
 
-    final List<String> command = new ArrayList<>();
+    final List<String> command = new ArrayList<String>();
     command.add("cmd");
     command.add("/c");
     return command;

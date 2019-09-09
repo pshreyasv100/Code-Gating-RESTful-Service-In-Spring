@@ -49,7 +49,7 @@ public class CyvisService {
     cyvisCommand.add(PROJECT_JAR_PATH);
     cyvisCommand.add(srcPath);
 
-    final List<String> command = new ArrayList<>();
+    final List<String> command = new ArrayList<String>();
     command.add("cmd");
     command.add("/c");
     command.add(cyvisCommand.toString());
@@ -71,7 +71,7 @@ public class CyvisService {
     cyvisCommand.add("-t");
     cyvisCommand.add(CYVIS_REPORT_PATH);
 
-    final List<String> command = new ArrayList<>();
+    final List<String> command = new ArrayList<String>();
     command.add("cmd");
     command.add("/c");
     command.add(cyvisCommand.toString());
@@ -105,7 +105,7 @@ public class CyvisService {
     BufferedReader reader = null;
     String line = "";
     final String cvsSplitBy = ",";
-    final Map<String, Integer> methodComplexityMap = new HashMap<>();
+    final Map<String, Integer> methodComplexityMap = new HashMap<String, Integer>();
     reader = new BufferedReader(new FileReader(csvFile));
 
     while ((line = reader.readLine()) != null) {
@@ -134,7 +134,7 @@ public class CyvisService {
     final int threshold = thresholdConfigService.getThresholds().getCyclomaticComplexity();
     final String finalDecision = Utility.isLessThan(maxComplexity, threshold) ? "Go" : "No Go";
 
-    return new ToolResponse<>(srcPath, maxComplexity, threshold, finalDecision);
+    return new ToolResponse<Integer>(srcPath, maxComplexity, threshold, finalDecision);
   }
 
 

@@ -49,7 +49,7 @@ public class VCGService {
     vcgCommand.add("-x");
     vcgCommand.add(VCG_REPORT_PATH);
 
-    final List<String> command = new ArrayList<>();
+    final List<String> command = new ArrayList<String>();
     command.add("cmd");
     command.add("/c");
     command.add(vcgCommand.toString());
@@ -106,7 +106,7 @@ public class VCGService {
     final int threshold = thresholdConfigService.getThresholds().getSecurityIssuesCount();
     final String finalDecision = Utility.isLessThan(securityIssues, threshold) ? "Go" : "No Go";
 
-    return new ToolResponse<>(srcPath,securityIssues, threshold, finalDecision);
+    return new ToolResponse<Integer>(srcPath,securityIssues, threshold, finalDecision);
   }
 
 

@@ -128,7 +128,7 @@ public class GatingController {
     final float timeThreshold = thresholdConfigService.getThresholds().getTimeToRunTests();
     final JacocoResponse thresholds = new JacocoResponse(timeThreshold, coverageThreshold, null);
 
-    return new ToolResponse<>(sourceCodePath, response, thresholds, response.getFinalResult());
+    return new ToolResponse<JacocoResponse>(sourceCodePath, response, thresholds, response.getFinalResult());
 
   }
 

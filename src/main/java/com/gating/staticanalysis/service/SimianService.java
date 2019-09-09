@@ -55,7 +55,7 @@ public class SimianService {
     simianCommand.add(">");
     simianCommand.add(SIMIAN_REPORT_PATH);
 
-    final List<String> command = new ArrayList<>();
+    final List<String> command = new ArrayList<String>();
     command.add("cmd");
     command.add("/c");
     command.add(simianCommand.toString());
@@ -106,10 +106,10 @@ public class SimianService {
         processUtility.runProcess(getCommand(simianConfig, srcPath), null);
 
     if (simianReturnValue == 0) {
-      return new ToolResponse<>(srcPath, 0, threshold, "Go");
+      return new ToolResponse<Integer>(srcPath, 0, threshold, "Go");
     }
     duplicateLinesFound = parseSimianTextReport(SIMIAN_REPORT_PATH);
-    return new ToolResponse<>(srcPath, duplicateLinesFound, threshold, "No Go");
+    return new ToolResponse<Integer>(srcPath, duplicateLinesFound, threshold, "No Go");
 
   }
 }

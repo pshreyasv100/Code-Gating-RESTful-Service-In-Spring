@@ -55,7 +55,7 @@ public class PMDService {
     pmdCommand.add(">");
     pmdCommand.add(pmdReportPath);
 
-    final List<String> command = new ArrayList<>();
+    final List<String> command = new ArrayList<String>();
     command.add("cmd");
     command.add("/c");
     command.add(pmdCommand.toString());
@@ -93,7 +93,7 @@ public class PMDService {
     final String decision =
         Utility.isLessThan(warnings, warningsThreshold) ? "Go" : "No Go";
 
-    return new ToolResponse<>(srcPath, warnings, warningsThreshold, decision);
+    return new ToolResponse<Integer>(srcPath, warnings, warningsThreshold, decision);
   }
 
 }
