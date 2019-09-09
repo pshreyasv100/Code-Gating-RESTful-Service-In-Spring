@@ -6,14 +6,22 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 import org.springframework.stereotype.Service;
+import com.gating.utility.InvalidInputException;
 
 @Service
 public class PMDConfigService {
 
-  public PMDConfig getConfig() throws IOException {
+  public PMDConfig getConfig() throws IOException, InvalidInputException {
 
     FileInputStream fileInput = null;
-    fileInput = new FileInputStream(new File("src/main/resources/pmd.config.properties"));
+    final File propFile = new File("src/main/resources/pmd.config.properties");
+
+    if(propFile.exists()) {
+      fileInput = new FileInputStream(propFile);
+    }
+    else {
+      throw new InvalidInputException("Server Error : pmd config properties file not found", null);
+    }
     final Properties prop = new Properties();
     prop.load(fileInput);
     final PMDConfig pmdConfig = new PMDConfig();

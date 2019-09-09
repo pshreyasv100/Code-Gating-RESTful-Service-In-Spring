@@ -2,6 +2,7 @@ package com.gating.staticanalysis.service;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import com.gating.toolconfig.service.SimianConfig;
 import com.gating.toolconfig.service.SimianConfigService;
 import com.gating.toolconfig.service.ThresholdConfigService;
 import com.gating.toolconfig.service.ToolResponse;
+import com.gating.utility.InvalidInputException;
 
 @Service
 public class SimianService {
@@ -53,32 +55,43 @@ public class SimianService {
     simianCommand.add(">");
     simianCommand.add(SIMIAN_REPORT_PATH);
 
-    final List<String> command = new ArrayList<String>();
+    final List<String> command = new ArrayList<>();
     command.add("cmd");
     command.add("/c");
     command.add(simianCommand.toString());
     return command;
   }
 
-  public int parseSimianTextReport(String reportPath) throws IOException {
+  public int parseSimianTextReport(String reportPath) throws InvalidInputException, IOException{
 
-    final BufferedReader reader = new BufferedReader(new FileReader(new File(reportPath)));
-    String line;
-    String prevLine = null;
-    String secondPrevLine = null;
-    String thirdPrevLine = null;
+    BufferedReader reader = null;
+    try{
+      reader = new BufferedReader(new FileReader(new File(reportPath)));
+      String line;
+      String prevLine = null;
+      String secondPrevLine = null;
+      String thirdPrevLine = null;
 
-    while ((line = reader.readLine()) != null) {
-      thirdPrevLine = secondPrevLine;
-      secondPrevLine = prevLine;
-      prevLine = line;
+      while ((line = reader.readLine()) != null) {
+        thirdPrevLine = secondPrevLine;
+        secondPrevLine = prevLine;
+        prevLine = line;
+      }
+      return Integer.valueOf(thirdPrevLine.split(" ")[1]);
+    } catch (final FileNotFoundException e) {
+      throw new InvalidInputException("Simian report not found", reportPath);
     }
-    reader.close();
-    return Integer.valueOf(thirdPrevLine.split(" ")[1]);
+
+    finally {
+      if (reader != null) {
+        reader.close();
+      }
+    }
   }
 
 
-  public ToolResponse<Integer> run(String srcPath) throws IOException, InterruptedException {
+  public ToolResponse<Integer> run(String srcPath)
+      throws IOException, InterruptedException, InvalidInputException {
 
     int duplicateLinesFound = 0;
     final int threshold = thresholdService.getThresholds().getCodeDuplication();
@@ -87,10 +100,10 @@ public class SimianService {
         processUtility.runProcess(getCommand(simianConfig, srcPath), null);
 
     if (simianReturnValue == 0) {
-      return new ToolResponse<Integer>(0, threshold, "Go");
+      return new ToolResponse<>(srcPath, 0, threshold, "Go");
     }
     duplicateLinesFound = parseSimianTextReport(SIMIAN_REPORT_PATH);
-    return new ToolResponse<Integer>(duplicateLinesFound, threshold, "No Go");
+    return new ToolResponse<>(srcPath, duplicateLinesFound, threshold, "No Go");
 
   }
 }

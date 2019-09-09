@@ -6,15 +6,23 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 import org.springframework.stereotype.Service;
+import com.gating.utility.InvalidInputException;
 
 @Service
 public class SimianConfigService {
 
-  public SimianConfig getConfig() throws IOException {
+  public SimianConfig getConfig() throws IOException, InvalidInputException {
 
     FileInputStream fileInput = null;
+    final File propFile = new File("src/main/resources/simian.config.properties");
 
-    fileInput = new FileInputStream(new File("src/main/resources/simian.config.properties"));
+    if(propFile.exists()) {
+      fileInput = new FileInputStream(propFile);
+    }
+    else {
+      throw new InvalidInputException("Server Error : simian config properties file not found", null);
+    }
+
     final Properties prop = new Properties();
     prop.load(fileInput);
     final SimianConfig simianConfig = new SimianConfig();

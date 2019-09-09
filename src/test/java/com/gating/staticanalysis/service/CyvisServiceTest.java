@@ -11,6 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.gating.Application;
 import com.gating.toolconfig.service.ToolResponse;
+import com.gating.utility.InvalidInputException;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = Application.class)
@@ -22,7 +23,7 @@ public class CyvisServiceTest {
   @Test
   public void testGetMaxComplexity() {
 
-    final Map<String, Integer> dummyMap = new HashMap<String, Integer>();
+    final Map<String, Integer> dummyMap = new HashMap<>();
     dummyMap.put("method1", 2);
     dummyMap.put("method2", 1);
 
@@ -33,14 +34,19 @@ public class CyvisServiceTest {
 
 
   @Test
-  public void testRun() throws IOException, InterruptedException {
+  public void testRun() throws IOException, InterruptedException, InvalidInputException {
 
     final String SourceCodePath = "C:\\bootcamp\\java\\code\\stack";
     final ToolResponse<Integer> actual = cyvisService.run(SourceCodePath);
-    final ToolResponse<Integer> expected = new ToolResponse<Integer>(3, 5, "Go");
+    final ToolResponse<Integer> expected = new ToolResponse<>(SourceCodePath, 3, 5, "Go");
     cyvisService.run(SourceCodePath);
     assertEquals(expected.getValue(), actual.getValue());
+  }
 
+
+  @Test(expected = InvalidInputException.class)
+  public void GetIssuesCount_throwsExceptionInputReportNotFound() throws InvalidInputException, NumberFormatException, IOException {
+    cyvisService.parseCyvisReport(System.getProperty("user.dir") + "\\reports\\cyvis_reports.txt");
   }
 
 }

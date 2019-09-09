@@ -128,12 +128,12 @@ public class GatingController {
     final float timeThreshold = thresholdConfigService.getThresholds().getTimeToRunTests();
     final JacocoResponse thresholds = new JacocoResponse(timeThreshold, coverageThreshold, null);
 
-    return new ToolResponse<JacocoResponse>(response, thresholds, response.getFinalResult());
+    return new ToolResponse<>(sourceCodePath, response, thresholds, response.getFinalResult());
 
   }
 
   @GetMapping(path = "/thresholds/config")
-  public ThresholdConfig getThresholds() throws IOException {
+  public ThresholdConfig getThresholds() throws IOException, InvalidInputException {
     return thresholdConfigService.getThresholds();
   }
 
@@ -148,7 +148,7 @@ public class GatingController {
   }
 
   @GetMapping(path = "/pmd/config")
-  public PMDConfig getPmdConfig() throws IOException {
+  public PMDConfig getPmdConfig() throws IOException, InvalidInputException {
     return pmdConfigService.getConfig();
   }
 
@@ -159,7 +159,7 @@ public class GatingController {
   }
 
   @GetMapping(path = "/simian/config")
-  public SimianConfig getSimianConfig() throws IOException {
+  public SimianConfig getSimianConfig() throws IOException, InvalidInputException {
     return simianConfigService.getConfig();
   }
 

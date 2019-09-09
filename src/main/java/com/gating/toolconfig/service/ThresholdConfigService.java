@@ -6,14 +6,23 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 import org.springframework.stereotype.Service;
+import com.gating.utility.InvalidInputException;
 
 @Service
 public class ThresholdConfigService {
 
-  public ThresholdConfig getThresholds() throws IOException {
+  public ThresholdConfig getThresholds() throws IOException, InvalidInputException {
 
     FileInputStream fileInput = null;
-    fileInput = new FileInputStream(new File("src/main/resources/threshold.config.properties"));
+    final File propFile = new File("src/main/resources/threshold.config.properties");
+
+    if(propFile.exists()) {
+      fileInput = new FileInputStream(propFile);
+    }
+    else {
+      throw new InvalidInputException("Server Error : threshold config properties file not found", null);
+    }
+
     final Properties prop = new Properties();
     prop.load(fileInput);
     final ThresholdConfig thresholdConfig = new ThresholdConfig();

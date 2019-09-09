@@ -12,12 +12,14 @@ public class ToolResponse<T> {
   private T value;
   private T threshold;
   private String finalResult;
+  private String srcProject;
 
-  public ToolResponse(T value, T threshold, String finalResult) {
+  public ToolResponse( String srcProject, T value, T threshold, String finalResult) {
     super();
     this.value = value;
     this.threshold = threshold;
     this.finalResult = finalResult;
+    this.srcProject = srcProject;
   }
 
   public T getValue() {
@@ -42,6 +44,14 @@ public class ToolResponse<T> {
 
   public void setFinalResult(String finalResult) {
     this.finalResult = finalResult;
+  }
+
+  public String getSrcProject() {
+    return srcProject;
+  }
+
+  public void setSrcProject(String srcProject) {
+    this.srcProject = srcProject;
   }
 
 

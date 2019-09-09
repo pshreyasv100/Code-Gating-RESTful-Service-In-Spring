@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.gating.service.ProcessUtility;
 import com.gating.toolconfig.service.ThresholdConfigService;
+import com.gating.utility.InvalidInputException;
 import com.gating.utility.Utility;
 
 @Service
@@ -30,7 +31,7 @@ public class JacocoService {
   ThresholdConfigService thresholdConfigService;
 
   private List<String> getAllTestCasesPath(File projectTestsCasesPath) {
-    final List<String> resultFiles = new ArrayList<String>();
+    final List<String> resultFiles = new ArrayList<>();
     Utility.searchFilesInDirectory(".*\\.class", projectTestsCasesPath, resultFiles);
     return resultFiles;
   }
@@ -51,7 +52,7 @@ public class JacocoService {
     jacocoCommand.append(" org.junit.runner.JUnitCore ");
     jacocoCommand.append(pathvar);
 
-    final List<String> command = new ArrayList<String>();
+    final List<String> command = new ArrayList<>();
     command.add("cmd");
     command.add("/c");
     command.add(jacocoCommand.toString());
@@ -100,7 +101,7 @@ public class JacocoService {
     jacocoReportGenerationCommand.append(" --html ");
     jacocoReportGenerationCommand.append(finalCsvFileLocation);
 
-    final List<String> reportCommand = new ArrayList<String>();
+    final List<String> reportCommand = new ArrayList<>();
     reportCommand.add("cmd");
     reportCommand.add("/c");
     reportCommand.add(jacocoReportGenerationCommand.toString());
@@ -123,7 +124,7 @@ public class JacocoService {
     buildCommand.add(operation);
     buildCommand.add(srcPath);
 
-    final List<String> command = new ArrayList<String>();
+    final List<String> command = new ArrayList<>();
     command.add("cmd");
     command.add("/c");
     return command;
@@ -136,7 +137,7 @@ public class JacocoService {
     processUtility.runProcess(getBuildCommand("install", srcPath), null);
   }
 
-  public JacocoResponse run(String srcPath) throws IOException, InterruptedException {
+  public JacocoResponse run(String srcPath) throws IOException, InterruptedException, InvalidInputException {
 
     final List<String> allTests = getAllTestCasesPath(new File(srcPath + "/target/test-classes"));
     float timeToRunTests = 0;

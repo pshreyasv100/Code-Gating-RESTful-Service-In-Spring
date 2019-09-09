@@ -58,7 +58,7 @@ public class GatingService {
       thresholds = thresholdService.getThresholds();
     }
 
-    final List<Boolean> allResults = new ArrayList<Boolean>();
+    final List<Boolean> allResults = new ArrayList<>();
 
     allResults.add(Utility.isLessThan(response.getNoOfWarnings(), thresholds.getNoOfWarnings()));
     allResults.add(response.getCodeDuplication() == 0);

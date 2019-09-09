@@ -48,7 +48,7 @@ public class VCGService {
     vcgCommand.add("-x");
     vcgCommand.add(VCG_REPORT_PATH);
 
-    final List<String> command = new ArrayList<String>();
+    final List<String> command = new ArrayList<>();
     command.add("cmd");
     command.add("/c");
     command.add(vcgCommand.toString());
@@ -69,7 +69,7 @@ public class VCGService {
     try {
       builder = factory.newDocumentBuilder();
     } catch (final ParserConfigurationException e) {
-      logger.error("Report file could not be parsed", e);
+
     }
 
     try {
@@ -105,7 +105,7 @@ public class VCGService {
     final int threshold = thresholdConfigService.getThresholds().getSecurityIssuesCount();
     final String finalDecision = Utility.isLessThan(securityIssues, threshold) ? "Go" : "No Go";
 
-    return new ToolResponse<Integer>(securityIssues, threshold, finalDecision);
+    return new ToolResponse<>(srcPath,securityIssues, threshold, finalDecision);
   }
 
 
