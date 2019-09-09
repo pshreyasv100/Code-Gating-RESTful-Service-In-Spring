@@ -1,5 +1,5 @@
 #surefire
-#Mon Sep 09 11:32:18 IST 2019
+#Mon Sep 09 11:43:08 IST 2019
 classPathUrl.61=C\:\\Users\\320052310\\.m2\\repository\\io\\springfox\\springfox-spring-web\\2.9.2\\springfox-spring-web-2.9.2.jar
 classPathUrl.60=C\:\\Users\\320052310\\.m2\\repository\\io\\springfox\\springfox-swagger-common\\2.9.2\\springfox-swagger-common-2.9.2.jar
 excludes0=**/*$*

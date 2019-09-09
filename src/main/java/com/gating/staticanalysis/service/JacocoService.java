@@ -36,7 +36,7 @@ public class JacocoService {
     return resultFiles;
   }
 
-  public List<String> createExecFileCommand(String srcPath, String pathvar) {
+  public List<String> createExecFileCommand(String srcPath, StringBuilder classFullyQualifiedName) {
 
     final StringBuilder jarsRequired = new StringBuilder();
     jarsRequired.append("static-code-analyzers/jacoco/junit-4.12.jar;");
@@ -50,7 +50,7 @@ public class JacocoService {
     jacocoCommand.append(" -javaagent:" + "static-code-analyzers/jacoco/jacocoagent.jar");
     jacocoCommand.append("=destfile=" + "reports/jacoco.exec");
     jacocoCommand.append(" org.junit.runner.JUnitCore ");
-    jacocoCommand.append(pathvar);
+    jacocoCommand.append(classFullyQualifiedName);
 
     final List<String> command = new ArrayList<>();
     command.add("cmd");
@@ -59,22 +59,23 @@ public class JacocoService {
     return command;
   }
 
-  public String getFullyQualifiedClassName(String pathOfClass) {
+  public StringBuilder getFullyQualifiedClassName(String pathOfClass) {
 
     final String[] paths = pathOfClass.split("\\\\");
     boolean flag = false;
-    String pathvar = "";
+    final StringBuilder pathvar = new StringBuilder();
     for (int i = 0; i < paths.length - 1; i++) {
       if (paths[i].equals("test-classes")) {
         flag = true;
         i += 1;
       }
       if (flag) {
-        pathvar += paths[i] + ".";
+        pathvar.append(paths[i]);
+        pathvar.append(".");
       }
     }
     paths[paths.length - 1] = paths[paths.length - 1].replace(".class", "");
-    pathvar += paths[paths.length - 1];
+    pathvar.append(paths[paths.length - 1]);
     return pathvar;
   }
 
@@ -143,7 +144,7 @@ public class JacocoService {
     float timeToRunTests = 0;
 
     for (final String testClass : allTests) {
-      final String classFullyQualifiedName = getFullyQualifiedClassName(testClass);
+      final StringBuilder classFullyQualifiedName = getFullyQualifiedClassName(testClass);
 
       final long startTime = System.currentTimeMillis();
       processUtility.runProcess(createExecFileCommand(srcPath, classFullyQualifiedName), null);
