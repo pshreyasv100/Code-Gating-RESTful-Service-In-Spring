@@ -28,6 +28,7 @@ public class VCGService {
 
   Logger logger = LoggerFactory.getLogger(VCGService.class);
 
+
   public static final String VCG_BIN_PATH =  "C:\\Program Files (x86)\\VisualCodeGrepper;";
   public static final String VCG_REPORT_PATH = System.getProperty("user.dir") + "//reports//vcg_report.xml";
 
@@ -69,7 +70,7 @@ public class VCGService {
     try {
       builder = factory.newDocumentBuilder();
     } catch (final ParserConfigurationException e) {
-
+      logger.error("ParserConfigurationException  occured",e);
     }
 
     try {

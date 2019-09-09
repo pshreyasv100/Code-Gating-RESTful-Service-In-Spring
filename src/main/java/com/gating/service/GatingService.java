@@ -123,7 +123,7 @@ public class GatingService {
         new BufferedReader(new FileReader(System.getProperty("user.dir") + "\\resultsLog.csv"));
     currentRow = reader.readLine();
 
-    if (reader.readLine() == null) {
+    if ((currentRow =reader.readLine()) != null) {
       reader.close();
       throw new InvalidInputException("No previous results found", null);
     }

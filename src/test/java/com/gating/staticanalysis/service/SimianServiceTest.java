@@ -23,7 +23,7 @@ public class SimianServiceTest {
 
     final String SourceCodePath = "C:\\bootcamp\\java\\code\\stack";
     final ToolResponse<Integer> actual =  simianService.run(SourceCodePath);
-    final ToolResponse<Integer> expected = new ToolResponse<>(SourceCodePath, 28, 0, "No Go : Code Duplication Present");
+    final ToolResponse<Integer> expected = new ToolResponse<Integer>(SourceCodePath, 28, 0, "No Go : Code Duplication Present");
 
     assertEquals(expected.getValue(), actual.getValue());
   }

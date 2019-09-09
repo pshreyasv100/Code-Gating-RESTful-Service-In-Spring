@@ -10,7 +10,6 @@ public class ThresholdConfig {
   private int codeDuplication;
 
 
-  public ThresholdConfig() {}
 
   public int getSecurityIssuesCount() {
     return securityIssuesCount;

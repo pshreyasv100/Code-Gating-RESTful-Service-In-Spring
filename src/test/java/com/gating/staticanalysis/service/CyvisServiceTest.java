@@ -23,7 +23,7 @@ public class CyvisServiceTest {
   @Test
   public void testGetMaxComplexity() {
 
-    final Map<String, Integer> dummyMap = new HashMap<>();
+    final Map<String, Integer> dummyMap = new HashMap<String, Integer>();
     dummyMap.put("method1", 2);
     dummyMap.put("method2", 1);
 
@@ -38,7 +38,7 @@ public class CyvisServiceTest {
 
     final String SourceCodePath = "C:\\bootcamp\\java\\code\\stack";
     final ToolResponse<Integer> actual = cyvisService.run(SourceCodePath);
-    final ToolResponse<Integer> expected = new ToolResponse<>(SourceCodePath, 3, 5, "Go");
+    final ToolResponse<Integer> expected = new ToolResponse<Integer>(SourceCodePath, 3, 5, "Go");
     cyvisService.run(SourceCodePath);
     assertEquals(expected.getValue(), actual.getValue());
   }
@@ -46,7 +46,7 @@ public class CyvisServiceTest {
 
   @Test(expected = InvalidInputException.class)
   public void GetIssuesCount_throwsExceptionInputReportNotFound() throws InvalidInputException, NumberFormatException, IOException {
-    cyvisService.parseCyvisReport(System.getProperty("user.dir") + "\\reports\\cyvis_reports.txt");
+    cyvisService.parseCyvisReport(System.getProperty("user.dir") + "\\reports\\invalid_report.txt");
   }
 
 }

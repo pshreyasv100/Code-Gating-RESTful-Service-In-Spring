@@ -62,11 +62,13 @@ public class SimianService {
     return command;
   }
 
-  public int parseSimianTextReport(String reportPath) throws InvalidInputException, IOException{
+  public int parseSimianTextReport(String reportPath) throws InvalidInputException, IOException {
 
     BufferedReader reader = null;
-    try{
+    final int duplicatedLines = 0;
+    try {
       reader = new BufferedReader(new FileReader(new File(reportPath)));
+
       String line;
       String prevLine = null;
       String secondPrevLine = null;
@@ -77,7 +79,10 @@ public class SimianService {
         secondPrevLine = prevLine;
         prevLine = line;
       }
+
+
       return Integer.valueOf(thirdPrevLine.split(" ")[1]);
+
     } catch (final FileNotFoundException e) {
       throw new InvalidInputException("Simian report not found", reportPath);
     }

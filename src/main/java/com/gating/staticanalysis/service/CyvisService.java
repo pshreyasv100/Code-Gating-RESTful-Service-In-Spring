@@ -1,6 +1,7 @@
 package com.gating.staticanalysis.service;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -94,40 +95,42 @@ public class CyvisService {
 
   }
 
-  public Map<String, Integer> parseCyvisReport(String csvFile) throws IOException {
+  public Map<String, Integer> parseCyvisReport(String csvFile)
+      throws IOException, InvalidInputException {
+
+    final File reportFile = new File(csvFile);
+    if (!reportFile.exists()) {
+      throw new InvalidInputException("cyvis report not found", csvFile);
+    }
 
     BufferedReader reader = null;
     String line = "";
     final String cvsSplitBy = ",";
     final Map<String, Integer> methodComplexityMap = new HashMap<>();
-
-    try {
-      reader = new BufferedReader(new FileReader(csvFile));
-      while ((line = reader.readLine()) != null) {
-        final String[] complexity = line.split(cvsSplitBy);
-        int column = 3;
-        while (column < complexity.length) {
-          methodComplexityMap.put(complexity[1].concat(".".concat(complexity[column - 1])),
-              new Integer(complexity[column]));
-          column += 4;
-        }
-      }
-    } finally {
-      if (reader != null) {
-        reader.close();
+    reader = new BufferedReader(new FileReader(csvFile));
+    while ((line = reader.readLine()) != null) {
+      final String[] complexity = line.split(cvsSplitBy);
+      int column = 3;
+      while (column < complexity.length) {
+        methodComplexityMap.put(complexity[1].concat(".".concat(complexity[column - 1])),
+            new Integer(complexity[column]));
+        column += 4;
       }
     }
-
+    reader.close();
     return methodComplexityMap;
+
   }
 
 
-  public ToolResponse<Integer> run(String srcPath) throws IOException, InterruptedException, InvalidInputException{
+
+  public ToolResponse<Integer> run(String srcPath)
+      throws IOException, InterruptedException, InvalidInputException {
 
     processUtility.runProcess(generateJarFromProjectCommand(srcPath), null);
     processUtility.runProcess(generateReportFromProjectJarCommand(), null);
     final Map<String, Integer> complexityMap = parseCyvisReport(CYVIS_REPORT_PATH);
-    final int maxComplexity =  getMaxComplexity(complexityMap);
+    final int maxComplexity = getMaxComplexity(complexityMap);
     final int threshold = thresholdConfigService.getThresholds().getCyclomaticComplexity();
     final String finalDecision = Utility.isLessThan(maxComplexity, threshold) ? "Go" : "No Go";
 

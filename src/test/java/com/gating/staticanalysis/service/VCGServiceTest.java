@@ -30,7 +30,7 @@ public class VCGServiceTest {
   public void testRun() throws InvalidInputException, IOException, InterruptedException {
     final String SourceCodePath = "C:\\bootcamp\\java\\code\\stack";
     final ToolResponse<Integer> actual = vcgService.run(SourceCodePath);
-    final ToolResponse<Integer> expected = new ToolResponse<>(SourceCodePath ,23, 0, "No Go");
+    final ToolResponse<Integer> expected = new ToolResponse<Integer>(SourceCodePath ,23, 0, "No Go");
     assertEquals(expected.getValue(), actual.getValue());
   }
 

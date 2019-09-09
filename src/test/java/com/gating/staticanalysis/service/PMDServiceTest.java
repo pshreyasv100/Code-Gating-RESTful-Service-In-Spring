@@ -72,7 +72,7 @@ public class PMDServiceTest {
   @Test
   public void testRun() throws InvalidInputException, IOException, InterruptedException, SAXException, ParserConfigurationException {
     final ToolResponse<Integer> actual = pmd.run("C:\\eclipse-workspace\\demoo");
-    final ToolResponse<Integer> expected = new ToolResponse<>("C:\\eclipse-workspace\\demoo", 1, 1, "No Go");
+    final ToolResponse<Integer> expected = new ToolResponse<Integer>("C:\\eclipse-workspace\\demoo", 1, 1, "No Go");
     assertEquals(expected.getValue(), actual.getValue());
   }
 
