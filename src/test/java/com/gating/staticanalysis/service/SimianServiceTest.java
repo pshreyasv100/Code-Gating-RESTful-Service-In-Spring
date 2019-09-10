@@ -9,6 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.gating.Application;
 import com.gating.toolconfig.service.ToolResponse;
+import com.gating.utility.InternalServiceException;
 import com.gating.utility.InvalidInputException;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -39,7 +40,7 @@ public class SimianServiceTest {
   }
 
 
-  @Test(expected = InvalidInputException.class)
+  @Test(expected = InternalServiceException.class)
   public void testParseSimianReportThrowsExceptionWhenItsUnableToFindReport() throws InvalidInputException, IOException {
 
     final String SIMIAN_REPORT_PATH =

@@ -11,6 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.gating.Application;
 import com.gating.toolconfig.service.ToolResponse;
+import com.gating.utility.InternalServiceException;
 import com.gating.utility.InvalidInputException;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -44,7 +45,7 @@ public class CyvisServiceTest {
   }
 
 
-  @Test(expected = InvalidInputException.class)
+  @Test(expected = InternalServiceException.class)
   public void testGetIssuesCountThrowsExceptionInputReportNotFound() throws InvalidInputException, NumberFormatException, IOException {
     cyvisService.parseCyvisReport(System.getProperty("user.dir") + "\\reports\\invalid_report.txt");
   }

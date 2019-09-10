@@ -1,6 +1,5 @@
 package com.gating.service;
 
-import static org.junit.Assert.assertEquals;
 import java.io.IOException;
 import javax.xml.parsers.ParserConfigurationException;
 import org.junit.Test;
@@ -59,7 +58,7 @@ public class GatingServiceTest {
 
     final String SourceCodePath = "C:\\Users\\320052310\\Desktop\\Test1";
     final QualityParameters actual = gatingService.gateCode(SourceCodePath,false);
-    assertEquals(100, actual.getCodeCoverage());
+    assert(actual.getCodeDuplication() == 0);
   }
 
 

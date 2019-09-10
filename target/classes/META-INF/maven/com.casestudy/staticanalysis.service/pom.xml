@@ -93,7 +93,7 @@
                     <encoding>UTF-8</encoding>
                     <source>1.8</source>
                     <target>1.8</target>
-                    <fork>true</fork>
+                    <fork>false</fork>
                     <executable>C:\Program Files\Java\jdk1.8.0_181\bin\javac</executable>
                     <compilerArgs>
                         <arg>-Xlint:all</arg>

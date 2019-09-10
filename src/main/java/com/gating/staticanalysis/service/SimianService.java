@@ -73,7 +73,7 @@ public class SimianService {
         prevLine = line;
       }
 
-      if("".equals(thirdPrevLine)) {
+      if(!("".equals(thirdPrevLine))) {
         return Integer.valueOf(thirdPrevLine.split(" ")[1]);
       }
 
