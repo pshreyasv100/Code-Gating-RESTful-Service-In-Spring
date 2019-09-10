@@ -11,6 +11,11 @@ public class ThresholdConfig {
 
 
 
+
+  public ThresholdConfig() {
+    super();
+  }
+
   public int getSecurityIssuesCount() {
     return securityIssuesCount;
   }

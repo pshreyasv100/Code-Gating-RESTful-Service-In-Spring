@@ -8,6 +8,10 @@ public class PMDConfig {
 
   private String ruleSet;
 
+  public PMDConfig() {
+    super();
+    this.ruleSet = "rulesets/java/quickstart.xml";
+  }
 
   public void setRuleSet(String resultSet) {
     this.ruleSet = resultSet;

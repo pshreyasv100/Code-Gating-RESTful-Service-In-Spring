@@ -23,7 +23,7 @@ public class SimianServiceTest {
 
     final String SourceCodePath = "C:\\bootcamp\\java\\code\\stack";
     final ToolResponse<Integer> actual =  simianService.run(SourceCodePath);
-    final ToolResponse<Integer> expected = new ToolResponse<Integer>(SourceCodePath, 28, 0, "No Go : Code Duplication Present");
+    final ToolResponse<Integer> expected = new ToolResponse<>(SourceCodePath, 28, 0, "No Go : Code Duplication Present");
 
     assertEquals(expected.getValue(), actual.getValue());
   }
@@ -40,7 +40,7 @@ public class SimianServiceTest {
 
 
   @Test(expected = InvalidInputException.class)
-  public void parseSimianReportThrowsException_WhenItsUnableToFindReport() throws InvalidInputException, IOException {
+  public void testParseSimianReportThrowsExceptionWhenItsUnableToFindReport() throws InvalidInputException, IOException {
 
     final String SIMIAN_REPORT_PATH =
         System.getProperty("user.dir") + "\\reports\\invalid_report.txt";

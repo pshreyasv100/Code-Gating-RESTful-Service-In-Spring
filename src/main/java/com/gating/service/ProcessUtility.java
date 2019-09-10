@@ -6,14 +6,14 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import com.gating.utility.InternalServiceException;
 
 @Service
 public class ProcessUtility {
 
+  private static final Logger LOGGER = LoggerFactory.getLogger(ProcessUtility.class);
 
-  Logger logger = LoggerFactory.getLogger(ProcessUtility.class);
-
-  public int runProcess(List<String> command, String toolBinPath) throws IOException, InterruptedException {
+  public int runProcess(List<String> command, String toolBinPath){
 
     final ProcessBuilder processBuilder = new ProcessBuilder();
     final Map<String, String> envMap = processBuilder.environment();
@@ -24,8 +24,21 @@ public class ProcessUtility {
     processBuilder.command(command);
     Process process = null;
 
-    process = processBuilder.start();
-    process.waitFor();
-    return process.exitValue();
+    try{
+      process = processBuilder.start();
+      process.waitFor();
+      return process.exitValue();
+    }
+    catch(final IOException e) {
+      throw new InternalServiceException("Process could not be started", e);
+    }
+    catch(final InterruptedException e) {
+      LOGGER.error("Process was interrupted");
+      Thread.currentThread().interrupt();
+    }
+
+    return 1;
+
+
   }
 }

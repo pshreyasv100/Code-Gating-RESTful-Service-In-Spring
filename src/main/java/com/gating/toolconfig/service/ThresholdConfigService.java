@@ -6,42 +6,50 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 import org.springframework.stereotype.Service;
+import com.gating.utility.InternalServiceException;
 import com.gating.utility.InvalidInputException;
 
 @Service
 public class ThresholdConfigService {
 
-  public ThresholdConfig getThresholds() throws IOException, InvalidInputException {
+  public ThresholdConfig getThresholds() {
 
-    FileInputStream fileInput = null;
     final File propFile = new File("src/main/resources/threshold.config.properties");
 
-    if(propFile.exists()) {
-      fileInput = new FileInputStream(propFile);
+    try {
+      if (propFile.exists()) {
+        try (FileInputStream fileInput = new FileInputStream(propFile)) {
+
+          final Properties prop = new Properties();
+          prop.load(fileInput);
+          final ThresholdConfig thresholdConfig = new ThresholdConfig();
+
+          thresholdConfig
+          .setCyclomaticComplexity(Integer.valueOf(prop.getProperty("cyclomaticComplexity")));
+          thresholdConfig.setCodeCoverage(Float.valueOf(prop.getProperty("codeCoverage")));
+          thresholdConfig.setTimeToRunTests(Float.valueOf(prop.getProperty("timeToRunTests")));
+          thresholdConfig.setNoOfWarnings(Integer.valueOf(prop.getProperty("noOfWarnings")));
+          thresholdConfig
+          .setSecurityIssuesCount(Integer.valueOf(prop.getProperty("securityIssuesCount")));
+
+          return thresholdConfig;
+        }
+
+      } else {
+        throw new InvalidInputException("Server Error : threshold config properties file not found",
+            null);
+      }
     }
-    else {
-      throw new InvalidInputException("Server Error : threshold config properties file not found", null);
+
+    catch (final IOException e) {
+      throw new InternalServiceException("Error occured while reading thresholds", e);
     }
 
-    final Properties prop = new Properties();
-    prop.load(fileInput);
-    final ThresholdConfig thresholdConfig = new ThresholdConfig();
-
-    thresholdConfig
-    .setCyclomaticComplexity(Integer.valueOf(prop.getProperty("cyclomaticComplexity")));
-    thresholdConfig.setCodeCoverage(Float.valueOf(prop.getProperty("codeCoverage")));
-    thresholdConfig.setTimeToRunTests(Float.valueOf(prop.getProperty("timeToRunTests")));
-    thresholdConfig.setNoOfWarnings(Integer.valueOf(prop.getProperty("noOfWarnings")));
-    thresholdConfig
-    .setSecurityIssuesCount(Integer.valueOf(prop.getProperty("securityIssuesCount")));
-
-    fileInput.close();
-    return thresholdConfig;
   }
 
 
 
-  public void setThresholds(ThresholdConfig newThresholds) throws IOException {
+  public void setThresholds(ThresholdConfig newThresholds) {
 
 
     final Properties properties = new Properties();
@@ -53,10 +61,13 @@ public class ThresholdConfigService {
     properties.setProperty("securityIssuesCount",
         String.valueOf(newThresholds.getSecurityIssuesCount()));
 
-    final FileOutputStream fileOut =
-        new FileOutputStream(new File("src/main/resources/threshold.config.properties"));
-    properties.store(fileOut, null);
-    fileOut.close();
+
+    try (FileOutputStream fileOut =
+        new FileOutputStream(new File("src/main/resources/threshold.config.properties"))) {
+      properties.store(fileOut, null);
+    } catch (final IOException e) {
+      throw new InternalServiceException("Error occurred while saving thresholds ", e);
+    }
   }
 
 }

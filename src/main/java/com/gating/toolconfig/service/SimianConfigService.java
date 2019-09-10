@@ -6,32 +6,35 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 import org.springframework.stereotype.Service;
+import com.gating.utility.InternalServiceException;
 import com.gating.utility.InvalidInputException;
 
 @Service
 public class SimianConfigService {
 
-  public SimianConfig getConfig() throws IOException, InvalidInputException {
+  public SimianConfig getConfig()
+  {
 
-    FileInputStream fileInput = null;
     final File propFile = new File("src/main/resources/simian.config.properties");
 
     if(propFile.exists()) {
-      fileInput = new FileInputStream(propFile);
+      try(FileInputStream fileInput = new FileInputStream(propFile)){
+
+        final Properties prop = new Properties();
+        prop.load(fileInput);
+        final SimianConfig simianConfig = new SimianConfig();
+        simianConfig
+        .setDuplicateLinesThreshold(Integer.valueOf(prop.getProperty("duplicateLinesThreshold")));
+
+        return simianConfig;
+      }
+      catch(final IOException e) {
+        throw new InternalServiceException("Error occured while reading simian config", e);
+      }
     }
     else {
       throw new InvalidInputException("Server Error : simian config properties file not found", null);
     }
-
-    final Properties prop = new Properties();
-    prop.load(fileInput);
-    final SimianConfig simianConfig = new SimianConfig();
-    simianConfig
-    .setDuplicateLinesThreshold(Integer.valueOf(prop.getProperty("duplicateLinesThreshold")));
-
-    fileInput.close();
-    return simianConfig;
-
   }
 
 

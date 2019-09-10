@@ -8,19 +8,15 @@ import java.util.StringJoiner;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.gating.service.ProcessUtility;
 import com.gating.toolconfig.service.ThresholdConfigService;
-import com.gating.utility.InvalidInputException;
+import com.gating.utility.InternalServiceException;
 import com.gating.utility.Utility;
 
 @Service
 public class JacocoService {
-
-  Logger logger = LoggerFactory.getLogger(JacocoService.class);
 
 
 
@@ -30,8 +26,8 @@ public class JacocoService {
   @Autowired
   ThresholdConfigService thresholdConfigService;
 
-  private List<String> getAllTestCasesPath(File projectTestsCasesPath) {
-    final List<String> resultFiles = new ArrayList<String>();
+  private static  List<String> getAllTestCasesPath(File projectTestsCasesPath) {
+    final List<String> resultFiles = new ArrayList<>();
     Utility.searchFilesInDirectory(".*\\.class", projectTestsCasesPath, resultFiles);
     return resultFiles;
   }
@@ -52,7 +48,7 @@ public class JacocoService {
     jacocoCommand.append(" org.junit.runner.JUnitCore ");
     jacocoCommand.append(classFullyQualifiedName);
 
-    final List<String> command = new ArrayList<String>();
+    final List<String> command = new ArrayList<>();
     command.add("cmd");
     command.add("/c");
     command.add(jacocoCommand.toString());
@@ -64,10 +60,11 @@ public class JacocoService {
     final String[] paths = pathOfClass.split("\\\\");
     boolean flag = false;
     final StringBuilder pathvar = new StringBuilder();
+
     for (int i = 0; i < paths.length - 1; i++) {
-      if (paths[i].equals("test-classes")) {
+
+      if ("test-classes".equals(paths[i])) {
         flag = true;
-        i += 1;
       }
       if (flag) {
         pathvar.append(paths[i]);
@@ -79,7 +76,7 @@ public class JacocoService {
     return pathvar;
   }
 
-  private List<String> createReportCommand(String srcPath) {
+  private static List<String> createReportCommand(String srcPath) {
 
     final StringBuilder jacococliJarLocation = new StringBuilder();
     jacococliJarLocation.append("static-code-analyzers/jacoco/jacococli.jar");
@@ -102,7 +99,7 @@ public class JacocoService {
     jacocoReportGenerationCommand.append(" --html ");
     jacocoReportGenerationCommand.append(finalCsvFileLocation);
 
-    final List<String> reportCommand = new ArrayList<String>();
+    final List<String> reportCommand = new ArrayList<>();
     reportCommand.add("cmd");
     reportCommand.add("/c");
     reportCommand.add(jacocoReportGenerationCommand.toString());
@@ -110,12 +107,18 @@ public class JacocoService {
     return reportCommand;
   }
 
-  public static Float getCoverageFromReport() throws IOException {
+  public static Float getCoverageFromReport(){
     final File file = new File("reports/jacoco-reports/index.html");
-    final Document doc = Jsoup.parse(file, "UTF-8");
-    final Element divTag = doc.getElementById("c0");
 
-    return Float.valueOf(divTag.text().replaceAll("%", ""));
+    try {
+      final Document doc = Jsoup.parse(file, "UTF-8");
+      final Element divTag = doc.getElementById("c0");
+      return Float.valueOf(divTag.text().replaceAll("%", ""));
+    }
+    catch(final IOException e) {
+      throw new InternalServiceException("Error occured parsing jacoco report", e);
+    }
+
   }
 
   public List<String> getBuildCommand(String operation, String srcPath) {
@@ -125,23 +128,24 @@ public class JacocoService {
     buildCommand.add(operation);
     buildCommand.add(srcPath);
 
-    final List<String> command = new ArrayList<String>();
+    final List<String> command = new ArrayList<>();
     command.add("cmd");
     command.add("/c");
     return command;
   }
 
-  public void buildProject(String srcPath) throws IOException, InterruptedException {
+  public void buildProject(String srcPath){
     processUtility.runProcess(getBuildCommand("clean", srcPath), null);
     processUtility.runProcess(getBuildCommand("compile", srcPath), null);
     processUtility.runProcess(getBuildCommand("test-compile", srcPath), null);
     processUtility.runProcess(getBuildCommand("install", srcPath), null);
   }
 
-  public JacocoResponse run(String srcPath) throws IOException, InterruptedException, InvalidInputException {
+  public JacocoResponse run(String srcPath){
 
     final List<String> allTests = getAllTestCasesPath(new File(srcPath + "/target/test-classes"));
-    float timeToRunTests = 0;
+    double timeToRunTests = 0;
+    String finalDecision;
 
     for (final String testClass : allTests) {
       final StringBuilder classFullyQualifiedName = getFullyQualifiedClassName(testClass);
@@ -160,10 +164,13 @@ public class JacocoService {
     final float timeThreshold = thresholdConfigService.getThresholds().getTimeToRunTests();
     final float codeCoverage = getCoverageFromReport();
 
-    final String finalDecision =
-        Utility.isGreaterThan(codeCoverage, coverageThreshold)
-        && Utility.isLessThan(timeToRunTests, timeThreshold) ? "Go"
-            : "No Go";
+    if(Utility.isGreaterThan(codeCoverage, coverageThreshold)
+        && Utility.isLessThan(timeToRunTests, timeThreshold)) {
+      finalDecision  = "Go";
+    }
+    else {
+      finalDecision =  "No Go";
+    }
 
     return new JacocoResponse(timeToRunTests, codeCoverage, finalDecision);
   }

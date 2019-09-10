@@ -19,7 +19,7 @@ public class VCGServiceTest {
   VCGService vcgService;
 
   @Test(expected = InvalidInputException.class)
-  public void GetIssuesCount_throwsExceptionInputReportIsNotXML() throws InvalidInputException {
+  public void testGetIssuesCountThrowsExceptionInputReportIsNotXML() throws InvalidInputException {
     final int expected = 23;
     final int actual = vcgService
         .getIssuesCountFromXML(System.getProperty("user.dir") + "\\reports\\vcg_reports.txt");
@@ -30,7 +30,7 @@ public class VCGServiceTest {
   public void testRun() throws InvalidInputException, IOException, InterruptedException {
     final String SourceCodePath = "C:\\bootcamp\\java\\code\\stack";
     final ToolResponse<Integer> actual = vcgService.run(SourceCodePath);
-    final ToolResponse<Integer> expected = new ToolResponse<Integer>(SourceCodePath ,27, 0, "No Go");
+    final ToolResponse<Integer> expected = new ToolResponse<>(SourceCodePath ,27, 0, "No Go");
     assertEquals(expected.getValue(), actual.getValue());
   }
 

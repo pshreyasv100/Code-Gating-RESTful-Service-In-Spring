@@ -3,7 +3,7 @@ package com.gating.service;
 public class QualityParameters {
 
   private String projectPath;
-  private float timeToRunTest;
+  private double timeToRunTest;
   private int noOfWarnings;
   private float codeCoverage;
   private int cyclomaticComplexity;
@@ -11,12 +11,17 @@ public class QualityParameters {
   private int securityIssuesCount;
   private String finalDecision;
 
-  public float getTimeToRunTests() {
+
+  public QualityParameters() {
+    super();
+  }
+
+  public double getTimeToRunTests() {
     return timeToRunTest;
   }
 
-  public void setTimeToRunTests(float timeToRunTest) {
-    this.timeToRunTest = timeToRunTest;
+  public void setTimeToRunTests(double time) {
+    this.timeToRunTest = time;
   }
 
   public int getNoOfWarnings() {

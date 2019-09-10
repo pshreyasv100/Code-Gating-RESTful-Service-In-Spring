@@ -8,8 +8,6 @@ import java.util.regex.Pattern;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
@@ -20,13 +18,12 @@ import com.gating.toolconfig.service.PMDConfig;
 import com.gating.toolconfig.service.PMDConfigService;
 import com.gating.toolconfig.service.ThresholdConfigService;
 import com.gating.toolconfig.service.ToolResponse;
+import com.gating.utility.InternalServiceException;
 import com.gating.utility.InvalidInputException;
 import com.gating.utility.Utility;
 
 @Service
 public class PMDService {
-
-  Logger logger = LoggerFactory.getLogger(PMDService.class);
 
   @Autowired
   ProcessUtility processUtility;
@@ -37,8 +34,9 @@ public class PMDService {
   @Autowired
   PMDConfigService pmdConfigService;
 
+
   public List<String> getCommand(String srcPath, PMDConfig params, String outputFormat,
-      String pmdReportPath) throws InvalidInputException {
+      String pmdReportPath) {
 
     if (!Pattern.matches(".*\\.xml", params.getRuleSet())) {
       throw new InvalidInputException("ruleset required by pmd must be an xml file, input given ",
@@ -55,45 +53,60 @@ public class PMDService {
     pmdCommand.add(">");
     pmdCommand.add(pmdReportPath);
 
-    final List<String> command = new ArrayList<String>();
+    final List<String> command = new ArrayList<>();
     command.add("cmd");
     command.add("/c");
     command.add(pmdCommand.toString());
     return command;
   }
 
-  public int parsePMDXMLReport(String pmdreportpath) throws SAXException, IOException, ParserConfigurationException {
+  public int parsePMDXMLReport(String pmdreportpath){
 
     final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
     DocumentBuilder builder = null;
     Document doc = null;
 
-    builder = factory.newDocumentBuilder();
-    if (builder != null) {
-      doc = builder.parse(pmdreportpath);
+    try {
+      builder = factory.newDocumentBuilder();
+      if (builder != null) {
+        doc = builder.parse(pmdreportpath);
+      }
+      if (doc != null && doc.getElementsByTagName("violation") != null) {
+        final NodeList violationList = doc.getElementsByTagName("violation");
+        return violationList.getLength();
+      }
     }
-    if (doc != null && doc.getElementsByTagName("violation") != null) {
-      final NodeList violationList = doc.getElementsByTagName("violation");
-      return violationList.getLength();
+
+    catch(final ParserConfigurationException|SAXException e) {
+      throw new InternalServiceException("PMD parser could not parse report", e);
     }
-    return 0;
+    catch(final IOException e) {
+      throw new InternalServiceException("PMD could not read report ", e);
+    }
+
+    return -1;
   }
 
 
   public ToolResponse<Integer> run(String srcPath)
-      throws InvalidInputException, IOException, InterruptedException, SAXException, ParserConfigurationException {
-
+  {
     final PMDConfig params = pmdConfigService.getConfig();
     List<String> command;
+    String decision;
+
     command = getCommand(srcPath, params, PMDConfig.OUTPUT_FORMAT, PMDConfig.PMD_REPORT_PATH);
     processUtility.runProcess(command, PMDConfig.PMD_BIN_PATH);
 
     final int warnings = parsePMDXMLReport(PMDConfig.PMD_REPORT_PATH);
     final int warningsThreshold = thresholdConfService.getThresholds().getNoOfWarnings();
-    final String decision =
-        Utility.isLessThan(warnings, warningsThreshold) ? "Go" : "No Go";
 
-    return new ToolResponse<Integer>(srcPath, warnings, warningsThreshold, decision);
+    if (Utility.isLessThan(warnings, warningsThreshold)) {
+      decision = "Go";
+    } else {
+      decision = "No Go";
+    }
+
+    return new ToolResponse<>(srcPath, warnings, warningsThreshold, decision);
   }
 
 }

@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class GatingToolErrorAdvice {
 
-  Logger logger = LoggerFactory.getLogger(GatingToolErrorAdvice.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(GatingToolErrorAdvice.class);
 
-  private ResponseEntity<String> error(HttpStatus status, Exception e) {
-    logger.error("Exception : ", e);
+  private static ResponseEntity<String> error(HttpStatus status, Exception e) {
+    LOGGER.error("Exception : ", e);
     return ResponseEntity.status(status).body(e.getMessage());
   }
 
