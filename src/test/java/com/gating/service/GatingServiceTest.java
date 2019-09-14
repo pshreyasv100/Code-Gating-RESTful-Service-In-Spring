@@ -15,6 +15,7 @@ import com.gating.staticanalysis.service.PMDService;
 import com.gating.staticanalysis.service.SimianService;
 import com.gating.staticanalysis.service.VCGService;
 import com.gating.toolconfig.service.ThresholdConfigService;
+import com.gating.utility.InternalServiceException;
 import com.gating.utility.InvalidInputException;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -44,7 +45,7 @@ public class GatingServiceTest {
 
 
 
-  @Test(expected = InvalidInputException.class)
+  @Test(expected = InternalServiceException.class)
   public void testJacocoDoesNotRunWhenProjectDoesNotContainTestCases() throws IOException,
   InterruptedException, InvalidInputException, SAXException, ParserConfigurationException {
     final String srcPath = "C:\\bootcamp\\java\\code\\stack";
@@ -53,8 +54,7 @@ public class GatingServiceTest {
 
 
   @Test
-  public void testGateCode() throws IOException, InterruptedException, InvalidInputException,
-  SAXException, ParserConfigurationException {
+  public void testGateCode(){
 
     final String SourceCodePath = "C:\\Users\\320052310\\Desktop\\Test1";
     final QualityParameters actual = gatingService.gateCode(SourceCodePath,false);

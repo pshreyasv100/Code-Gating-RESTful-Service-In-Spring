@@ -160,7 +160,7 @@ public class GatingService {
     response.setCyclomaticComplexity(cyvisService.run(srcPath).getValue());
 
     if (!(new File(srcPath + "/target/test-classes")).exists()) {
-      throw new InvalidInputException(
+      throw new InternalServiceException(
           "Cannot run jacoco since project does not contain testcase classes,", null);
     } else {
 

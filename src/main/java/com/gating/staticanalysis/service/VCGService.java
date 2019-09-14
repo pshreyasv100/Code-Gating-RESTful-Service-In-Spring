@@ -20,7 +20,6 @@ import com.gating.toolconfig.service.ThresholdConfigService;
 import com.gating.toolconfig.service.ToolResponse;
 import com.gating.toolconfig.service.VCGConfig;
 import com.gating.utility.InternalServiceException;
-import com.gating.utility.InvalidInputException;
 import com.gating.utility.Utility;
 
 @Service
@@ -56,7 +55,7 @@ public class VCGService {
   public int getIssuesCountFromXML(String vcgReportPath) {
 
     if (!Pattern.matches(".*\\.xml", vcgReportPath)) {
-      throw new InvalidInputException("Report  to VCG XML :", vcgReportPath);
+      throw new InternalServiceException("Report  to VCG XML :", null);
     }
 
 

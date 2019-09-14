@@ -16,3 +16,9 @@ TimeToRunTests,NoOfWarnings,CodeCoverage,CyclomaticComplexity,SecurityIssuesCoun
 0.902,13,71.0,1,27,0,No Go
 1.754,13,71.0,1,27,0,No Go
 0.876,13,71.0,1,27,0,No Go
+1.026,13,0.0,1,27,0,No Go
+0.793,13,0.0,1,27,0,No Go
+0.903,13,0.0,1,27,0,No Go
+0.847,13,0.0,1,27,0,No Go
+0.85,13,0.0,1,27,0,No Go
+1.554,13,0.0,1,27,0,No Go
