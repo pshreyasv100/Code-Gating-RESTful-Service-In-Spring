@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.gating.service.GatingService;
 import com.gating.service.QualityParameters;
@@ -96,10 +97,11 @@ public class GatingController {
 
 
   @GetMapping(path = "security/vcg")
-  public ToolResponse<Integer> vcgRequestHandler(@RequestParam String sourceCodePath){
+  public @ResponseBody ToolResponse<Integer> vcgRequestHandler(@RequestParam String sourceCodePath){
 
     validateSourceCodePath(sourceCodePath);
-    return vcgService.run(sourceCodePath);
+    return  vcgService.run(sourceCodePath);
+
   }
 
   @GetMapping(path = "coverage/jacoco")

@@ -55,7 +55,7 @@ public class VCGService {
   public int getIssuesCountFromXML(String vcgReportPath) {
 
     if (!Pattern.matches(".*\\.xml", vcgReportPath)) {
-      throw new InternalServiceException("Report  to VCG XML :", null);
+      throw new InternalServiceException("VCG could not find xml report :", null);
     }
 
 
