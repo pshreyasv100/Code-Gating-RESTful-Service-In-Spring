@@ -9,10 +9,8 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.parsers.ParserConfigurationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.xml.sax.SAXException;
 import com.gating.staticanalysis.service.CyvisService;
 import com.gating.staticanalysis.service.JacocoResponse;
 import com.gating.staticanalysis.service.JacocoService;
@@ -21,6 +19,7 @@ import com.gating.staticanalysis.service.SimianService;
 import com.gating.staticanalysis.service.VCGService;
 import com.gating.toolconfig.service.ThresholdConfig;
 import com.gating.toolconfig.service.ThresholdConfigService;
+import com.gating.utility.InternalServiceException;
 import com.gating.utility.InvalidInputException;
 import com.gating.utility.Utility;
 
@@ -47,7 +46,7 @@ public class GatingService {
 
 
   private void determineCodeQuality(QualityParameters response,
-      Boolean usePreviousResultsAsThreshold) throws IOException, InvalidInputException {
+      Boolean usePreviousResultsAsThreshold) {
 
     ThresholdConfig thresholds;
 
@@ -58,7 +57,7 @@ public class GatingService {
       thresholds = thresholdService.getThresholds();
     }
 
-    final List<Boolean> allResults = new ArrayList<Boolean>();
+    final List<Boolean> allResults = new ArrayList<>();
 
     allResults.add(Utility.isLessThan(response.getNoOfWarnings(), thresholds.getNoOfWarnings()));
     allResults.add(response.getCodeDuplication() == 0);
@@ -81,13 +80,10 @@ public class GatingService {
   }
 
 
-  private void saveResults(QualityParameters response, String resultsLogPath) throws IOException {
+  private static void saveResults(QualityParameters response, String resultsLogPath){
 
-    BufferedWriter csvWriter = null;
-    try{
-
-      csvWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(resultsLogPath, true)));
-
+    try (BufferedWriter csvWriter =
+        new BufferedWriter(new OutputStreamWriter(new FileOutputStream(resultsLogPath, true)))) {
 
       final String CSV_SEPARATOR = ",";
       final StringBuilder responseLine = new StringBuilder();
@@ -108,38 +104,38 @@ public class GatingService {
 
       csvWriter.newLine();
       csvWriter.write(responseLine.toString());
-
-    } finally {
-      if (csvWriter != null) {
-        csvWriter.close();
-      }
     }
-
+    catch(final IOException e) {
+      throw new InternalServiceException("Error occurred while saving  current run results", e);
+    }
   }
 
 
-  private ThresholdConfig getLastRunResults() throws IOException, InvalidInputException {
+  private static ThresholdConfig getLastRunResults() {
 
     String currentRow;
     String lastRow = null;
+
+    try (BufferedReader reader =
+        new BufferedReader(new FileReader(System.getProperty("user.dir") + "\\resultsLog.csv"))) {
+
+      currentRow = reader.readLine();
+
+      if ((currentRow = reader.readLine()) == null) {
+        throw new InvalidInputException("No previous results found", null);
+      }
+
+      while ((currentRow = reader.readLine()) != null) {
+        lastRow = currentRow;
+      }
+    } catch (final IOException e) {
+      throw new InternalServiceException("Error occured retrieving previous run results", e);
+    }
+
     final ThresholdConfig lastResult = new ThresholdConfig();
-    final BufferedReader reader =
-        new BufferedReader(new FileReader(System.getProperty("user.dir") + "\\resultsLog.csv"));
+    if (lastRow != null)
 
-    currentRow = reader.readLine();
-
-    if ((currentRow =reader.readLine()) == null) {
-      reader.close();
-      throw new InvalidInputException("No previous results found", null);
-    }
-
-    while ((currentRow = reader.readLine()) != null) {
-      lastRow = currentRow;
-    }
-
-    reader.close();
-
-    if (lastRow != null) {
+    {
       final String[] lastRowArray = lastRow.split(",");
       lastResult.setTimeToRunTests(Float.valueOf(lastRowArray[0]));
       lastResult.setNoOfWarnings(Integer.valueOf(lastRowArray[1]));
@@ -152,9 +148,7 @@ public class GatingService {
   }
 
 
-  public QualityParameters gateCode(String srcPath, Boolean usePreviousResultsAsThreshold)
-      throws IOException, InterruptedException, InvalidInputException, SAXException,
-      ParserConfigurationException {
+  public QualityParameters gateCode(String srcPath, Boolean usePreviousResultsAsThreshold) {
 
     jacocoService.buildProject(srcPath);
 
@@ -166,7 +160,7 @@ public class GatingService {
     response.setCyclomaticComplexity(cyvisService.run(srcPath).getValue());
 
     if (!(new File(srcPath + "/target/test-classes")).exists()) {
-      throw new InvalidInputException(
+      throw new InternalServiceException(
           "Cannot run jacoco since project does not contain testcase classes,", null);
     } else {
 

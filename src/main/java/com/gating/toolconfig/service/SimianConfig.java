@@ -6,6 +6,14 @@ public class SimianConfig {
 
   private int duplicateLinesThreshold;
 
+
+
+
+  public SimianConfig() {
+    super();
+    this.duplicateLinesThreshold = 3;
+  }
+
   public int getDuplicateLinesThreshold() {
     return duplicateLinesThreshold;
   }

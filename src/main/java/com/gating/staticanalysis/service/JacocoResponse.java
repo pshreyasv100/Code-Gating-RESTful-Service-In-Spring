@@ -2,17 +2,17 @@ package com.gating.staticanalysis.service;
 
 public class JacocoResponse {
 
-  private final float timeToRunTest;
+  private final  double timeToRunTest;
+  private float codeCoverage;
+  private String finalResult;
 
-  public JacocoResponse(float timeToRunTest, float codeCoverage, String finalResult) {
+  public JacocoResponse(double timeToRunTests, float codeCoverage, String finalResult) {
     super();
-    this.timeToRunTest = timeToRunTest;
+    this.timeToRunTest = timeToRunTests;
     this.codeCoverage = codeCoverage;
     this.finalResult = finalResult;
   }
 
-  private float codeCoverage;
-  private String finalResult;
 
   public float getCodeCoverage() {
     return codeCoverage;
@@ -22,7 +22,7 @@ public class JacocoResponse {
     this.codeCoverage = codeCoverage;
   }
 
-  public float getTimeToRunTest() {
+  public double getTimeToRunTest() {
     return timeToRunTest;
   }
 

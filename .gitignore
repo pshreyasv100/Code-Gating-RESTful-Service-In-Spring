@@ -5,3 +5,5 @@
 *.log
 reports/
 static-code-analyzers/cyvis-0.9
+/target/
+/bin/
