@@ -104,6 +104,4 @@ public class VCGService {
     return new ToolResponse<>(srcPath, securityIssues, threshold, finalDecision);
   }
 
-
-
 }
