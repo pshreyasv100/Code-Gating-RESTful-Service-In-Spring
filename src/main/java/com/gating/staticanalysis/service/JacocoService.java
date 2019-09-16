@@ -65,6 +65,7 @@ public class JacocoService {
 
       if ("test-classes".equals(paths[i])) {
         flag = true;
+        i += 1;
       }
       if (flag) {
         pathvar.append(paths[i]);
